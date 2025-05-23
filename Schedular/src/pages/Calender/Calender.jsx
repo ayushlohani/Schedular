@@ -21,8 +21,8 @@ const Calender = () => {
   const disableWeekends = ({ date, view }) => {
     // Disable only in month view
     if (view === "month") {
-      const day = date.getDay();
-      return day === 0 || day === 6; // Sunday = 0, Saturday = 6
+      const today = value.getDate();
+      return date < value; // Sunday = 0, Saturday = 6
     }
     return false;
   };
