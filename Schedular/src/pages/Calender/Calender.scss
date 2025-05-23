@@ -1,0 +1,27 @@
+.calender {
+  width: 70vw;
+  height: 500px;
+  padding: 1rem;
+  box-sizing: border-box;
+  display: flex;
+
+  .left {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: flex-start;
+    gap: 2rem;
+    height: 100%;
+    width: 50%;
+
+    .react-calendar {
+      width: 100%;
+    }
+
+  }
+
+  .right {
+    // You can style additional content here
+    width: 50%;
+  }
+}
