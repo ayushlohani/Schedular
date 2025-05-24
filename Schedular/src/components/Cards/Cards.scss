@@ -1,0 +1,94 @@
+.cards {
+    padding: 20px;
+    display: flex;
+    justify-content: center;
+  
+    .card-container {
+      display: flex;
+      background: #fff;
+      border-radius: 10px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+      overflow: hidden;
+      width: 1000px; // Increased width
+      position: relative; // To position the button inside
+    }
+  
+    .left-section {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding-right: 130px;
+      background-color: #1882c126;
+  
+      .avatar img {
+        width: 80px;
+        height: 80px;
+        border-radius: 50%;
+        object-fit: contain;
+        margin-left: 90px;
+      }
+    }
+  
+    .right-section {
+      flex: 1;
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+  
+      h2 {
+        margin: 0;
+        color: #033e6b;
+      }
+  
+      .speciality {
+        font-size: 14px;
+        color: #2b93d1;
+  
+        span {
+          color: #666;
+        }
+      }
+  
+      .divider {
+        border: none;
+        border-top: 1px solid #ccc;
+        margin: 10px 0;
+      }
+  
+      .details {
+        margin: 10px 0;
+  
+        p {
+          margin: 5px 0;
+          color: #555;
+        }
+      }
+  
+      .timing {
+        margin: 10px 0;
+  
+        .days {
+          font-weight: bold;
+          color: #d19f00;
+        }
+  
+        .hours {
+          color: #00aaff;
+          margin-left: 5px;
+        }
+      }
+  
+      .book-btn {
+        align-self: flex-end; // Align to right
+        margin-top: auto;     // Push to bottom
+        padding: 10px 20px;
+        background: linear-gradient(to right, #045c8f, #026a87);
+        color: white;
+        border: none;
+        border-radius: 6px;
+        cursor: pointer;
+        font-weight: bold;
+      }
+    }
+  }
+  
