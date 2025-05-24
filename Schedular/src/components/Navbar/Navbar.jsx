@@ -1,12 +1,16 @@
 import React from "react";
-import "./Navbar.scss"
+import "./Navbar.scss";
+import { useNavigate } from "react-router-dom";
 
 const Navbar = () => {
-    return(
-        <div className="nav">
-            BOOK YOUR APPOINTMENT
-        </div>
-    );
+  const navigate = useNavigate();
+  return (
+    <div className="nav">
+      <div className="left" onClick={() => navigate("/")}>
+        Schedular
+      </div>
+    </div>
+  );
 };
 
 export default Navbar;
