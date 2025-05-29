@@ -5,9 +5,12 @@ const Slot = ({ onSlotClick, slotTimeStart, slotTimeEnd }) => {
   const start = parseInt(slotTimeStart.split(":")[0], 10);
   const end = parseInt(slotTimeEnd.split(":")[0], 10);
 
-  const slots = Array.from({ length: end - start + 1 }, (_, i) => {
+  const slots = Array.from({ length: end - start }, (_, i) => {
     const hour = start + i;
-    return `${hour}:00`;
+    const nextHour = hour + 1;
+    return `${hour.toString().padStart(2, "0")}:00–${nextHour
+      .toString()
+      .padStart(2, "0")}:00`;
   });
 
   return (

@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import "./Bookingorm.scss";
 
-function BookingForm() {
+function BookingForm({ onSubmit }) {
   const [formData, setFormData] = useState({
     name: "",
     phone: "",
@@ -16,6 +16,7 @@ function BookingForm() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    onSubmit();
     alert(`Submitted:\n${JSON.stringify(formData, null, 2)}`);
     // You can send formData to your backend here
   };

@@ -1,4 +1,9 @@
 .slot{
+    display: flex;
+    align-items: center;
+    width: 100%;
+    flex-wrap: wrap;
+    justify-content: center;
     button{
         margin-right: 5px;
         margin-bottom: 5px;
