@@ -16,7 +16,7 @@ function BookingForm({ onSubmit }) {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    onSubmit();
+    onSubmit(formData);
     alert(`Submitted:\n${JSON.stringify(formData, null, 2)}`);
     // You can send formData to your backend here
   };

@@ -12,7 +12,7 @@ const doctorList = [
     slotStarttime: "11:00",
     slotEndTime: "18:00",
     image: "https://cdn-icons-png.flaticon.com/512/3135/3135715.png",
-    email: "anand.goyal@example.com",
+    email: "ayushlohani2004@gmail.com",
     phoneNo: "9876543210",
     role: "Doctor"
   },

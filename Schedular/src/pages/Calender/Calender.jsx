@@ -12,7 +12,7 @@ const API_KEY = "AIzaSyCrRPOdRF8ichRTC11DI5pRye4z02MySWk";
 const SCOPES = "https://www.googleapis.com/auth/calendar.events";
 
 const Calender = () => {
-  const [value, onChange] = useState(new Date());
+  const [valueDate, setvalueDate] = useState(null);
   const [isSlot, setISlot] = useState(false);
   const [isForm, setIsForm] = useState(false);
   const [gapiReady, setGapiReady] = useState(false);
@@ -48,11 +48,11 @@ const Calender = () => {
         callback: (tokenResponse) => {
           if (tokenResponse?.access_token) {
             setAccessToken(tokenResponse.access_token);
-
-            // Load the OAuth2 client library to get user info
             window.gapi.client.load("oauth2", "v2", () => {
               window.gapi.client.oauth2.userinfo.get().then((resp) => {
-                setloggedInUserEmail(resp.result.email);
+                if (resp.result?.email) {
+                  setloggedInUserEmail(resp.result.email);
+                }
               });
             });
           }
@@ -91,15 +91,26 @@ const Calender = () => {
     setIsForm(true);
   };
 
-  const onClickDate = () => {
-    setISlot(true);
+  const onClickDate = (date) => {
+    setvalueDate(date); // global use
+    handleSlotOpen(date); // pass it where needed
   };
 
-  const onSubmit = async () => {
+  const handleSlotOpen = (date) => {
+    setISlot(true);
+    console.log("Using latest date:", date); // use immediately here
+  };
+
+  const onSubmit = async (formObj) => {
+    const [start, end] = selectedSlot.split("–");
+    const date = valueDate.toLocaleDateString("en-CA");
+
+    const userEmail = loggedInUserEmail || formObj.email;
+
     const event = {
       summary: `Appointment with Dr. ${doc.name}`,
       location: "Online",
-      description: `Booking with ${doc.name}`,
+      description: `Booking with ${doc.name}.\nTime: ${start}–${end} IST`,
       start: {
         dateTime: `${date}T${start}:00`,
         timeZone: "Asia/Kolkata",
@@ -108,7 +119,7 @@ const Calender = () => {
         dateTime: `${date}T${end}:00`,
         timeZone: "Asia/Kolkata",
       },
-      attendees: [{ email: doc?.email }, { email: loggedInUserEmail }],
+      attendees: [{ email: userEmail }, { email: doc?.email }],
       reminders: { useDefault: true },
     };
 
@@ -129,12 +140,7 @@ const Calender = () => {
   return (
     <div className="calender">
       <div className="left">
-        <Calendar
-          onChange={onChange}
-          value={value}
-          onClickDay={onClickDate}
-          tileDisabled={disablePastDates}
-        />
+        <Calendar onClickDay={onClickDate} tileDisabled={disablePastDates} />
         {isSlot && (
           <Slot
             onSlotClick={isFormOpen}
@@ -145,7 +151,10 @@ const Calender = () => {
       </div>
       <div className="right">
         {!accessToken && gapiReady && (
-          <button onClick={signIn}>Sign In with Google</button>
+          <div className="signIn">
+            <h3>Please LogIn First</h3>
+            <button onClick={signIn}>Log In</button>
+          </div>
         )}
         {isForm && <BookingForm onSubmit={onSubmit} />}
       </div>
