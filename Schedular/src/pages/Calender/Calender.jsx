@@ -7,8 +7,8 @@ import { useParams } from "react-router-dom";
 import doctorList from "../../data/DoctorData";
 
 const CLIENT_ID =
-  "623152041990-eg8boh7t235igum0mug2t36d0g3oklvd.apps.googleusercontent.com";
-const API_KEY = "AIzaSyCrRPOdRF8ichRTC11DI5pRye4z02MySWk";
+  "617077874869-k1e5b67l0br0u7v4g9456mu4mpr1p4qf.apps.googleusercontent.com";
+const API_KEY = "AIzaSyAy1tk4MQ77bJvvW7lx8RIZuMO9GVsM0mY";
 const SCOPES = "https://www.googleapis.com/auth/calendar.events";
 
 const Calender = () => {
