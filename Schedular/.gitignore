@@ -7,12 +7,14 @@ yarn-error.log*
 pnpm-debug.log*
 lerna-debug.log*
 
+# Build output
 node_modules
 dist
 dist-ssr
 *.local
 
-Schedular\src\data\secretData.js
+# Secret file
+Schedular/src/data/secretData.js
 
 # Editor directories and files
 .vscode/*
@@ -24,4 +26,3 @@ Schedular\src\data\secretData.js
 *.njsproj
 *.sln
 *.sw?
-

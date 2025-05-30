@@ -1,4 +1,4 @@
 export const env = {
-    CLIENT_SECRET:"*****",
-API_KEY:"******"
+    CLIENT_SECRET:"***.googleusercontent.com",
+API_KEY:"****"
 }
