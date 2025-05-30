@@ -5,10 +5,10 @@ import BookingForm from "../../components/Bookingform/Bookingform";
 import Slot from "../../components/Slot/Slot";
 import { useParams } from "react-router-dom";
 import doctorList from "../../data/DoctorData";
+import { env } from "../../data/secretData";
 
-const CLIENT_ID =
-  "617077874869-k1e5b67l0br0u7v4g9456mu4mpr1p4qf.apps.googleusercontent.com";
-const API_KEY = "AIzaSyAy1tk4MQ77bJvvW7lx8RIZuMO9GVsM0mY";
+const CLIENT_ID = `${env.CLIENT_SECRET}`;
+const API_KEY = `${env.API_KEY}`;
 const SCOPES = "https://www.googleapis.com/auth/calendar.events";
 
 const Calender = () => {
