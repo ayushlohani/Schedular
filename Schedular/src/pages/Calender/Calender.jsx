@@ -149,12 +149,16 @@ const Calender = () => {
           />
         )}
       </div>
+
       <div className="right">
         {!accessToken && gapiReady && (
-          <div className="signIn">
-            <h3>Please LogIn First</h3>
-            <button onClick={signIn}>Log In</button>
-          </div>
+          <>
+            <div className="gray"></div>
+            <div className="signIn">
+              <h3>Please LogIn First</h3>
+              <button onClick={signIn}>Log In</button>
+            </div>
+          </>
         )}
         {isForm && <BookingForm onSubmit={onSubmit} />}
       </div>

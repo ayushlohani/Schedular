@@ -33,6 +33,15 @@
   .right {
     // You can style additional content here
     width: 50%;
+    .gray{
+      height: 100vh;
+      width: 100vw;
+      background-color: #dbdcdf4b;
+      position: absolute;
+      z-index: 9;
+      top: 0;
+      left: 0%;
+    }
     .signIn{
       position: absolute;
       top: 35%;
