@@ -1,11 +1,35 @@
-.slot{
-    display: flex;
-    align-items: center;
-    width: 100%;
-    flex-wrap: wrap;
-    justify-content: center;
-    button{
-        margin-right: 5px;
-        margin-bottom: 5px;
+.slot {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  flex-wrap: wrap;
+  justify-content: center;
+
+  button {
+    margin-right: 5px;
+    margin-bottom: 5px;
+    padding: 0.5rem 1rem;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+
+    &:hover {
+      background-color: #2980b9;
     }
+
+    &.booked {
+      background-color: #ccc;
+      color: #666;
+      cursor: not-allowed;
+
+      &:hover {
+        background-color: #ccc;
+      }
+    }
+
+    &:disabled {
+      pointer-events: none;
+    }
+  }
 }

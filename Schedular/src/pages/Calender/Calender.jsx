@@ -96,9 +96,18 @@ const Calender = () => {
     handleSlotOpen(date); // pass it where needed
   };
 
+  //This function help in Key for Booked Slots
+  const changeDatetoString = (date) => {
+    const day = String(date.getDate()).padStart(2, "0");
+    const month = String(date.getMonth() + 1).padStart(2, "0");
+    const year = date.getFullYear();
+
+    return `${day}${month}${year}`;
+  };
+
   const handleSlotOpen = (date) => {
     setISlot(true);
-    console.log("Using latest date:", date); // use immediately here
+    console.log("Using latest date:", changeDatetoString(date)); // use immediately here
   };
 
   const onSubmit = async (formObj) => {
@@ -146,6 +155,9 @@ const Calender = () => {
             onSlotClick={isFormOpen}
             slotTimeStart={startTime}
             slotTimeEnd={endTime}
+            dateSelected={changeDatetoString(valueDate)}
+            userId={id}
+            bookedSlots={doc?.bookedSlots}
           />
         )}
       </div>

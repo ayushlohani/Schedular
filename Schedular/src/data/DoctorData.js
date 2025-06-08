@@ -14,7 +14,8 @@ const doctorList = [
     image: "https://cdn-icons-png.flaticon.com/512/3135/3135715.png",
     email: "ayushlohani2004@gmail.com",
     phoneNo: "9876543210",
-    role: "Doctor"
+    role: "Doctor",
+    bookedSlots:{"10062025":[12,13]}
   },
   {
     id: "2",
