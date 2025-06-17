@@ -6,7 +6,7 @@ import Calendar from "react-calendar"
 
 const Home = () => {
   return (
-      <div className="home-scroll-container">
+      <div className="hom-scroll-container">
       <div className="left">
       {doctorList.map((doctor, index) => (
         <Cards key={index} doctor={doctor} />
