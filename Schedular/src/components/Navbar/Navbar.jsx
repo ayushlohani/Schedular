@@ -4,6 +4,8 @@ import { useNavigate } from "react-router-dom";
 import { FaUser } from "react-icons/fa";
 import { signOut } from "firebase/auth";
 import { auth } from "../Firebase/Firebase";
+import { Link } from "react-router-dom";
+import { MdOutlineAutoGraph } from "react-icons/md";
 
 const Navbar = () => {
   const navigate = useNavigate();
@@ -29,21 +31,15 @@ const Navbar = () => {
   return (
     <div className="nav">
       <div className="left" onClick={() => navigate("/Home")}>
-        Schedular
+        <img src="logo.png" />
       </div>
-      <div
-        className="profile-container"
-        onMouseEnter={handleMouseEnter}
-        onMouseLeave={handleMouseLeave}
-      >
-        <div className="profile">
-          <FaUser />
-        </div>
-        {showLogout && (
-          <div className="logout-card">
-            <button onClick={handleLogout}>Logout</button>
-          </div>
-        )}
+      <div className="right">
+        <Link className="link" to="/dashboard">
+          Dashboard
+        </Link>
+        <Link className="login-btn" to="/dashboard">
+          Login
+        </Link>
       </div>
     </div>
   );
