@@ -20,7 +20,7 @@ const LandingPage = () => {
         <Link className="link">Sign Up with Email</Link>
       </div>
       <div className="right">
-        <img src="Calender.png" />
+        <img src="calender2.png" />
       </div>
     </div>
   );
