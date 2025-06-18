@@ -20,7 +20,7 @@ const LandingPage = () => {
         <Link className="link">Sign Up with Email</Link>
       </div>
       <div className="right">
-        <img src="https://media1.thehungryjpeg.com/thumbs2/ori_3968301_jqbzkmygmgaeot78dnyc2ym0ohkd75pveth5ntia_blue-wave-calendar-2022-theme.jpg" />
+        <img src="Calender.png" />
       </div>
     </div>
   );
