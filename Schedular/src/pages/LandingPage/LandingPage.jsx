@@ -11,7 +11,7 @@ const LandingPage = () => {
       <div className="left">
         <h1>Start Your Journey</h1>
         <button className="google">
-          <FcGoogle className="icon" /> Sign in with google
+          <FcGoogle className="icon" /> Sign in with Google
         </button>
         <button>
           <TiVendorMicrosoft className="icon" /> Sign in with Microsoft
