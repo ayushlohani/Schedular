@@ -38,7 +38,7 @@ const Navbar = () => {
           Dashboard
         </Link>
         <Link className="login-btn" to="/dashboard">
-          Login
+          Get Started
         </Link>
       </div>
     </div>
