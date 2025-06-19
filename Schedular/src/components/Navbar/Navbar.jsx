@@ -30,14 +30,14 @@ const Navbar = () => {
 
   return (
     <div className="nav">
-      <div className="left" onClick={() => navigate("/Home")}>
+      <div className="left" onClick={() => navigate("/")}>
         <img src="logo3.png" />
       </div>
       <div className="right">
         <Link className="link" to="/dashboard">
           Dashboard
         </Link>
-        <Link className="login-btn" to="/dashboard">
+        <Link className="login-btn" to="/login">
           Login
         </Link>
       </div>

@@ -1,9 +1,9 @@
+$blue: #004DFF;
 .home-scroll-container {
   display: flex;
   width: 100%;
-  height: calc(100vh - 60px); // Adjust '60px' to your navbar height
-  background-color: #f4f4f4;
-
+  height: calc(100vh); // Adjust '60px' to your navbar height
+  padding-top: 60px;
   .left {
     flex: 1.2;
     display: flex;
@@ -49,7 +49,7 @@
 
     .auth-form button {
       padding: 0.75rem;
-      background-color: #0c4b70a8;
+      background-color: $blue;
       color: white;
       border: none;
       border-radius: 6px;
