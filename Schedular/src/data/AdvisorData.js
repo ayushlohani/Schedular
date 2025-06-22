@@ -1,4 +1,4 @@
-const AdvisorList = [
+export const AdvisorList = [
   {
     id: "1",
     title: "Dr.",

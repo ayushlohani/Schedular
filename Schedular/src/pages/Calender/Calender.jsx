@@ -4,7 +4,7 @@ import "./Calender.scss";
 import BookingForm from "../../components/Bookingform/Bookingform";
 import Slot from "../../components/Slot/Slot";
 import { useParams } from "react-router-dom";
-import doctorList from "../../data/DoctorData";
+import { AdvisorList } from "../../data/AdvisorData";
 import { env } from "../../data/secretData";
 
 const CLIENT_ID = `${env.CLIENT_SECRET}`;
@@ -23,7 +23,7 @@ const Calender = () => {
   const [loggedInUserEmail, setloggedInUserEmail] = useState(null);
 
   const { id } = useParams();
-  const doc = doctorList.find((d) => d.id === id);
+  const doc = AdvisorList.find((d) => d.id === id);
 
   const startTime = doc?.slotStarttime || "08:00";
   const endTime = doc?.slotEndTime || "18:00";
