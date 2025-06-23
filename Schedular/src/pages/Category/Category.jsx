@@ -13,9 +13,15 @@ const Category = () => {
     <div className="Category">
       <h1>What are you looking for?</h1>
       <div className="cat">
-        <button onClick={() => onNav("/Mental")}>Mental</button>
-        <button onClick={() => onNav("/Physical")}>Physical</button>
-        <button onClick={() => onNav("/Financial")}>Financial</button>
+        <div onClick={() => onNav("/Mental")} className="cat-cont">
+          Mental
+        </div>
+        <div onClick={() => onNav("/Physical")} className="cat-cont">
+          Physical
+        </div>
+        <div onClick={() => onNav("/Financial")} className="cat-cont">
+          Financial
+        </div>
       </div>
     </div>
   );
