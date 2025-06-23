@@ -18,10 +18,14 @@
             height: 300px;
             width: 30%;
             margin: 90px 30px;
+            font-size: 30px;
+            border-radius: 10px;
             border: 4px solid #004dff;
             &:hover{
                 border-radius: 20px;
                 cursor: pointer;
+                text-decoration: underline;
+                background-color: rgba(153, 209, 235, 0.082);
             }
         }
     }

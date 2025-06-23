@@ -13,13 +13,13 @@ const Category = () => {
     <div className="Category">
       <h1>What are you looking for?</h1>
       <div className="cat">
-        <div onClick={() => onNav("Mental")} className="cat-cont">
+        <div onClick={() => onNav("mental")} className="cat-cont">
           Mental
         </div>
-        <div onClick={() => onNav("Physical")} className="cat-cont">
+        <div onClick={() => onNav("physical")} className="cat-cont">
           Physical
         </div>
-        <div onClick={() => onNav("Financial")} className="cat-cont">
+        <div onClick={() => onNav("financial")} className="cat-cont">
           Financial
         </div>
       </div>
