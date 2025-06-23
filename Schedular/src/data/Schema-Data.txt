@@ -78,7 +78,8 @@ Edit
   advisorId: String,
   slotTime: Number, // 24-hr format
   details: String,
-  status: String // confirmed, pending, cancelled
+  status: String // confirmed, pending, cancelled,
+  Attendee_Count:5 //2-10
 }
 4. HistorySessions Schema
 json
