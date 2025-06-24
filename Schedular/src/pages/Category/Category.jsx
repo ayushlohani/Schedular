@@ -11,7 +11,6 @@ const Category = () => {
 
   return (
     <div className="Category">
-      <div className="bg"></div>
       <h1>What are you looking for?</h1>
       <div className="cat">
         <div onClick={() => onNav("mental")} className="cat-cont">

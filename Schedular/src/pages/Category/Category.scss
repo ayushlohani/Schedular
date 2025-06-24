@@ -10,6 +10,7 @@
         justify-content: space-around;
         align-items: center;
         width: 75vw;
+
         div{
             background-color: white;
             display: flex;
@@ -39,3 +40,54 @@
         }
     }
 }
+
+ @media (max-width: 780px) {
+    .Category{
+        h1{
+                font-size: 2rem;
+            }
+        height: 80vh;
+        div{
+            //background-color: #004dff;
+            flex-direction: column;
+            height: 50vh;
+            margin: 0%;
+            .cat-cont{
+                margin: 10px;
+                flex-direction: row;
+                width: 60%;
+                height: 200px;
+                img{
+                    width: 35%;
+                    height: 120px;
+                }
+            }
+        }
+    }
+
+ }
+ @media (max-width: 450px) {
+    .Category{
+        h1{
+                font-size: 1.5rem;
+            }
+        height: 80vh;
+        div{
+            //background-color: #004dff;
+            flex-direction: column;
+            height: 50vh;
+            margin: 0%;
+            .cat-cont{
+                margin: 10px;
+                flex-direction: row;
+                width: 80%;
+                height: 150px;
+                img{
+                    width: 35%;
+                    height: 100px;
+                }
+            }
+        }
+    }
+
+ }
