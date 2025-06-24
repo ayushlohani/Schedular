@@ -11,16 +11,20 @@ const Category = () => {
 
   return (
     <div className="Category">
+      <div className="bg"></div>
       <h1>What are you looking for?</h1>
       <div className="cat">
         <div onClick={() => onNav("mental")} className="cat-cont">
-          Mental
+          <img src="mental2.png"></img>
+          <span>Mental</span>
         </div>
         <div onClick={() => onNav("physical")} className="cat-cont">
-          Physical
+          <img src="physical2.png"></img>
+          <span>Physical</span>
         </div>
         <div onClick={() => onNav("financial")} className="cat-cont">
-          Financial
+          <img src="financial2.png"></img>
+          <span>Financial</span>
         </div>
       </div>
     </div>

@@ -3,6 +3,7 @@ import "./LandingPage.scss";
 import Navbar from "../../components/Navbar/Navbar";
 import { FcGoogle } from "react-icons/fc";
 import { TiVendorMicrosoft } from "react-icons/ti";
+import { HiMail } from "react-icons/hi";
 import { Link } from "react-router-dom";
 
 const LandingPage = () => {
@@ -17,7 +18,10 @@ const LandingPage = () => {
           <TiVendorMicrosoft className="icon" /> Sign in with Microsoft
         </button>
         <span>Or</span>
-        <Link className="link">Sign Up with Email</Link>
+        <Link className="link">
+          <HiMail className="icon" />
+          Sign Up with Email
+        </Link>
       </div>
       <div className="right">
         <img src="calender2.png" />

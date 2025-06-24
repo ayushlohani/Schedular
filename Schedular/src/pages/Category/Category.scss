@@ -13,19 +13,26 @@
         div{
             background-color: white;
             display: flex;
+            flex-direction: column;
             justify-content: center;
             align-items: center;
-            height: 300px;
-            width: 30%;
+            height: 250px;
+            width: 25%;
             margin: 90px 30px;
             font-size: 30px;
             border-radius: 10px;
             border: 4px solid #004dff;
             &:hover{
-                border-radius: 20px;
+                border:6px solid #093bb1;
                 cursor: pointer;
-                text-decoration: underline;
-                background-color: rgba(153, 209, 235, 0.082);
+                //background-color: rgba(153, 209, 235, 0.082);
+            }
+
+            img{
+                height: 60%;
+            }
+            span{
+                font-size: 20px;
             }
         }
     }
