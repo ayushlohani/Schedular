@@ -9,6 +9,8 @@ import Login from "./pages/Login/Login.jsx";
 import LandingPage from "./pages/LandingPage/LandingPage.jsx";
 import Category from "./pages/Category/Category.jsx";
 import SessionType from "./pages/SessionType/SessionType.jsx";
+import Signin from "./pages/SignIn/Signin.jsx";
+import PrivateRoute from "./components/PrivateRoute/PrivateRoute.jsx";
 
 const router = createBrowserRouter([
   {
@@ -17,11 +19,15 @@ const router = createBrowserRouter([
     children: [
       {
         path: "/",
-        element: <LandingPage />,
+        element: <Home />,
       },
       {
         path: "/login",
         element: <Login />,
+      },
+      {
+        path: "/Signin",
+        element: <Signin />,
       },
       {
         path: "/calender/:id",

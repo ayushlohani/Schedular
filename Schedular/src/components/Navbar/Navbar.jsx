@@ -1,45 +1,50 @@
-import React, { useState, useRef } from "react";
+import React, { useEffect, useState } from "react";
 import "./Navbar.scss";
 import { useNavigate } from "react-router-dom";
 import { FaUser } from "react-icons/fa";
-import { signOut } from "firebase/auth";
+import { signOut, onAuthStateChanged } from "firebase/auth";
 import { auth } from "../Firebase/Firebase";
 import { Link } from "react-router-dom";
 import { MdOutlineAutoGraph } from "react-icons/md";
 
 const Navbar = () => {
   const navigate = useNavigate();
-  const [showLogout, setShowLogout] = useState(false);
-  const timeoutRef = useRef(null);
+  const [user, setUser] = useState(null); // Track logged-in user
+
+  useEffect(() => {
+    // Set up listener for authentication state
+    const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
+      setUser(currentUser);
+    });
+
+    // Clean up the listener on unmount
+    return () => unsubscribe();
+  }, []);
 
   const handleLogout = async () => {
     await signOut(auth);
     navigate("/");
   };
 
-  const handleMouseEnter = () => {
-    clearTimeout(timeoutRef.current);
-    setShowLogout(true);
-  };
-
-  const handleMouseLeave = () => {
-    timeoutRef.current = setTimeout(() => {
-      setShowLogout(false);
-    }, 2000); // 2 seconds delay
-  };
-
   return (
     <div className="nav">
       <div className="left" onClick={() => navigate("/")}>
-        <img src="/logo3.png" />
+        <img src="/logo3.png" alt="Logo" />
       </div>
       <div className="right">
         <Link className="link" to="/dashboard">
           Dashboard
         </Link>
-        <Link className="login-btn" to="/login">
-          Login
-        </Link>
+        {!user && (
+          <Link className="login-btn" to="/login">
+            Login
+          </Link>
+        )}
+        {user && (
+          <Link className="login-btn" to="/" onClick={handleLogout}>
+            Logout
+          </Link>
+        )}
       </div>
     </div>
   );

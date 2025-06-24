@@ -1,9 +1,14 @@
 // components/PrivateRoute.jsx
-import { Navigate, Outlet } from "react-router-dom";
+import { Navigate, Outlet, useLocation } from "react-router-dom";
 import { auth } from "../Firebase/Firebase";
 
 export default function PrivateRoute() {
   const user = auth.currentUser;
+  const location = useLocation();
 
-  return user ? <Outlet /> : <Navigate to="/" replace />;
+  if (location.pathname === "/") {
+    return user ? <Navigate to="/category" replace /> : <Navigate to="/Landing" replace />;
+  }
+
+  return user ? <Outlet /> : <Navigate to="/Landing" replace />;
 }

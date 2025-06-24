@@ -3,19 +3,16 @@ import Cards from "../../components/Cards/cards";
 import { AdvisorList } from "../../data/AdvisorData";
 import "./Home.scss";
 import Calendar from "react-calendar";
+import Category from "../Category/Category";
+import LandingPage from "../LandingPage/LandingPage";
+import { auth } from "../../components/Firebase/Firebase";
 
 const Home = () => {
+  let user = auth.currentUser;
   return (
-    <div className="hom-scroll-container">
-      <div className="left">
-        {AdvisorList.map((doctor, index) => (
-          <Cards key={index} doctor={doctor} />
-        ))}
-      </div>
-      <div className="right">
-        <img src="https://static.vecteezy.com/system/resources/previews/013/141/034/non_2x/book-doctor-appointment-card-template-schedule-hospital-visit-editable-social-media-post-design-flat-color-illustration-for-poster-web-banner-ecard-vector.jpg" />
-      </div>
-    </div>
+    <>
+    {user ? <Category /> : <LandingPage />}
+    </>
   );
 };
 
