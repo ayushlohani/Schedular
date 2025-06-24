@@ -31,7 +31,7 @@ const Navbar = () => {
   return (
     <div className="nav">
       <div className="left" onClick={() => navigate("/")}>
-        <img src="logo3.png" />
+        <img src="/logo3.png" />
       </div>
       <div className="right">
         <Link className="link" to="/dashboard">

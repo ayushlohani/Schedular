@@ -8,6 +8,7 @@ import Calender from "./pages/Calender/Calender.jsx";
 import Login from "./pages/Login/Login.jsx";
 import LandingPage from "./pages/LandingPage/LandingPage.jsx";
 import Category from "./pages/Category/Category.jsx";
+import SessionType from "./pages/SessionType/SessionType.jsx";
 
 const router = createBrowserRouter([
   {
@@ -29,6 +30,10 @@ const router = createBrowserRouter([
       {
         path: "/category",
         element: <Category />,
+      },
+      {
+        path: "/category/:category",
+        element: <SessionType />,
       },
     ],
   },
