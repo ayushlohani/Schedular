@@ -11,6 +11,8 @@ import Category from "./pages/Category/Category.jsx";
 import SessionType from "./pages/SessionType/SessionType.jsx";
 import Signin from "./pages/SignIn/Signin.jsx";
 import PrivateRoute from "./components/PrivateRoute/PrivateRoute.jsx";
+import EventCard from "./components/Cards/EventCard.jsx";
+import DashBoard from "./pages/DashBoard/DashBoard.jsx";
 
 const router = createBrowserRouter([
   {
@@ -41,6 +43,10 @@ const router = createBrowserRouter([
         path: "/category/:category",
         element: <SessionType />,
       },
+      {
+        path: "/Dashboard",
+        element: <DashBoard />
+      }
     ],
   },
 ]);

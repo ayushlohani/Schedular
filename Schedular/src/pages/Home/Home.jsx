@@ -1,19 +1,23 @@
-import React from "react";
-import Cards from "../../components/Cards/cards";
-import { AdvisorList } from "../../data/AdvisorData";
-import "./Home.scss";
-import Calendar from "react-calendar";
+import { useEffect, useState } from "react";
+import { auth } from "../../components/Firebase/Firebase";
+import { onAuthStateChanged } from "firebase/auth";
 import Category from "../Category/Category";
 import LandingPage from "../LandingPage/LandingPage";
-import { auth } from "../../components/Firebase/Firebase";
+import DashBoard from "../DashBoard/DashBoard";
 
 const Home = () => {
-  let user = auth.currentUser;
-  return (
-    <>
-    {user ? <Category /> : <LandingPage />}
-    </>
-  );
+  const [user, setUser] = useState(undefined);
+
+  useEffect(() => {
+    const unsubscribe = onAuthStateChanged(auth, (u) => {
+      setUser(u);
+    });
+    return () => unsubscribe();
+  }, []);
+
+  if (user === undefined) return <p>Loading...</p>;
+
+  return user ? <DashBoard /> : <LandingPage />;
 };
 
 export default Home;
