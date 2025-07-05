@@ -72,7 +72,7 @@ export default function DashBoard() {
       </div>
 
       <div className={`profile-panel ${showProfile ? "show-on-mobile" : ""}`}>
-        <div  onClick={toggleProfileFalse}>x</div>
+        <div  className="top-profile-bar" onClick={toggleProfileFalse}><a>x</a></div>
         <div className="profile-photo">
           <div className="avatar-ring-wrapper">
             <svg className="avatar-ring">

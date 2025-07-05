@@ -379,6 +379,9 @@
   .profile-toggle {
     display: none;
   }
+  .top-profile-bar{
+    display: none;
+  }
 }
 
 // 🔽 MODIFY mobile profile-panel to overlay above dashboard
@@ -403,4 +406,19 @@
     flex-direction: column;
   }
 }
+ .top-profile-bar {
+    position: absolute;
+    top: 10px;
+    right: 10px;
 
+    a {
+      font-size: 20px;
+      font-weight: bold;
+      text-decoration: none;
+      cursor: pointer;
+      border-radius: 50%;
+      padding: 5px 10px;
+      line-height: 1;
+      transition: background 0.2s ease;
+    }
+ }
