@@ -13,6 +13,7 @@ import Signin from "./pages/SignIn/Signin.jsx";
 import PrivateRoute from "./components/PrivateRoute/PrivateRoute.jsx";
 import EventCard from "./components/Cards/EventCard.jsx";
 import DashBoard from "./pages/DashBoard/DashBoard.jsx";
+import AdvisorList from "./pages/AdvisorList/AdvisorList.jsx";
 
 const router = createBrowserRouter([
   {
@@ -44,9 +45,13 @@ const router = createBrowserRouter([
         element: <SessionType />,
       },
       {
+        path: "/category/:category/:session",
+        element: <AdvisorList />,
+      },
+      {
         path: "/Dashboard",
-        element: <DashBoard />
-      }
+        element: <DashBoard />,
+      },
     ],
   },
 ]);
