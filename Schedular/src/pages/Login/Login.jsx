@@ -23,24 +23,22 @@ export default function Login() {
   const handleLogin = async (e) => {
     e.preventDefault();
     setLoading(true);
-    try {
-      const formData = { email, password };
-      const formDataToSend = JSON.stringify(formData);
-      sendDataToapi("/users/login", formDataToSend, "application/json").then(
-        (res) => {
-          setLoading(false);
-          window.location.href = "/";
-          console.log("Logged in user:", res);
-          toast.success("Login Sucessfully");
-        }
-      );
-    } catch (error) {
-      console.log(error.message);
-      toast.error(error.message, {
-        position: "bottom-center",
+    const formData = { email, password };
+    const formDataToSend = JSON.stringify(formData);
+    sendDataToapi("/users/login", formDataToSend, "application/json")
+      .then((res) => {
+        setLoading(false);
+        window.location.href = "/";
+        console.log("Logged in user:", res);
+        toast.success("Login Sucessfully");
+      })
+      .catch((err) => {
+        setLoading(false);
+        console.log(error.message);
+        toast.error(error.message, {
+          position: "bottom-center",
+        });
       });
-      setLoading(false);
-    }
   };
   return (
     <>

@@ -6,7 +6,7 @@ const Cards = ({ advisor }) => {
   const navigate = useNavigate();
 
   const goToCalender = () => {
-    navigate(`/calender/${advisor._id}`);
+    navigate(`${advisor._id}`);
   };
 
   const fullName = `${advisor.title || ""} ${advisor.fullname}`;

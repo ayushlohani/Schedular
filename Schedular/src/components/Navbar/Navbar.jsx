@@ -8,11 +8,14 @@ import { Link } from "react-router-dom";
 import { MdOutlineAutoGraph } from "react-icons/md";
 import { fetchDataFromApi, sendDataToapi } from "../../utils/api";
 import { toast } from "react-toastify";
+import { useDispatch } from "react-redux";
+import { Useraction } from "../../store/userSlice";
 
 const Navbar = () => {
   const navigate = useNavigate();
   const [user, setUser] = useState(null); // Track logged-in user
   const [loading, setLoading] = useState(false);
+  const dispatch = useDispatch();
 
   // useEffect(() => {
   //   // Set up listener for authentication state
@@ -43,6 +46,7 @@ const Navbar = () => {
         console.log(res);
         toast.success("Logout Successfully!");
         setUser(null);
+        dispatch(Useraction.logoutUser);
         navigate("/login"); // optional
       })
       .catch((err) => console.log(err))

@@ -8,14 +8,10 @@ const AdvisorList = () => {
   const [advisor, setadvisor] = useState([]);
   const [loading, setLoading] = useState(false);
   const { category } = useParams();
-  const capitalizeFirstChar = (str) => {
-    if (!str) return "";
-    return str.charAt(0).toUpperCase() + str.slice(1);
-  };
 
   useEffect(() => {
     fetchDataFromApi("/advisors/getallAdvisors", {
-      domain: `${capitalizeFirstChar(category)}`,
+      domain: `${category}`,
     })
       .then((res) => {
         setadvisor(res?.data?.advisor);

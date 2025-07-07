@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import LandingPage from "../LandingPage/LandingPage";
 import DashBoard from "../DashBoard/DashBoard";
 import { fetchDataFromApi } from "../../utils/api";
+import Loader from "../../components/Loader/Loader";
 
 const Home = () => {
   const [user, setUser] = useState(undefined);
@@ -24,7 +25,7 @@ const Home = () => {
       });
   }, []);
 
-  if (user === undefined) return <p>Loading...</p>;
+  if (user === undefined) return <Loader />;
 
   return user ? <DashBoard /> : <LandingPage />;
 };

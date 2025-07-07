@@ -1,0 +1,65 @@
+.appointment{
+    margin-top: 160px;
+    .appointment-form {
+  max-width: 500px;
+  margin: auto;
+  padding: 1.5rem;
+  //background: #f9f9f9;
+  border-radius: 12px;
+  //box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+
+  h2 {
+    text-align: center;
+    margin-bottom: 1rem;
+  }
+
+  label {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 1rem;
+    font-weight: 500;
+
+    input,
+    textarea,
+    select {
+      margin-top: 0.3rem;
+      padding: 0.5rem;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      font-size: 1rem;
+    }
+
+    textarea {
+      resize: vertical;
+      min-height: 80px;
+    }
+  }
+
+  button {
+    width: 100%;
+    padding: 0.7rem;
+    font-size: 1rem;
+    background: #007bff;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+
+    &:hover {
+      background: #0056b3;
+    }
+  }
+}
+
+// Responsive
+@media (max-width: 600px) {
+  .appointment-form {
+    padding: 1rem;
+  }
+
+  .appointment-form label {
+    font-size: 0.95rem;
+  }
+}
+
+}

@@ -14,6 +14,9 @@ import PrivateRoute from "./components/PrivateRoute/PrivateRoute.jsx";
 import EventCard from "./components/Cards/EventCard.jsx";
 import DashBoard from "./pages/DashBoard/DashBoard.jsx";
 import AdvisorList from "./pages/AdvisorList/AdvisorList.jsx";
+import Schedule from "./pages/Schedule/Schedule.jsx";
+import { Provider } from "react-redux";
+import store from "./store/store.js";
 
 const router = createBrowserRouter([
   {
@@ -49,6 +52,10 @@ const router = createBrowserRouter([
         element: <AdvisorList />,
       },
       {
+        path: "/category/:category/:session/:advisorId",
+        element: <Schedule />,
+      },
+      {
         path: "/Dashboard",
         element: <DashBoard />,
       },
@@ -58,8 +65,10 @@ const router = createBrowserRouter([
 
 createRoot(document.getElementById("root")).render(
   <StrictMode>
-    <RouterProvider router={router}>
-      <App />
-    </RouterProvider>
+    <Provider store={store}>
+      <RouterProvider router={router}>
+        <App />
+      </RouterProvider>
+    </Provider>
   </StrictMode>
 );
