@@ -23,23 +23,29 @@ const Slot = ({
     };
   });
 
-  const handleClick = (time) => {
-    setSelectedTime(time);
-    onSlotClick(time);
+  const handleClick = (slot) => {
+    if (disabledSlots.includes(slot.startTime)) return;
+    setSelectedTime(slot.time);
+    onSlotClick(slot.time);
   };
 
   return (
     <div className="slot">
-      {slots.map(({ time, startTime }) => (
-        <button
-          key={time}
-          disabled={disabledSlots.includes(startTime)}
-          className={selectedTime === time ? "active" : ""}
-          onClick={() => handleClick(time)}
-        >
-          {time}
-        </button>
-      ))}
+      {slots.map((slot) => {
+        const isDisabled = disabledSlots.includes(slot.startTime);
+        const isActive = selectedTime === slot.time;
+
+        return (
+          <button
+            key={slot.time}
+            disabled={isDisabled}
+            className={isActive ? "active" : ""}
+            onClick={() => handleClick(slot)}
+          >
+            {slot.time}
+          </button>
+        );
+      })}
     </div>
   );
 };

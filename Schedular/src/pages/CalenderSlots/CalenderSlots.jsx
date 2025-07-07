@@ -10,22 +10,24 @@ const CalenderSlots = ({ appointments, advisor, DateandTime }) => {
   const [slotTime, setSlotTime] = useState();
   const [disabledSlots, setDisabledSlots] = useState([]);
 
-  function formatTime(num) {
+  const formatTime = (num) => {
     const hours = String(Math.floor(num / 100)).padStart(2, "0");
     const minutes = String(num % 100).padStart(2, "0");
     return `${hours}:${minutes}`;
-  }
-  function parseTime(str) {
+  };
+
+  const parseTime = (str) => {
     const [hours, minutes] = str.split(":").map(Number);
     return hours * 100 + minutes;
-  }
+  };
 
-  function formatDate(date) {
+  const formatDate = (date) => {
     const year = date.getFullYear();
-    const month = String(date.getMonth() + 1).padStart(2, "0"); // Months are 0-based
+    const month = String(date.getMonth() + 1).padStart(2, "0");
     const day = String(date.getDate()).padStart(2, "0");
     return `${year}-${month}-${day}`;
-  }
+  };
+
   const disablePastDates = ({ date, view }) => {
     if (view === "month") {
       return date < new Date().setHours(0, 0, 0, 0);
@@ -33,35 +35,42 @@ const CalenderSlots = ({ appointments, advisor, DateandTime }) => {
     return false;
   };
 
-  const onClickDate = (date) => {
+  const onClickDate = async (selectedDate) => {
+    const formatted = formatDate(selectedDate);
     setIsSlot(true);
-    setDate(formatDate(date));
+    setDate(formatted);
     setDisabledSlots([]);
 
-    fetchDataFromApi("/appointment/filterBydate", {
-      date: formatDate(date),
-    }).then((res) => {
-      res?.data?.map((x) => {
-        setDisabledSlots([...disabledSlots, formatTime(x?.slotTime)]);
+    try {
+      const res = await fetchDataFromApi("/appointment/filterBydate", {
+        date: formatted,
       });
 
-      console.log(disabledSlots);
-    });
+      const disabled = res?.data?.map((x) => formatTime(x?.slotTime)) || [];
+      setDisabledSlots(disabled);
+    } catch (error) {
+      console.error("Error fetching slots:", error);
+    }
   };
 
   const slotClick = (time) => {
-    setSlotTime(parseTime(time.substr(0, 4)));
-    DateandTime(date, slotTime);
-    console.log("Slot Clicked", slotTime);
+    const parsed = parseTime(time.substr(0, 5)); // safer: "09:00"
+    setSlotTime(parsed);
+    DateandTime(date, parsed);
+    console.log("Slot Clicked", parsed);
   };
+
+  const slotStart = advisor?.availability?.slotStartTime ?? 900;
+  const slotEnd = advisor?.availability?.slotEndTime ?? 1700;
+
   return (
     <div className="cal">
       <Calendar onClickDay={onClickDate} tileDisabled={disablePastDates} />
       {isSlot && (
         <Slot
           onSlotClick={slotClick}
-          slotTimeStart={formatTime(advisor?.availability?.slotStartTime)}
-          slotTimeEnd={formatTime(advisor?.availability?.slotEndTime)}
+          slotTimeStart={formatTime(slotStart)}
+          slotTimeEnd={formatTime(slotEnd)}
           disabledSlots={disabledSlots}
         />
       )}
