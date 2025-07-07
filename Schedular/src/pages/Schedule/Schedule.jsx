@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { fetchDataFromApi, sendDataToapi } from "../../utils/api";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import "./Schedule.scss";
 import { useSelector } from "react-redux";
 import Loader from "../../components/Loader/Loader";
@@ -12,6 +12,7 @@ const Schedule = ({}) => {
   const [loading, setLoading] = useState(false);
   const [advisor, setAdvisor] = useState({});
   const { userId, advisorId, category } = useParams();
+  const navigate = useNavigate();
 
   const [formData, setFormData] = useState({
     date: "",
@@ -42,6 +43,7 @@ const Schedule = ({}) => {
       .then((res) => {
         console.log(res);
         toast.success("Appointment created succesfully!");
+        navigate("/dashboard");
       })
       .catch((err) => {
         console.log(err);
