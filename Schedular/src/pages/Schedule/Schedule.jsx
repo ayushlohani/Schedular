@@ -3,10 +3,14 @@ import { fetchDataFromApi, sendDataToapi } from "../../utils/api";
 import { useParams } from "react-router-dom";
 import "./Schedule.scss";
 import { useSelector } from "react-redux";
+import Loader from "../../components/Loader/Loader";
+import CalenderSlots from "../CalenderSlots/CalenderSlots";
+import { toast } from "react-toastify";
 
 const Schedule = ({}) => {
   const [appointments, setappointments] = useState([]);
   const [loading, setLoading] = useState(false);
+  const [advisor, setAdvisor] = useState({});
   const { userId, advisorId, category } = useParams();
 
   const [formData, setFormData] = useState({
@@ -37,9 +41,11 @@ const Schedule = ({}) => {
     )
       .then((res) => {
         console.log(res);
+        toast.success("Appointment created succesfully!");
       })
       .catch((err) => {
         console.log(err);
+        toast.error("Appointment Failed!Please fill out the data carefully.");
       })
       .finally(() => {
         setLoading(false);
@@ -47,61 +53,42 @@ const Schedule = ({}) => {
   };
 
   useEffect(() => {
-    fetchDataFromApi("/appointment/filterById", { advisorId }).then((res) => {
-      setappointments(res?.data);
-    });
+    setLoading(true);
+    fetchDataFromApi("/appointment/filterById", { advisorId, userId })
+      .then((res) => {
+        setappointments(res?.data);
+      })
+      .catch((err) => console.log(err))
+      .finally(() => setLoading(false));
+
+    fetchDataFromApi(`/advisors/getAdvisorbyId/${advisorId}`)
+      .then((res) => {
+        setAdvisor(res?.data);
+      })
+      .catch((err) => console.log(err))
+      .finally(() => setLoading(false));
   }, []);
+
+  const getDateandTime = (date, slotTime) => {
+    setFormData((prev) => ({
+      ...prev,
+      date,
+      slotTime,
+    }));
+    console.log(formData);
+  };
   return (
     <div className="appointment">
-      <div className="left"></div>
+      {loading && <Loader />}
+      <div className="left">
+        <CalenderSlots
+          appointments={appointments}
+          advisor={advisor}
+          DateandTime={getDateandTime}
+        />
+      </div>
       <form className="appointment-form" onSubmit={handleSubmit}>
         <h2>Book Appointment</h2>
-
-        <label>
-          Date:
-          <input
-            type="date"
-            name="date"
-            value={formData.date}
-            onChange={handleChange}
-            required
-          />
-        </label>
-
-        <label>
-          User ID:
-          <input
-            type="text"
-            name="userId"
-            value={formData.userId}
-            onChange={handleChange}
-            required
-          />
-        </label>
-        <label>
-          Advisor ID:
-          <input
-            type="text"
-            name="advisorId"
-            value={formData.advisorId}
-            onChange={handleChange}
-            required
-          />
-        </label>
-
-        <label>
-          Slot Time (24hr):
-          <input
-            type="number"
-            name="slotTime"
-            value={formData.slotTime}
-            onChange={handleChange}
-            min="0"
-            max="23"
-            required
-          />
-        </label>
-
         <label>
           Details:
           <textarea
