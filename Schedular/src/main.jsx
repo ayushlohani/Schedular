@@ -52,7 +52,7 @@ const router = createBrowserRouter([
         element: <AdvisorList />,
       },
       {
-        path: "/category/:category/:session/:advisorId",
+        path: "/category/:category/:session/:advisorId/:userId",
         element: <Schedule />,
       },
       {

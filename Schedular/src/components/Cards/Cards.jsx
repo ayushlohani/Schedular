@@ -1,12 +1,14 @@
 import React from "react";
 import "./Cards.scss";
 import { useNavigate } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 const Cards = ({ advisor }) => {
   const navigate = useNavigate();
+  const user = useSelector((state) => state.user);
 
   const goToCalender = () => {
-    navigate(`${advisor._id}`);
+    navigate(`${advisor._id}/${user?._id}`);
   };
 
   const fullName = `${advisor.title || ""} ${advisor.fullname}`;

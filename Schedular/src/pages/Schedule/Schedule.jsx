@@ -7,11 +7,11 @@ import { useSelector } from "react-redux";
 const Schedule = ({}) => {
   const [appointments, setappointments] = useState([]);
   const [loading, setLoading] = useState(false);
-  const { advisorId, category } = useParams();
-  const user = useSelector((state) => state.user);
+  const { userId, advisorId, category } = useParams();
+
   const [formData, setFormData] = useState({
     date: "",
-    userId: user._id,
+    userId: userId,
     advisorId: advisorId,
     slotTime: "",
     details: "",
@@ -48,11 +48,12 @@ const Schedule = ({}) => {
 
   useEffect(() => {
     fetchDataFromApi("/appointment/filterById", { advisorId }).then((res) => {
-      console.log(res);
+      setappointments(res?.data);
     });
   }, []);
   return (
     <div className="appointment">
+      <div className="left"></div>
       <form className="appointment-form" onSubmit={handleSubmit}>
         <h2>Book Appointment</h2>
 
