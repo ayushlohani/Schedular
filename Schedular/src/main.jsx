@@ -17,6 +17,7 @@ import AdvisorList from "./pages/AdvisorList/AdvisorList.jsx";
 import Schedule from "./pages/Schedule/Schedule.jsx";
 import { Provider } from "react-redux";
 import store from "./store/store.js";
+import RegisterForm from "./pages/SigninForm/SigninForm.jsx";
 
 const router = createBrowserRouter([
   {
@@ -59,6 +60,10 @@ const router = createBrowserRouter([
         path: "/Dashboard",
         element: <DashBoard />,
       },
+      {
+        path:"/user/signin",
+        element:<RegisterForm />
+      }
     ],
   },
 ]);
