@@ -98,7 +98,7 @@ const RegisterForm = () => {
     })
       .then((res) => {
         console.log(res);
-        navigate("/category");
+        window.location.href = "/category";
       })
       .catch((err) => {
         setMsg("Something wnet wrong!");
