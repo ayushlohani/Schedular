@@ -1,67 +1,76 @@
 .register-container {
   display: flex;
   justify-content: center;
-  align-items: center;
-  padding: 2rem;
-  min-height: 100vh;
-  background-color: #f0f2f5;
+  margin-top: 100px;
+  padding: 0 1rem;
 }
 
 .register-form {
-  background-color: white;
+  width: 90vw;
+  max-width: 700px;
+  background: #fff;
   padding: 2rem;
-  border-radius: 12px;
-  box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
-  max-width: 500px;
-  width: 100%;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
 
   h2 {
     text-align: center;
-    margin-bottom: 1rem;
-    color: #333;
+    margin-bottom: 1.5rem;
   }
 
   .message {
     text-align: center;
+    color: red;
     margin-bottom: 1rem;
-    color: green;
-    font-weight: bold;
   }
 
-  input, button {
-    display: block;
-    width: 100%;
-    margin: 0.5rem 0;
-    padding: 0.7rem;
-    font-size: 1rem;
-    border: 1px solid #ccc;
-    border-radius: 8px;
+  .form-row {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 1rem;
+
+    input {
+      flex: 1;
+      padding: 0.8rem;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      font-size: 1rem;
+    }
+
+    // Ensure file input isn't too tall
+    input[type="file"] {
+      padding: 0.3rem;
+    }
   }
 
   button {
-    background-color: #007bff;
+    width: 100%;
+    padding: 0.9rem;
+    font-size: 1rem;
+    background-color: #1d72b8;
     color: white;
+    border: none;
+    border-radius: 6px;
     cursor: pointer;
-    transition: 0.3s;
+    transition: background 0.3s ease;
 
     &:hover {
-      background-color: #0056b3;
-    }
-
-    &:disabled {
-      background-color: #999;
-      cursor: not-allowed;
+      background-color: #155d8c;
     }
   }
 }
 
-@media (max-width: 600px) {
+// Responsive: stack inputs on smaller screens
+@media (max-width: 768px) {
   .register-form {
-    padding: 1rem;
+    padding: 1.5rem;
   }
 
-  input, button {
-    font-size: 0.9rem;
-    padding: 0.6rem;
+  .form-row {
+    flex-direction: column;
+
+    input {
+      width: 100%;
+    }
   }
 }

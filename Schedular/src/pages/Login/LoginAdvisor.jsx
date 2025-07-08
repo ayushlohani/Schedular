@@ -1,14 +1,8 @@
-import React, { useState, useEffect } from "react";
-import "./Login.scss";
-import { signInWithEmailAndPassword } from "firebase/auth";
-import { auth } from "../../components/Firebase/Firebase";
-import { ToastContainer, toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
-import { Navigate, Link, useNavigate } from "react-router-dom";
-import Loader from "../../components/Loader/Loader";
-import { sendDataToapi } from "../../utils/api";
+import React, { useEffect, useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import { ToastContainer } from "react-toastify";
 
-export default function Login() {
+const LoginAdvisor = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
@@ -25,7 +19,7 @@ export default function Login() {
     setLoading(true);
     const formData = { email, password };
     const formDataToSend = JSON.stringify(formData);
-    sendDataToapi("/users/login", formDataToSend, "application/json")
+    sendDataToapi("/advisors/login", formDataToSend, "application/json")
       .then((res) => {
         setLoading(false);
         window.location.href = "/";
@@ -46,7 +40,7 @@ export default function Login() {
       <div className="home-scroll-container">
         <div className="left">
           <div className="auth-container">
-            <h2>Login</h2>
+            <h2>Login (Advisor)</h2>
             <div className="login-form">
               <form
                 onSubmit={handleLogin}
@@ -80,7 +74,8 @@ export default function Login() {
             </div>
             <div className="switch-text">
               <>
-                Don't have an account? <Link to="/user/Signin">Register</Link>
+                Don't have an account?{" "}
+                <Link to="/advisor/Signin">Register</Link>
               </>
             </div>
             <ToastContainer />
@@ -89,4 +84,6 @@ export default function Login() {
       </div>
     </>
   );
-}
+};
+
+export default LoginAdvisor;

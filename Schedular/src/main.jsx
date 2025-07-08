@@ -18,6 +18,8 @@ import Schedule from "./pages/Schedule/Schedule.jsx";
 import { Provider } from "react-redux";
 import store from "./store/store.js";
 import RegisterForm from "./pages/SigninForm/SigninForm.jsx";
+import RegisterAdvisor from "./pages/SigninForm/AdvisorSignIn.jsx";
+import LoginAdvisor from "./pages/Login/LoginAdvisor.jsx";
 
 const router = createBrowserRouter([
   {
@@ -31,6 +33,10 @@ const router = createBrowserRouter([
       {
         path: "/login",
         element: <Login />,
+      },
+      {
+        path: "/advisor/login",
+        element: <LoginAdvisor />,
       },
       {
         path: "/Signin",
@@ -61,9 +67,13 @@ const router = createBrowserRouter([
         element: <DashBoard />,
       },
       {
-        path:"/user/signin",
-        element:<RegisterForm />
-      }
+        path: "/user/signin",
+        element: <RegisterForm />,
+      },
+      {
+        path: "/advisor/signin",
+        element: <RegisterAdvisor />,
+      },
     ],
   },
 ]);
