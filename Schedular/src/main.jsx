@@ -20,6 +20,7 @@ import store from "./store/store.js";
 import RegisterForm from "./pages/SigninForm/SigninForm.jsx";
 import RegisterAdvisor from "./pages/SigninForm/AdvisorSignIn.jsx";
 import LoginAdvisor from "./pages/Login/LoginAdvisor.jsx";
+import TopicsList from "./pages/Topics/Topics.jsx";
 
 const router = createBrowserRouter([
   {
@@ -56,10 +57,14 @@ const router = createBrowserRouter([
       },
       {
         path: "/category/:category/:session",
+        element: <TopicsList />,
+      },
+      {
+        path: "/category/:category/:session/:topic",
         element: <AdvisorList />,
       },
       {
-        path: "/category/:category/:session/:advisorId/:userId",
+        path: "/category/:category/:session/:topic/:advisorId/:userId",
         element: <Schedule />,
       },
       {

@@ -11,7 +11,7 @@ const Schedule = ({}) => {
   const [appointments, setappointments] = useState([]);
   const [loading, setLoading] = useState(false);
   const [advisor, setAdvisor] = useState({});
-  const { userId, advisorId, category } = useParams();
+  const { userId, advisorId, category, topic } = useParams();
   const navigate = useNavigate();
 
   const [formData, setFormData] = useState({
@@ -22,6 +22,7 @@ const Schedule = ({}) => {
     details: "",
     status: "pending",
     domain: category,
+    topic: topic,
   });
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -99,6 +100,10 @@ const Schedule = ({}) => {
             onChange={handleChange}
             required
           />
+        </label>
+        <label>
+          Topic:
+          <input value={topic} name={topic} disabled></input>
         </label>
 
         <label>
