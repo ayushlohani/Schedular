@@ -5,7 +5,9 @@ const userSlice = createSlice({
     initialState:{},
     reducers:{
         loginUser:(store,action)=>{
+            console.log(action.payload);
             return action.payload;
+            
         },
         logoutUser:(store,action)=>{
             return {};

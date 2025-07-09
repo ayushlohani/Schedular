@@ -2,11 +2,17 @@ import React, { useState, useEffect } from "react";
 import EventCard from "../../components/Cards/EventCard";
 import { useNavigate } from "react-router-dom";
 import "./DashBoard.scss";
+import { Useraction } from "../../store/userSlice";
+import { useSelector } from "react-redux";
+import { fetchDataFromApi } from "../../utils/api";
 
 export default function DashBoard() {
   const navigate = useNavigate();
   const [showProfile, setShowProfile] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
+  const userData = useSelector((state) => state.user);
+  const [loading, setLoading] = useState(false);
+  console.log(userData);
 
   const goToCategory = () => {
     navigate("/Category");
@@ -21,6 +27,15 @@ export default function DashBoard() {
   };
 
   useEffect(() => {
+    setLoading(true);
+    fetchDataFromApi("appointment/getallAppointment")
+      .then((res) => {
+        console.log(res);w
+        })
+        .catch((err) => console.log(err))
+        .finally(() => {
+          setLoading(false);
+        });
     const handleResize = () => {
       setIsMobile(window.innerWidth <= 768);
     };
@@ -81,12 +96,12 @@ export default function DashBoard() {
             </svg>
             <div className="avatar">
               <img
-                src="https://randomuser.me/api/portraits/men/75.jpg"
+                src={userData.profilepic}
                 alt="Profile"
               />
             </div>
           </div>
-          <div className="name">Akash Lohani</div>
+          <div className="name">{userData.fullname}</div>
           <div className="role">21 Years</div>
         </div>
         <hr className="divider" />
