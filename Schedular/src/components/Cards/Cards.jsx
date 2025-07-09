@@ -10,6 +10,13 @@ const Cards = ({ advisor }) => {
   const goToCalender = () => {
     navigate(`${advisor._id}/${user?._id}`);
   };
+  function capitalizeWords(str) {
+    if (!str) return "";
+    return str
+      .split(" ")
+      .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+      .join(" ");
+  }
 
   const fullName = `${advisor.title || ""} ${advisor.fullname}`;
   const specialization = advisor.specialization || "";
@@ -51,7 +58,7 @@ const Cards = ({ advisor }) => {
           </div>
         </div>
         <div className="right-section">
-          <h2>{fullName}</h2>
+          <h2>{capitalizeWords(fullName)}</h2>
           <p className="speciality">
             {specialization} | <span>{experience} years</span>
           </p>
@@ -62,10 +69,10 @@ const Cards = ({ advisor }) => {
             <p>{advisor.description}</p>
           </div>
           <div className="timing">
-            <span className="days">{advisor.domain}</span>
+            <span className="days">{capitalizeWords(advisor.domain)}</span>
           </div>
           <button className="book-btn" onClick={goToCalender}>
-            BOOK APPOINTMENT
+            Book Appointment
           </button>
         </div>
       </div>
