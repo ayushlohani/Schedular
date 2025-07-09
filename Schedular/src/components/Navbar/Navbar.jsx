@@ -59,7 +59,7 @@ const Navbar = () => {
         <img src="/logo3.png" alt="Logo" />
       </div>
       <div className="right">
-        <Link className="link" to="/dashboard">
+        <Link className="link" to={user ? "/dashboard" : "/login"}>
           Dashboard
         </Link>
         {!user && (
