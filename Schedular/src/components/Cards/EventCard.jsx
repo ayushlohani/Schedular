@@ -24,6 +24,13 @@ const EventCard = ({
     if (!str) return "";
     return str.charAt(0).toUpperCase() + str.slice(1);
   }
+  function capitalizeWords(str) {
+    if (!str) return "";
+    return str
+      .split(" ")
+      .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+      .join(" ");
+  }
 
   return (
     <div className="event-card">
@@ -40,7 +47,7 @@ const EventCard = ({
 
         <div className="card-body">
           <h2 className="doctor-name">
-            Dr. {capitalizeFirst(advisor) || "Unknown"}
+            Dr. {capitalizeWords(advisor) || "Unknown"}
           </h2>
           <p className="time-label">
             {`${formatTime(time)}-${formatTime(time + 100)}`}

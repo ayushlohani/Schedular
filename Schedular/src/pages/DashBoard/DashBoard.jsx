@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import "./DashBoard.scss";
 import { fetchDataFromApi } from "../../utils/api";
 import { useSelector } from "react-redux";
+import Loader from "../../components/Loader/Loader";
 
 export default function DashBoard() {
   const navigate = useNavigate();
@@ -11,8 +12,20 @@ export default function DashBoard() {
   const [isMobile, setIsMobile] = useState(false);
   const [appointments, setAppointments] = useState([]);
   const [loading, setLoading] = useState(false);
+  const [user, setUser] = useState(null);
 
-  const user = useSelector((state) => state.user?.data);
+  useEffect(() => {
+    setLoading(true);
+    fetchDataFromApi("/users/getloggedinUser")
+      .then((res) => {
+        setUser(res?.data);
+        console.log(res);
+      })
+      .catch((err) => console.log(err))
+      .finally(() => {
+        setLoading(false);
+      });
+  }, []);
 
   const goToCategory = () => {
     navigate("/Category");
@@ -47,8 +60,21 @@ export default function DashBoard() {
       .finally(() => setLoading(false));
   }, []);
 
+  function capitalizeFirst(str) {
+    if (!str) return "";
+    return str.charAt(0).toUpperCase() + str.slice(1);
+  }
+  function capitalizeWords(str) {
+    if (!str) return "";
+    return str
+      .split(" ")
+      .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+      .join(" ");
+  }
+
   const renderAppointmentsSection = (title, dataList = []) => (
     <div className="event-section">
+      {loading && <Loader />}
       <h2>{title}</h2>
       <hr className="divider" />
       <div className="event-card-list">
@@ -152,16 +178,13 @@ export default function DashBoard() {
               />
             </div>
           </div>
-          <div className="name">{user?.fullname || "User"}</div>
+          <div className="name">
+            {capitalizeWords(user?.fullname) || "User"}
+          </div>
           <div className="role">
             {user?.dob
               ? `${Math.floor(
-                  (new Date() -
-                    new Date(
-                      user.dob.slice(4, 8),
-                      user.dob.slice(2, 4) - 1,
-                      user.dob.slice(0, 2)
-                    )) /
+                  (new Date() - new Date(user.dob)) /
                     (1000 * 60 * 60 * 24 * 365)
                 )} Years`
               : ""}
@@ -173,13 +196,31 @@ export default function DashBoard() {
             <strong>Email:</strong> {user?.email}
           </div>
           <div>
-            <strong>Phone:</strong> +91 98765 43210
+            <strong>Alt Email:</strong> {user?.contact?.email || "N/A"}
           </div>
           <div>
-            <strong>Location:</strong> Bengaluru, India
+            <strong>Phone:</strong> {user?.contact?.phone || "N/A"}
           </div>
           <div>
-            <strong>Experience:</strong> 3 Years
+            <strong>Gender:</strong> {capitalizeFirst(user?.gender)}
+          </div>
+          <div>
+            <strong>Blood Group:</strong> {user?.bloodGroup || "N/A"}
+          </div>
+          <div>
+            <strong>Languages:</strong> {user?.languagesSpoken?.join(", ")}
+          </div>
+          <div>
+            <strong>Address:</strong>{" "}
+            {user?.address
+              ? `${user.address.street}, ${user.address.city}, ${user.address.state}, ${user.address.zipCode}, ${user.address.country}`
+              : "N/A"}
+          </div>
+          <div>
+            <strong>Emergency Contact:</strong>{" "}
+            {user?.emergencyContact
+              ? `${user.emergencyContact.name} (${user.emergencyContact.relation}) - ${user.emergencyContact.phone}`
+              : "N/A"}
           </div>
         </div>
       </div>
