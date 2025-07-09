@@ -49,6 +49,7 @@ export default function DashBoard() {
   }, []);
 
   useEffect(() => {
+    if (!user) return;
     setLoading(true);
     fetchDataFromApi("/appointment/filterById", { userId: user?._id })
       .then((res) => {
@@ -58,7 +59,7 @@ export default function DashBoard() {
       })
       .catch((err) => console.error("Failed to fetch appointments:", err))
       .finally(() => setLoading(false));
-  }, []);
+  }, [user]);
 
   function capitalizeFirst(str) {
     if (!str) return "";
