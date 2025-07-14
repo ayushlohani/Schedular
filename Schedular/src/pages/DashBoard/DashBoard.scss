@@ -1,3 +1,9 @@
+html, body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  overflow: hidden;
+}
 .dashboard-wrapper {
   display: flex;
   height: 100vh;
@@ -5,9 +11,17 @@
   padding: 20px;
   margin-top: 60px;
   box-sizing: border-box;
-  gap: 20px;
-  overflow: hidden; 
+  gap: 5px;
+  overflow-y: auto; // ya scroll, depends on your need
+  scrollbar-width: none; // Firefox
+  -ms-overflow-style: none; // Internet Explorer
+
+  &::-webkit-scrollbar {
+    width: 0px; // Chrome, Safari
+    background: transparent;
+  }
 }
+
 .top-bar {
   display: flex;
   justify-content: flex-end;
@@ -49,30 +63,17 @@
   flex-direction: column;
   padding: 40px 20px;
   font-family: sans-serif;
-  //background-color: #efeaea34;
+  background-color: #efeaea34;
   border-radius: 12px;
-  //box-shadow: 0 4px 12px rgba(160, 159, 159, 0.794);
+  box-shadow: 0 4px 12px rgba(160, 159, 159, 0.298);
   overflow-y: auto;
   overflow-x: hidden;
-
+scrollbar-width: none; // Firefox
+  -ms-overflow-style: none; // IE 10+
   // ✅ Make vertical scrollbar thin
   &::-webkit-scrollbar {
-    width: 6px;
+    display: none
   }
-
-  &::-webkit-scrollbar-thumb {
-    background-color: rgba(0, 0, 0, 0.2);
-    border-radius: 10px;
-  }
-
-  &::-webkit-scrollbar-track {
-    background: transparent;
-  }
-
-  // ✅ Firefox support
-  scrollbar-width: thin;
-  scrollbar-color: rgba(0, 0, 0, 0.2) transparent;
-  scroll-behavior: smooth;
 }
 
 // USER HEADER SECTION

@@ -1,7 +1,7 @@
 import React, { useEffect, useRef } from "react";
-import "./EventCard.scss";
+import "./PastCard.scss";
 
-const EventCard = ({
+const PastCard = ({
   date,
   advisor,
   user,
@@ -11,18 +11,18 @@ const EventCard = ({
   details,
   domain,
 }) => {
-  const cardRef = useRef(null);
+//   const cardRef = useRef(null);
 
-  useEffect(() => {
-    if (!domain || !cardRef.current) return;
+//   useEffect(() => {
+//     if (!domain || !cardRef.current) return;
 
-    let color = "#ccc";
-    if (domain === "mental") color = "#ADD8E6";
-    else if (domain === "physical") color = "#F5A623";
-    else if (domain === "financial") color = "#7ED321";
+//     let color = "#ccc";
+//     if (domain === "mental") color = "#ADD8E6";
+//     else if (domain === "physical") color = "#F5A623";
+//     else if (domain === "financial") color = "#7ED321";
 
-    cardRef.current.style.borderTop = `5px solid ${color}`;
-  }, [domain]);
+//     cardRef.current.style.borderTop = `5px solid ${color}`;
+//   }, [domain]);
 
   const formatTime = (slotTime) => {
     if (!slotTime) return "";
@@ -47,12 +47,12 @@ const EventCard = ({
   }
 
   return (
-    <div className="event-card" ref={cardRef}>
+    <div className="event-card">
       <div className="card-content">
         <div className="card-heading">
           <h1 className="title">
             {`${capitalizeFirst(domain)} (${
-              capitalizeFirst(topic) || "Session"
+              capitalizeFirst(topic) || "Financial"
             })`}
           </h1>
           <p className="subtitle">{details || "Consultation"}</p>
@@ -61,24 +61,24 @@ const EventCard = ({
 
         <div className="card-body">
           <h2 className="doctor-name">
-            Dr. {capitalizeWords(advisor) || "Unknown"}
+            Dr. {capitalizeWords(advisor) || "Rambir Singh"}
           </h2>
           <p className="time-label">
             {`${formatTime(time)}-${formatTime(time + 100)}`}
           </p>
-          <p className="date">Date: {date}</p>
+          <p className="date">Date: {date  || "2025-07-10"}</p>
           <p className={`status ${status}`}>
-            Status: {capitalizeFirst(status)}
+            Status: {capitalizeFirst(status) || "Completed"} 
           </p>
         </div>
-
+{/* 
         <div className="card-footer">
           <button className="card-button">Meet Link</button>
 
-        </div>
+        </div> */}
       </div>
     </div>
   );
 };
 
-export default EventCard;
+export default PastCard;
