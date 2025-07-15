@@ -13,6 +13,15 @@
     transform: translateY(-10px);
   }
 
+  a{
+    text-decoration: none;
+    color: #007bff;
+    &:hover{
+      color: white;
+      background-color: transparent;
+    }
+  }
+
   .card-content {
     padding: 20px;
     display: flex;

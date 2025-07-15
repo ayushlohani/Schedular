@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import "./DashBoard.scss";
 import { fetchDataFromApi } from "../../utils/api";
 import Loader from "../../components/Loader/Loader";
-import {learningMaterials} from "../../data/LearningMaterial"
+import { learningMaterials } from "../../data/LearningMaterial";
 import LearningCard from "../../components/Cards/LearningCard";
 import PastCard from "../../components/Cards/PastCard";
 
@@ -15,7 +15,6 @@ export default function DashBoard() {
   const [appointments, setAppointments] = useState([]);
   const [loading, setLoading] = useState(false);
   const [user, setUser] = useState(null);
-
 
   useEffect(() => {
     setLoading(true);
@@ -100,6 +99,7 @@ export default function DashBoard() {
                 status={item.status}
                 details={item.details}
                 domain={item.domain}
+                meetlink={item.meetlink}
               />
             );
 
@@ -123,45 +123,43 @@ export default function DashBoard() {
     </div>
   );
   const renderLearningSection = (title, materials = []) => (
-  <div className="event-section">
-    <h2>{title}</h2>
-    <hr className="divider" />
-    <div className="event-card-list">
-      {materials.length === 0 ? (
-        <p>No learning materials available.</p>
-      ) : (
-        materials.map((item, index) => {
-          const card = (
-            <LearningCard
-              key={item.id}
-              title={item.title}
-              duration={item.duration || "Self-paced"}
-              image={item.image}
-              link={item.link}
-            />
-          );
+    <div className="event-section">
+      <h2>{title}</h2>
+      <hr className="divider" />
+      <div className="event-card-list">
+        {materials.length === 0 ? (
+          <p>No learning materials available.</p>
+        ) : (
+          materials.map((item, index) => {
+            const card = (
+              <LearningCard
+                key={item.id}
+                title={item.title}
+                duration={item.duration || "Self-paced"}
+                image={item.image}
+                link={item.link}
+              />
+            );
 
-          if (!isMobile) return card;
+            if (!isMobile) return card;
 
-          return (
-            <div className="event-list-item" key={item.id}>
-              <div
-                className="list-title"
-                onClick={(e) => e.currentTarget.classList.toggle("expanded")}
-              >
-                {item.title}
-                <span className="arrow">▼</span>
+            return (
+              <div className="event-list-item" key={item.id}>
+                <div
+                  className="list-title"
+                  onClick={(e) => e.currentTarget.classList.toggle("expanded")}
+                >
+                  {item.title}
+                  <span className="arrow">▼</span>
+                </div>
+                <div className="list-body">{card}</div>
               </div>
-              <div className="list-body">{card}</div>
-            </div>
-          );
-        })
-      )}
+            );
+          })
+        )}
+      </div>
     </div>
-  </div>
-);
-
-
+  );
 
   const renderStaticSection = (title, count) => (
     <div className="event-section">

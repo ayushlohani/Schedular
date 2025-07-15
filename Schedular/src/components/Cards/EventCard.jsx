@@ -10,6 +10,7 @@ const EventCard = ({
   status,
   details,
   domain,
+  meetlink,
 }) => {
   const cardRef = useRef(null);
 
@@ -73,8 +74,9 @@ const EventCard = ({
         </div>
 
         <div className="card-footer">
-          <button className="card-button">Meet Link</button>
-
+          <a href={meetlink} className="card-button" target="_blank">
+            Meet Link
+          </a>
         </div>
       </div>
     </div>
