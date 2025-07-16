@@ -3,6 +3,8 @@ import LandingPage from "../LandingPage/LandingPage";
 import DashBoard from "../DashBoard/DashBoard";
 import { fetchDataFromApi } from "../../utils/api";
 import Loader from "../../components/Loader/Loader";
+import Category from "../Category/Category";
+import { useNavigate } from "react-router-dom";
 
 const Home = () => {
   const [user, setUser] = useState(undefined);
@@ -12,12 +14,14 @@ const Home = () => {
   //   });
   //   return () => unsubscribe();
   // }, []);
+  const navigate = useNavigate();
 
   useEffect(() => {
     fetchDataFromApi("/users/getloggedinUser")
       .then((res) => {
         setUser(res.data);
         console.log(res);
+        navigate("/category");
       })
       .catch((err) => {
         console.error("Error fetching user:", err);
@@ -27,7 +31,7 @@ const Home = () => {
 
   if (user === undefined) return <Loader />;
 
-  return user ? <DashBoard /> : <LandingPage />;
+  return user ? <Category /> : <LandingPage />;
 };
 
 export default Home;
