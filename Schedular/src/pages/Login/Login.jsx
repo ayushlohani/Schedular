@@ -28,7 +28,7 @@ export default function Login() {
     sendDataToapi("/users/login", formDataToSend, "application/json")
       .then((res) => {
         setLoading(false);
-        window.location.href = "/";
+        window.location.href = "/category";
         console.log("Logged in user:", res);
         toast.success("Login Sucessfully");
       })

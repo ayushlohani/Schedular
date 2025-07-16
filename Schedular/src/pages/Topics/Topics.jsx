@@ -78,6 +78,13 @@ const TopicsList = () => {
     navigate(`${formatTopicForUrl(topic)}`);
   };
 
+  const handleOther = (e) => {
+    const inputValue = e.target.value.trim();
+    if (inputValue) {
+      navigate(`${formatTopicForUrl(inputValue)}`);
+    }
+  };
+
   return (
     <div className="topics-container">
       <h2>
@@ -94,6 +101,16 @@ const TopicsList = () => {
               {topic}
             </li>
           ))}
+          <input
+            className="topic-item"
+            type="text"
+            placeholder="+ Other"
+            onKeyDown={(e) => {
+              if (e.key === "Enter" && e.target.value.trim()) {
+                handleOther(e);
+              }
+            }}
+          />
         </ul>
       ) : (
         <p className="no-topics">No topics found for category: {category}</p>
