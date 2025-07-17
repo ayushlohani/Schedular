@@ -9,10 +9,10 @@
     border-radius: 10px;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
     overflow: hidden;
-    width: 45vw;
+    width: 30vw;
     position: relative;
     flex-direction: row;
-    height: 270px;
+    height: 300px;
   }
 
   .left-section {
@@ -20,8 +20,8 @@
   align-items: center;
   justify-content: center;
   background-color: #1882c126;
-  width: 30%;
-  height: 100%; 
+  width: 40%;
+  height: 100%;
   overflow-y: hidden;
 
   .avatar {
@@ -96,7 +96,6 @@
 
     .book-btn {
       align-self: flex-end;
-      margin-top: auto;
       padding: 10px 20px;
       background: #026cdd;
       color: white;
