@@ -39,15 +39,14 @@ const CalenderSlots = ({ appointments, advisor, DateandTime }) => {
     const formatted = formatDate(selectedDate);
     setIsSlot(true);
     setDate(formatted);
-    setDisabledSlots([]);
 
     try {
-      const res = await fetchDataFromApi("/appointment/filterBydate", {
-        date: formatted,
-      });
-
-      const disabled = res?.data?.map((x) => formatTime(x?.slotTime)) || [];
+      const disabled =
+        appointments
+          ?.filter((x) => x?.date === formatted)
+          .map((x) => formatTime(x?.slotTime)) || [];
       setDisabledSlots(disabled);
+      console.log("Disabled Slots", disabled);
     } catch (error) {
       console.error("Error fetching slots:", error);
     }
