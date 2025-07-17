@@ -15,6 +15,7 @@ export default function DashBoard() {
   const [appointments, setAppointments] = useState([]);
   const [loading, setLoading] = useState(false);
   const [user, setUser] = useState(null);
+  const [domain, setdomain] = useState("");
 
   useEffect(() => {
     setLoading(true);
@@ -53,7 +54,7 @@ export default function DashBoard() {
   useEffect(() => {
     if (!user) return;
     setLoading(true);
-    fetchDataFromApi("/appointment/filterById", { userId: user?._id })
+    fetchDataFromApi("/appointment/filter", { userId: user?._id, domain })
       .then((res) => {
         const list = res?.data || [];
         setAppointments(list);
@@ -62,7 +63,7 @@ export default function DashBoard() {
       })
       .catch((err) => console.error("Failed to fetch appointments:", err))
       .finally(() => setLoading(false));
-  }, [user]);
+  }, [user, domain]);
 
   function capitalizeFirst(str) {
     if (!str) return "";
@@ -191,6 +192,18 @@ export default function DashBoard() {
     <div className="dashboard-wrapper">
       <div className="dashboard-container">
         <div className="top-bar">
+          <select
+            className="new-meeting"
+            value={domain}
+            onChange={(e) => {
+              setdomain(e?.target?.value);
+            }}
+          >
+            <option value={""}>All</option>
+            <option value={"mental"}>Mental</option>
+            <option value={"physical"}>Physical</option>
+            <option value={"financial"}>Financial</option>
+          </select>
           <a className="new-meeting" onClick={goToCategory}>
             + New Meeting
           </a>

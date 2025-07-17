@@ -33,13 +33,13 @@ html, body {
 .new-meeting {
   width: 200px;
   height: 50px;
-  border-radius:50px;
+  border-radius:10px;
   display: flex;
   justify-content: center;
   align-items: center;
   color: #004DFF;
   background-color: white;
-  padding: 10px 18px;
+  padding: 10px 15px;
   font-weight: bold;
   font-size: 18px;
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
@@ -49,11 +49,20 @@ html, body {
 
   &:hover {
     background-color: #004DFF;
-    color: white;
+    color: #ffffff;
     transform: translateY(-8px);
     box-shadow: 0 6px 18px rgba(0, 0, 0, 0.013);
     z-index: 100;
   }
+}
+
+select{
+  background-color: #ffffff !important;
+  color: #004DFF !important;
+ margin-right: 20px !important;
+ //border:2px solid #004DFF;
+ border: none;
+ width: 150px !important;
 }
 
 // MAIN DASHBOARD
