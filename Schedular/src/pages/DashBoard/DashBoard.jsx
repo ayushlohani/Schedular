@@ -193,7 +193,7 @@ export default function DashBoard() {
       <div className="dashboard-container">
         <div className="top-bar">
           <select
-            className="new-meeting"
+            className="new-meeting domain"
             value={domain}
             onChange={(e) => {
               setdomain(e?.target?.value);
