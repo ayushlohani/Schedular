@@ -1,69 +1,7 @@
 import React from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import "./Topics.scss";
-
-const topicsData = {
-  mental: [
-    "Anxiety",
-    "Depression",
-    "Stress Management",
-    "Trauma Recovery",
-    "PTSD",
-    "Insomnia",
-    "Low Self-Esteem",
-    "Burnout",
-    "Panic Attacks",
-    "Anger Issues",
-    "OCD",
-    "Grief and Loss",
-    "Social Anxiety",
-    "Addiction Recovery",
-    "Relationship Conflicts",
-    "Body Image Issues",
-    "Perfectionism",
-    "Fear of Failure",
-  ],
-  physical: [
-    "Chronic Pain",
-    "Obesity",
-    "Diabetes Management",
-    "Hypertension",
-    "Arthritis",
-    "Heart Disease",
-    "Digestive Disorders",
-    "Respiratory Issues",
-    "Fatigue",
-    "Sleep Apnea",
-    "Thyroid Problems",
-    "Injury Recovery",
-    "Exercise and Fitness",
-    "Post-Surgery Rehab",
-    "Menstrual Health",
-    "Skin Disorders",
-    "Immunity Issues",
-    "Migraine Management",
-  ],
-  financial: [
-    "Budgeting",
-    "Debt Management",
-    "Credit Score Improvement",
-    "Savings Strategies",
-    "Retirement Planning",
-    "Investing Basics",
-    "Tax Planning",
-    "Student Loan Help",
-    "Emergency Fund Setup",
-    "Financial Anxiety",
-    "Spending Habits",
-    "Insurance Literacy",
-    "Financial Planning for Families",
-    "Wealth Building",
-    "Side Income Strategies",
-    "Estate Planning",
-    "Money Mindset",
-    "Cost Cutting Techniques",
-  ],
-};
+import { topicsData } from "../../utils/topicsList";
 
 const TopicsList = () => {
   const { category } = useParams();

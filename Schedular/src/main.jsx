@@ -21,6 +21,7 @@ import RegisterForm from "./pages/SigninForm/SigninForm.jsx";
 import RegisterAdvisor from "./pages/SigninForm/AdvisorSignIn.jsx";
 import LoginAdvisor from "./pages/Login/LoginAdvisor.jsx";
 import TopicsList from "./pages/Topics/Topics.jsx";
+import CreateBatch from "./pages/CreateBatch/CreateBatch.jsx";
 
 const router = createBrowserRouter([
   {
@@ -38,6 +39,10 @@ const router = createBrowserRouter([
       {
         path: "/advisor/login",
         element: <LoginAdvisor />,
+      },
+      {
+        path: "/advisor/:advisorId/createBatch",
+        element: <CreateBatch />,
       },
       {
         path: "/Signin",
