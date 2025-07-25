@@ -8,7 +8,7 @@ const Cards = ({ advisor }) => {
   const user = useSelector((state) => state.user);
 
   const goToCalender = () => {
-    navigate(`${advisor._id}/${user?._id}`);
+    navigate(`${advisor._id}/${user?._id}`, { state: { advisor } });
   };
   function capitalizeWords(str) {
     if (!str) return "";

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { fetchDataFromApi, sendDataToapi } from "../../utils/api";
-import { useNavigate, useParams } from "react-router-dom";
+import { useLocation, useNavigate, useParams } from "react-router-dom";
 import "./Schedule.scss";
 import { useSelector } from "react-redux";
 import Loader from "../../components/Loader/Loader";
@@ -12,6 +12,7 @@ const Schedule = ({}) => {
   const [loading, setLoading] = useState(false);
   const [advisor, setAdvisor] = useState({});
   const { userId, advisorId, category, topic } = useParams();
+
   const navigate = useNavigate();
 
   const [formData, setFormData] = useState({
@@ -80,6 +81,13 @@ const Schedule = ({}) => {
     }));
     console.log(formData);
   };
+  function capitalizeWords(str) {
+    if (!str) return "";
+    return str
+      .split(" ")
+      .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+      .join(" ");
+  }
   return (
     <div className="appointment">
       {loading && <Loader />}
@@ -91,7 +99,12 @@ const Schedule = ({}) => {
         />
       </div>
       <form className="appointment-form" onSubmit={handleSubmit}>
-        <h2>Book Appointment</h2>
+        <h2>
+          Book Your Appointment with{" "}
+          {`${advisor.title ? advisor.title : ""} ${capitalizeWords(
+            advisor.fullname
+          )}`}
+        </h2>
         <label>
           Details:
           <textarea
