@@ -64,8 +64,8 @@ const Cards = ({ advisor }) => {
           </p>
           <hr className="divider" />
           <div className="details">
-            <p>{qualification}</p>
-            <p>{languages}</p>
+            <p className="qualification">{qualification}</p>
+            {/* <p>{languages}</p> */}
             <p>{advisor.description}</p>
           </div>
           <div className="timing">

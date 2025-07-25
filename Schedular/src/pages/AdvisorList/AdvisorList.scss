@@ -1,6 +1,8 @@
-.list{
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: start;
-    margin-top: 100px;
+.list {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  margin-top: 100px;
+  overflow-y: scroll;
+  height: 90vh; /* or max-height */
 }
