@@ -1,7 +1,7 @@
 import React from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import "./Topics.scss";
-import { topicsData } from "../../utils/topicsList";
+import { topicsData } from "../../data/topicsList";
 
 const TopicsList = () => {
   const { category } = useParams();

@@ -3,7 +3,7 @@ import "./CreateBatch.scss";
 import { sendDataToapi } from "../../utils/api";
 import { toast } from "react-toastify";
 import { useNavigate, useParams } from "react-router-dom";
-import { topicsData } from "../../utils/topicsList";
+import { topicsData } from "../../data/topicsList";
 
 const CreateBatch = () => {
   const { advisorId } = useParams();
