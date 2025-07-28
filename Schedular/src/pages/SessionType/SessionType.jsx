@@ -20,7 +20,7 @@ const SessionType = () => {
           <img src="/HabitSchedular.png"></img>
           <span>Habbit Schedular</span>
         </div>
-        <div onClick={() => onNav("personalised")} className="cat-cont">
+        <div onClick={() => onNav("learning")} className="cat-cont">
           <img src="/Personailsed.png"></img>
           <span>Personalised Learning</span>
         </div>

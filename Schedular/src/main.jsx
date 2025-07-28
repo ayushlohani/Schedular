@@ -22,6 +22,10 @@ import RegisterAdvisor from "./pages/SigninForm/AdvisorSignIn.jsx";
 import LoginAdvisor from "./pages/Login/LoginAdvisor.jsx";
 import TopicsList from "./pages/Topics/Topics.jsx";
 import CreateBatch from "./pages/CreateBatch/CreateBatch.jsx";
+import Batches from "./pages/Batches/Batches.jsx";
+import HabitSchedular from "./pages/HabitSchedular/HabitSchedular.jsx";
+import QuickAppointment from "./pages/QuickAppointment/QuickAppointment.jsx";
+import LearningMaterial from "./pages/LearningMaterial/LearningMaterial.jsx";
 
 const router = createBrowserRouter([
   {
@@ -65,11 +69,27 @@ const router = createBrowserRouter([
         element: <TopicsList />,
       },
       {
-        path: "/category/:category/:session/:topic",
-        element: <AdvisorList />,
+        path: "/category/:category/habbit-learning/:isGroup/:topic",
+        element: <Batches />,
       },
       {
-        path: "/category/:category/:session/:topic/:advisorId/:userId",
+        path: "/category/:category/habbit-learning/:isGroup",
+        element: <TopicsList />,
+      },
+      {
+        path: "/category/:category/habbit-learning",
+        element: <HabitSchedular />,
+      },
+      {
+        path: "/category/:category/quick-session/:topic",
+        element: <QuickAppointment />,
+      },
+      {
+        path: "/category/:category/learning/:topic",
+        element: <LearningMaterial />,
+      },
+      {
+        path: "/category/:category/habbit-learning/personal/:topic/:advisorId/:userId",
         element: <Schedule />,
       },
       {
