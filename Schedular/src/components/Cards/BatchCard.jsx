@@ -1,6 +1,8 @@
 import React from "react";
 import "./BatchCard.scss";
 import { weekdays } from "../../data/Usabledata";
+import { useSelector } from "react-redux";
+import { sendDataToapi } from "../../utils/api";
 
 const formatTime = (time) => {
   const hours = Math.floor(time / 100);
@@ -28,6 +30,7 @@ function formatDateToDDMMYYYY(dateString) {
 
 const BatchCard = ({ batch }) => {
   const {
+    _id,
     topic,
     description,
     meetlink,
@@ -42,6 +45,24 @@ const BatchCard = ({ batch }) => {
   } = batch;
 
   const dayNames = weekdays;
+
+  const userId = useSelector((state) => state?.user?._id);
+
+  const joinBatch = () => {
+    const url = `/batch/join/${_id}`;
+    const params = {
+      userId,
+      advisorId: advisorId?._id,
+    };
+
+    sendDataToapi(url, {}, "application/json", params)
+      .then((res) => {
+        console.log("Batch joined:", res.data);
+      })
+      .catch((err) => {
+        console.error("Join batch failed:", err);
+      });
+  };
 
   return (
     <div className="batch-card">
@@ -72,22 +93,10 @@ const BatchCard = ({ batch }) => {
           </p>
         )}
         <div className="bottom">
-          {learningMaterial && (
-            <p>
-              <a
-                href={learningMaterial}
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                Learning Material
-              </a>
-            </p>
-          )}
           <a
-            href={meetlink}
-            target="_blank"
             rel="noopener noreferrer"
             className="join-link"
+            onClick={joinBatch}
           >
             Join Batch
           </a>

@@ -17,12 +17,13 @@ export const fetchDataFromApi = async (url,params,id='')=>{
     }
 }
 
-export const sendDataToapi = async (url,body,header)=>{
+export const sendDataToapi = async (url,body,header,params)=>{
     try {
         const result = await axios.post(base_url + url,body,{
             headers: {
                 'Content-Type': header || 'multipart/form-data',
             },
+            params,
             withCredentials:true, // Ensure cookies are sent with the request (Imp)
         });
         return result;
