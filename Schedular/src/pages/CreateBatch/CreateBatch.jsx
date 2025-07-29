@@ -4,6 +4,7 @@ import { sendDataToapi } from "../../utils/api";
 import { toast } from "react-toastify";
 import { useNavigate, useParams } from "react-router-dom";
 import { topicsData } from "../../data/topicsList";
+import { weekdays } from "../../data/Usabledata";
 
 const CreateBatch = () => {
   const { advisorId } = useParams();
@@ -23,16 +24,6 @@ const CreateBatch = () => {
     learningMaterial: "",
   });
 
-  const weekdays = [
-    "Monday",
-    "Tuesday",
-    "Wednesday",
-    "Thursday",
-    "Friday",
-    "Saturday",
-    "Sunday",
-  ];
-
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
@@ -41,6 +32,10 @@ const CreateBatch = () => {
   const handleDomainChange = (e) => {
     setDomain(e.target.value);
     handleChange(e); // updates domain in formData too
+  };
+
+  const formatTopicForUrl = (topic) => {
+    return topic.toLowerCase().replace(/\s+/g, "-");
   };
 
   const handleSubmit = async (e) => {
@@ -84,7 +79,7 @@ const CreateBatch = () => {
               Select Your Topic
             </option>
             {topicsData[domain].map((topic, i) => (
-              <option key={i} value={topic}>
+              <option key={i} value={formatTopicForUrl(topic)}>
                 {topic}
               </option>
             ))}
