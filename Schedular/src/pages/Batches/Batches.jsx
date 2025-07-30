@@ -7,6 +7,7 @@ import BatchCard from "../../components/Cards/BatchCard";
 import { weekdays } from "../../data/Usabledata";
 import { fetchDataFromApi } from "../../utils/api";
 import AdvisorSearch from "../../components/auto-complete-search/AdvisorSearch";
+import { capitalizeWords } from "../../utils/usableFunctions";
 
 const Batches = () => {
   const { isGroup } = useParams();
@@ -46,7 +47,7 @@ const Batches = () => {
         <AdvisorList />
       ) : (
         <div className="batches">
-          <h2>Available Batches</h2>
+          <h2>Available Batches For {capitalizeWords(topic)}</h2>
 
           <div className="filters">
             <AdvisorSearch setFilters={setFilterInputs} />
