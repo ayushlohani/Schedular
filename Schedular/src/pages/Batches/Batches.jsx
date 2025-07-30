@@ -6,12 +6,13 @@ import "./Batches.scss";
 import BatchCard from "../../components/Cards/BatchCard";
 import { weekdays } from "../../data/Usabledata";
 import { fetchDataFromApi } from "../../utils/api";
+import AdvisorSearch from "../../components/auto-complete-search/AdvisorSearch";
 
 const Batches = () => {
   const { isGroup } = useParams();
   const [batches, setBatches] = useState([]);
   const [filters, setFilters] = useState({
-    advisor: "",
+    advisorId: "",
     weekDay: "",
     slotTime: "",
   });
@@ -26,6 +27,7 @@ const Batches = () => {
         ...filters,
       }).then((res) => {
         console.log(res);
+        console.log(filters);
         setBatches(res.data.batches);
       });
     } catch (err) {
@@ -42,14 +44,16 @@ const Batches = () => {
           <h2>Available Batches</h2>
 
           <div className="filters">
-            <input
+            {/* <input
               type="text"
               placeholder="Search by Advisor"
               value={filters.advisor}
               onChange={(e) =>
                 setFilters({ ...filters, advisor: e.target.value })
               }
-            />
+            /> */}
+            <AdvisorSearch setFilters={setFilters} />
+
 
             <select
               value={filters.weekDay}
