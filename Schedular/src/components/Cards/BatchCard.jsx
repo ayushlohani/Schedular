@@ -3,6 +3,12 @@ import "./BatchCard.scss";
 import { weekdays } from "../../data/Usabledata";
 import { useSelector } from "react-redux";
 import { sendDataToapi } from "../../utils/api";
+import {
+  capitalizeWords,
+  formatDateToDDMMYYYY,
+} from "../../utils/usableFunctions";
+import { toast } from "react-toastify";
+import { useNavigate } from "react-router-dom";
 
 const formatTime = (time) => {
   const hours = Math.floor(time / 100);
@@ -11,22 +17,6 @@ const formatTime = (time) => {
   const formattedHours = hours % 12 === 0 ? 12 : hours % 12;
   return `${formattedHours}:${minutes.toString().padStart(2, "0")} ${ampm}`;
 };
-
-function capitalizeWords(str) {
-  if (!str) return "";
-  return str
-    .split(" ")
-    .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
-    .join(" ");
-}
-function formatDateToDDMMYYYY(dateString) {
-  const date = new Date(dateString);
-  const day = String(date.getDate()).padStart(2, "0");
-  const month = String(date.getMonth() + 1).padStart(2, "0"); // Months are zero-based
-  const year = date.getFullYear();
-
-  return `${day}-${month}-${year}`;
-}
 
 const BatchCard = ({ batch }) => {
   const {
@@ -46,6 +36,8 @@ const BatchCard = ({ batch }) => {
 
   const dayNames = weekdays;
 
+  const navigate = useNavigate();
+
   const userId = useSelector((state) => state?.user?._id);
 
   const joinBatch = () => {
@@ -58,8 +50,11 @@ const BatchCard = ({ batch }) => {
     sendDataToapi(url, {}, "application/json", params)
       .then((res) => {
         console.log("Batch joined:", res.data);
+        toast.success("Batch Joined SuccessFully!");
+        navigate("/dashboard");
       })
       .catch((err) => {
+        toast.error("Join Batch Failed!", err);
         console.error("Join batch failed:", err);
       });
   };

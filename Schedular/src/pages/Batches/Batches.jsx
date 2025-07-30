@@ -10,14 +10,19 @@ import AdvisorSearch from "../../components/auto-complete-search/AdvisorSearch";
 
 const Batches = () => {
   const { isGroup } = useParams();
+  const { category, topic } = useParams();
+
   const [batches, setBatches] = useState([]);
   const [filters, setFilters] = useState({
     advisorId: "",
     weekDay: "",
     slotTime: "",
   });
-
-  const { category, topic } = useParams();
+  const [filterInputs, setFilterInputs] = useState({
+    advisorId: "",
+    weekDay: "",
+    slotTime: "",
+  });
 
   useEffect(() => {
     try {
@@ -44,21 +49,12 @@ const Batches = () => {
           <h2>Available Batches</h2>
 
           <div className="filters">
-            {/* <input
-              type="text"
-              placeholder="Search by Advisor"
-              value={filters.advisor}
-              onChange={(e) =>
-                setFilters({ ...filters, advisor: e.target.value })
-              }
-            /> */}
-            <AdvisorSearch setFilters={setFilters} />
-
+            <AdvisorSearch setFilters={setFilterInputs} />
 
             <select
-              value={filters.weekDay}
+              value={filterInputs.weekDay}
               onChange={(e) =>
-                setFilters({ ...filters, weekDay: e.target.value })
+                setFilterInputs({ ...filterInputs, weekDay: e.target.value })
               }
             >
               <option value="">All Days</option>
@@ -72,11 +68,19 @@ const Batches = () => {
             <input
               type="number"
               placeholder="Slot Time (e.g. 1100)"
-              value={filters.slotTime}
+              value={filterInputs.slotTime}
               onChange={(e) =>
-                setFilters({ ...filters, slotTime: e.target.value })
+                setFilterInputs({ ...filterInputs, slotTime: e.target.value })
               }
             />
+
+            <button
+              onClick={() => {
+                setFilters(filterInputs);
+              }}
+            >
+              Filter
+            </button>
           </div>
 
           {batches.length === 0 ? (
