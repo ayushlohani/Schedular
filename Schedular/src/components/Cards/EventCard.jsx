@@ -5,6 +5,7 @@ const EventCard = ({
   date,
   advisor,
   user,
+  profilepic,
   topic,
   time,
   status,
@@ -34,47 +35,49 @@ const EventCard = ({
     return `${hr}:${min.toString().padStart(2, "0")} ${ampm}`;
   };
 
-  function capitalizeFirst(str) {
-    if (!str) return "";
-    return str.charAt(0).toUpperCase() + str.slice(1);
-  }
+  const capitalizeFirst = (str) =>
+    str ? str.charAt(0).toUpperCase() + str.slice(1) : "";
 
-  function capitalizeWords(str) {
-    if (!str) return "";
-    return str
-      .split(" ")
-      .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
-      .join(" ");
-  }
+  const capitalizeWords = (str) =>
+    str
+      ? str
+          .split(" ")
+          .map((w) => w.charAt(0).toUpperCase() + w.slice(1))
+          .join(" ")
+      : "";
 
   return (
     <div className="event-card" ref={cardRef}>
-      <div className="card-content">
-        <div className="card-heading">
-          <h1 className="title">
-            {`${capitalizeFirst(domain)} (${
+      <div className="left">
+        <img src={profilepic} alt="Profile" />
+      </div>
+
+      <div className="right">
+        <div className="header">
+          <div className="head-left">
+            <h3>{`Dr. ${capitalizeWords(advisor) || "Unknown"}`}</h3>
+            <p>{`${capitalizeFirst(domain)} (${
               capitalizeFirst(topic) || "Session"
-            })`}
-          </h1>
-          <p className="subtitle">{details || "Consultation"}</p>
-          <hr className="divider" />
+            })`}</p>
+          </div>
+          <div className={`status ${status}`}>{capitalizeFirst(status)}</div>
         </div>
 
-        <div className="card-body">
-          <h2 className="doctor-name">
-            Dr. {capitalizeWords(advisor) || "Unknown"}
-          </h2>
-          <p className="time-label">
-            {`${formatTime(time)}-${formatTime(time + 100)}`}
-          </p>
-          <p className="date">Date: {date}</p>
-          <p className={`status ${status}`}>
-            Status: {capitalizeFirst(status)}
-          </p>
-        </div>
+        <p>
+          <strong>Date:</strong> {date}
+        </p>
+        <p>
+          <strong>Time:</strong>{" "}
+          {`${formatTime(time)}-${formatTime(time + 100)}`}
+        </p>
 
-        <div className="card-footer">
-          <a href={meetlink} className="card-button" target="_blank">
+        <div className="bottom">
+          <a
+            href={meetlink}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="join-link"
+          >
             Meet Link
           </a>
         </div>

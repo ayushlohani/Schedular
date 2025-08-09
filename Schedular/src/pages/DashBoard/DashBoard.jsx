@@ -101,6 +101,10 @@ export default function DashBoard() {
                 details={item.details}
                 domain={item.domain}
                 meetlink={item.meetlink}
+                profilepic={
+                  item.advisorId?.profilepic ||
+                  "https://upload.wikimedia.org/wikipedia/commons/9/9d/Unknown_Member.jpg"
+                }
               />
             );
 
@@ -229,7 +233,10 @@ export default function DashBoard() {
             </svg>
             <div className="avatar">
               <img
-                src={user?.profilepic || "https://via.placeholder.com/150"}
+                src={
+                  user?.profilepic ||
+                  "https://upload.wikimedia.org/wikipedia/commons/9/9d/Unknown_Member.jpg"
+                }
                 alt="Profile"
               />
             </div>
