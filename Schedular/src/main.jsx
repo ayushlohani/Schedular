@@ -26,6 +26,7 @@ import Batches from "./pages/Batches/Batches.jsx";
 import HabitSchedular from "./pages/HabitSchedular/HabitSchedular.jsx";
 import QuickAppointment from "./pages/QuickAppointment/QuickAppointment.jsx";
 import LearningMaterial from "./pages/LearningMaterial/LearningMaterial.jsx";
+import AdvisorQuick from "./pages/AdvisorQuick/AdvisorQuick.jsx";
 
 const router = createBrowserRouter([
   {
@@ -47,6 +48,10 @@ const router = createBrowserRouter([
       {
         path: "/advisor/:advisorId/createBatch",
         element: <CreateBatch />,
+      },
+      {
+        path: "/advisor/:advisorId/:domain/quickAppointment",
+        element: <AdvisorQuick />,
       },
       {
         path: "/Signin",

@@ -1,44 +1,28 @@
-.loader-comp{
-  background: rgb(235, 233, 230);
-  background: linear-gradient(90deg, rgba(216, 213, 208, 0.281) 0%, rgba(202, 199, 193, 0.171) 36%, rgb(189, 187, 182) 100%);
-    position: fixed;
-    z-index: 99;
-    width: 100vw;
-    height: 100vh;
-    top: 0;
-    left: 0;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-
-  /* HTML: <div class="loader"></div> */
-.loader {
-  width: 60px;
-  aspect-ratio: 1;
-  color: #3a3af0;
-  position: relative;
-}
-.loader::before,
-.loader::after {
-  content: "";
+/* HTML: <div class="loader"></div> */
+.loader-page {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  width: 100vw;
   position: absolute;
-  inset:0;
-  background:
-    linear-gradient(currentColor 0 0) 0 calc(var(--s,0)*-100%)/100% calc(100%/3),
-    repeating-linear-gradient(90deg,currentColor 0 25%,#0000 0 50%) calc(var(--s,0)*100%) 50%/calc(4*100%/3) calc(100%/3);
-  background-repeat: no-repeat;
-  animation: l26 2s infinite;
+  top: 0%;
+  background-color: rgba(255, 255, 255, 0.8);
+  .loader {
+  width: 100px;
+  aspect-ratio: 2;
+  --_g: no-repeat radial-gradient(circle closest-side,#4661d8 90%,#0000);
+  background: 
+    var(--_g) 0%   50%,
+    var(--_g) 50%  50%,
+    var(--_g) 100% 50%;
+  background-size: calc(100%/3) 50%;
+  animation: l3 1s infinite linear;
 }
-.loader::after {
-  --s:-1;
+@keyframes l3 {
+    20%{background-position:0%   0%, 50%  50%,100%  50%}
+    40%{background-position:0% 100%, 50%   0%,100%  50%}
+    60%{background-position:0%  50%, 50% 100%,100%   0%}
+    80%{background-position:0%  50%, 50%  50%,100% 100%}
 }
-@keyframes l26 {
-    0%,
-    10%  {transform:translateY(calc(var(--s,1)*0));   background-position: 0 calc(var(--s,0)*-100%),calc(var(--s,0)*100%) 50%}
-    33%  {transform:translateY(calc(var(--s,1)*-20%));background-position: 0 calc(var(--s,0)*-100%),calc(var(--s,0)*100%) 50%}
-    66%  {transform:translateY(calc(var(--s,1)*-20%));background-position: 0 calc(var(--s,0)*-100%),calc(var(--s,0)*100% + 100%) 50%}
-    90%,
-    100%  {transform:translateY(calc(var(--s,1)*0));  background-position: 0 calc(var(--s,0)*-100%),calc(var(--s,0)*100% + 100%) 50%}
 }
