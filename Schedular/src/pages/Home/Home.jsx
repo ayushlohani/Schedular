@@ -17,7 +17,7 @@ const Home = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    fetchDataFromApi("/users/getloggedinUser")
+    fetchDataFromApi("/advisors/logout")
       .then((res) => {
         setUser(res.data);
         console.log(res);

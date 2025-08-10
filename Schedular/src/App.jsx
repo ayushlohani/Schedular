@@ -14,7 +14,7 @@ function App() {
   const dispatch = useDispatch();
   useEffect(() => {
     setLoading(true);
-    fetchDataFromApi("/users/getloggedinUser")
+    fetchDataFromApi("/advisors/getloggedinAdvisor")
       .then((res) => {
         dispatch(Useraction.loginUser(res?.data));
         console.log(res);

@@ -2,10 +2,7 @@ import React, { useEffect, useState } from "react";
 import "./Navbar.scss";
 import { useNavigate } from "react-router-dom";
 import { FaUser } from "react-icons/fa";
-import { signOut, onAuthStateChanged } from "firebase/auth";
-import { auth } from "../Firebase/Firebase";
-import { Link } from "react-router-dom";
-import { MdOutlineAutoGraph } from "react-icons/md";
+import { MdOutlineArrowBack } from "react-icons/md"; // Back arrow icon
 import { fetchDataFromApi, sendDataToapi } from "../../utils/api";
 import { toast } from "react-toastify";
 import { useDispatch } from "react-redux";
@@ -13,41 +10,27 @@ import { Useraction } from "../../store/userSlice";
 
 const Navbar = () => {
   const navigate = useNavigate();
-  const [user, setUser] = useState(null); // Track logged-in user
+  const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(false);
   const dispatch = useDispatch();
 
-  // useEffect(() => {
-  //   // Set up listener for authentication state
-  //   const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
-  //     setUser(currentUser);
-  //   });
-
-  //   // Clean up the listener on unmount
-  //   return () => unsubscribe();
-  // }, []);
-
   useEffect(() => {
-    fetchDataFromApi("/users/getloggedinUser")
+    fetchDataFromApi("/advisors/getloggedinAdvisor")
       .then((res) => {
         setUser(res.data);
-        //console.log(res);
       })
-      .catch((err) => {
-        setUser(null);
-      });
+      .catch(() => setUser(null));
   }, []);
 
   const handleLogout = (e) => {
     e.preventDefault();
     setLoading(true);
-    sendDataToapi("/users/logout")
-      .then((res) => {
-        console.log(res);
+    sendDataToapi("advisors/logout")
+      .then(() => {
         toast.success("Logout Successfully!");
         setUser(null);
         dispatch(Useraction.logoutUser);
-        navigate("/login"); // optional
+        navigate("/");
       })
       .catch((err) => console.log(err))
       .finally(() => setLoading(false));
@@ -55,22 +38,30 @@ const Navbar = () => {
 
   return (
     <div className="nav">
+      {/* Back Button */}
+      <div className="back-btn" onClick={() => navigate(-1)}>
+        <MdOutlineArrowBack size={24} />
+      </div>
+
+      {/* Logo */}
       <div className="left" onClick={() => navigate("/")}>
         <img src="/logo3.png" alt="Logo" />
       </div>
+
+      {/* Links */}
       <div className="right">
-        <Link className="link" to={user ? "/dashboard" : "/login"}>
+        <span className="link" onClick={() => navigate(user ? "/dashboard" : "/login")}>
           Dashboard
-        </Link>
+        </span>
         {!user && (
-          <Link className="login-btn" to="/login">
+          <span className="login-btn" onClick={() => navigate("/loginConditon")}>
             Login
-          </Link>
+          </span>
         )}
         {user && (
-          <Link className="login-btn" to="/" onClick={handleLogout}>
+          <span className="login-btn" onClick={handleLogout}>
             Logout
-          </Link>
+          </span>
         )}
       </div>
     </div>

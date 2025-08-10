@@ -11,13 +11,33 @@ $blue: #004DFF;
   position: absolute;
   top: 0%;
 
+  // Back button — fixed at leftmost
+  .back-btn {
+    position: absolute;
+    left: 1rem;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    position: absolute;
+
+    svg {
+      font-size: 1.5rem;
+      color: #333;
+      transition: color 0.2s ease;
+    }
+
+    &:hover svg {
+      color: $blue;
+    }
+  }
+
   .left {
     cursor: pointer;
     font-weight: bold;
     font-size: 1.2rem;
     width: 30%;
     display: flex;
-    justify-content: center;
+    justify-content: center; // keeps it centered
     align-items: center;
     height: 100%;
 
@@ -47,7 +67,7 @@ $blue: #004DFF;
       font-weight: 500;
       margin-right: 20px;
 
-      &:hover{
+      &:hover {
         text-decoration: underline;
         color: black;
       }
@@ -65,12 +85,11 @@ $blue: #004DFF;
     }
   }
 
-  // 👇 Responsive styles
+  // Responsive
   @media (max-width: 1024px) {
     .right {
       width: 30%;
     }
-
     .left img {
       width: 60%;
     }

@@ -1,0 +1,566 @@
+/* Place this in src/styles/advisorDashboard.scss */
+$primary: #2563eb;
+$light-gray: #f6f9fb;
+$text: #1f2937;
+$card-shadow: 0 8px 20px rgba(18, 33, 73, 0.04);
+
+* {
+  box-sizing: border-box;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+  overflow-y: auto;
+}
+
+.dashboard {
+  display: flex;
+  min-height: 100vh;
+  background: $light-gray;
+  margin-top: 80px;
+
+  .sidebar {
+    width: 260px;
+    background: #fff;
+    padding: 20px;
+    box-shadow: $card-shadow;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+
+    .logo {
+      font-weight: 700;
+      font-size: 20px;
+      color: $primary;
+    }
+
+    .search-box {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      background: #f7f9fb;
+      padding: 8px;
+      border-radius: 8px;
+
+      input {
+        border: none;
+        outline: none;
+        background: transparent;
+        width: 100%;
+      }
+
+      svg {
+        color: #94a3b8;
+      }
+    }
+
+    nav {
+      ul {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+
+        li {
+          padding: 8px 0;
+          color: $text;
+          cursor: pointer;
+
+          &.active {
+            color: $primary;
+            font-weight: 700;
+          }
+
+          &.divider {
+            margin-top: 10px;
+            font-size: 12px;
+            color: #94a3b8;
+            font-weight: 700;
+          }
+        }
+      }
+    }
+
+    .working-track {
+      margin-top: auto;
+      font-size: 12px;
+
+      .track-card {
+        display: flex;
+        gap: 10px;
+        align-items: center;
+        background: #f7fbff;
+        padding: 8px;
+        border-radius: 8px;
+
+        .dot {
+          width: 10px;
+          height: 10px;
+          background: $primary;
+          border-radius: 50%;
+        }
+
+        .muted {
+          color: #64748b;
+          font-size: 12px;
+        }
+      }
+    }
+  }
+
+  .dashboard-content {
+    flex: 1;
+    padding: 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+
+    .header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+
+      h2 {
+        margin: 0;
+        font-size: 20px;
+        color: $text;
+      }
+
+      .muted {
+        color: #64748b;
+      }
+
+      .header-actions {
+        display: flex;
+        gap: 12px;
+        align-items: center;
+
+        svg {
+          color: #475569;
+        }
+
+        img {
+          border-radius: 50%;
+          width: 40px;
+          height: 40px;
+        }
+      }
+    }
+
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+
+      .stat-card {
+        background: #fff;
+        padding: 12px;
+        border-radius: 10px;
+        box-shadow: $card-shadow;
+        display: flex;
+        gap: 12px;
+        align-items: center;
+
+        .icon {
+          font-size: 20px;
+          color: $primary;
+        }
+
+        .stat-body {
+          .stat-number {
+            font-size: 20px;
+            font-weight: 700;
+          }
+
+          .muted {
+            color: #64748b;
+          }
+        }
+      }
+    }
+
+    .two-col {
+      display: grid;
+      grid-template-columns: 2fr 1fr;
+      gap: 16px;
+    }
+
+    .patients-card {
+      background: #fff;
+      height: 70vh;
+      padding: 14px;
+      border-radius: 10px;
+      box-shadow: $card-shadow;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      
+
+      .section-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 10px;
+        margin-bottom: 12px;
+
+        h3 {
+          margin: 0;
+        }
+
+        .small {
+          font-size: 12px;
+          color: #64748b;
+        }
+
+        .controls {
+          display: flex;
+          gap: 8px;
+          align-items: center;
+
+          select {
+            padding: 6px 8px;
+            border-radius: 6px;
+            border: 1px solid #e6edf5;
+          }
+
+          .link {
+            background: none;
+            border: none;
+            color: $primary;
+            cursor: pointer;
+          }
+        }
+      }
+
+      .patients-table {
+        width: 100%;
+        border-collapse: collapse;
+        max-height: 55vh;
+        tr{
+          height: 50px;
+        }
+        th {
+          text-align: center;
+          padding: 8px 6px;
+          color: #94a3b8;
+          font-weight: 600;
+          font-size: 13px;
+        }
+
+        td {
+          padding: 20px 6px;
+          border-top: 1px solid #eef3f8;
+          vertical-align: top;
+          font-size: 15px;
+        }
+
+        tr.selected {
+          background: #f8fbff;
+        }
+
+        .patient-name {
+          font-weight: 600;
+        }
+
+        .muted.small {
+          color: #64748b;
+          font-size: 12px;
+        }
+
+        .center {
+          text-align: center;
+
+          .join {
+            background-color: $light-gray;
+            color: $text;
+            border: none;
+            text-decoration: none;
+            border-radius: 8px;
+            padding: 8px 16px;
+            cursor: pointer;
+
+            &:hover {
+              background-color: $primary;
+              color: white;
+            }
+          }
+        }
+
+        .priority {
+          padding: 4px 8px;
+          border-radius: 999px;
+          color: #fff;
+          font-size: 12px;
+
+          &.low {
+            background: #16a34a;
+          }
+
+          &.medium {
+            background: #f59e0b;
+          }
+
+          &.high {
+            background: #ef4444;
+          }
+        }
+      }
+
+      .patient-detail {
+        margin-top: 10px;
+        padding: 10px;
+        background: #fbfdff;
+        border-radius: 8px;
+
+        .small {
+          font-size: 12px;
+          color: #64748b;
+        }
+      }
+    }
+
+    .calendar-card {
+      background: #fff;
+      padding: 14px;
+      border-radius: 10px;
+      box-shadow: $card-shadow;
+
+      .cal-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+
+        h3 {
+          margin: 0;
+        }
+
+        .cal-nav button {
+          border: none;
+          background: #f1f5f9;
+          padding: 6px 8px;
+          border-radius: 6px;
+          cursor: pointer;
+        }
+      }
+
+      .weekdays {
+        display: grid;
+        grid-template-columns: repeat(7, 1fr);
+        margin-top: 12px;
+        color: #94a3b8;
+        font-weight: 600;
+        font-size: 12px;
+      }
+
+      .calendar-grid {
+        display: grid;
+        grid-template-columns: repeat(7, 1fr);
+        gap: 6px;
+        margin-top: 8px;
+
+        .blank {
+          min-height: 48px;
+        }
+
+        .day {
+          min-height: 56px;
+          border-radius: 8px;
+          background: #fff;
+          border: 1px solid #f1f5f9;
+          padding: 6px;
+          text-align: left;
+          display: flex;
+          flex-direction: column;
+          justify-content: flex-start;
+          cursor: pointer;
+
+          .day-num {
+            font-weight: 700;
+            color: $text;
+          }
+
+          .dots {
+            margin-top: auto;
+            display: flex;
+            gap: 4px;
+          }
+
+          .dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+
+            &.green {
+              background: #16a34a;
+            }
+
+            &.red {
+              background: #ef4444;
+            }
+
+            &.blue {
+              background: #2563eb;
+            }
+
+            &.purple {
+              background: #7c3aed;
+            }
+          }
+
+          &.active {
+            background: #2563eb;
+            color: #fff;
+
+            .day-num {
+              color: #fff;
+            }
+          }
+        }
+      }
+
+      .cal-legend {
+        display: flex;
+        gap: 8px;
+        margin-top: 12px;
+
+        .legend {
+          display: flex;
+          gap: 6px;
+          align-items: center;
+
+          .dot {
+            width: 10px;
+            height: 10px;
+          }
+        }
+      }
+    }
+
+    .schedule-card {
+      background: #fff;
+      padding: 14px;
+      border-radius: 10px;
+      box-shadow: $card-shadow;
+
+      .schedule-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 12px;
+
+        h3 {
+          margin: 0;
+        }
+      }
+
+      .timeline {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        margin-bottom: 12px;
+
+        .timeline-event {
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          padding: 10px;
+          border-radius: 8px;
+          background: #fbfdff;
+          border: 1px solid #eef3f8;
+
+          .ev-left {
+            .ev-title {
+              font-weight: 700;
+            }
+
+            .small {
+              color: #64748b;
+            }
+          }
+
+          .ev-right {
+            display: flex;
+            gap: 8px;
+            align-items: center;
+
+            .pill {
+              width: 12px;
+              height: 12px;
+              border-radius: 4px;
+
+              &.green {
+                background: #16a34a;
+              }
+
+              &.red {
+                background: #ef4444;
+              }
+
+              &.blue {
+                background: #2563eb;
+              }
+
+              &.purple {
+                background: #7c3aed;
+              }
+            }
+
+            .btn-del {
+              border: none;
+              background: #fff;
+              color: #ef4444;
+              cursor: pointer;
+            }
+          }
+        }
+      }
+
+      .add-event {
+        display: flex;
+        gap: 8px;
+        align-items: center;
+
+        input,
+        select {
+          padding: 8px;
+          border-radius: 8px;
+          border: 1px solid #e6edf5;
+        }
+
+        .btn-add {
+          padding: 8px 12px;
+          background: $primary;
+          color: #fff;
+          border: none;
+          border-radius: 8px;
+          cursor: pointer;
+        }
+      }
+    }
+  }
+}
+
+.pagination {
+  text-align: end;
+  margin-top: 10px;
+}
+
+/* Responsive */
+@media (max-width: 1000px) {
+  .dashboard {
+    .sidebar {
+      display: none;
+    }
+
+    .dashboard-content {
+      padding: 16px;
+
+      .two-col {
+        grid-template-columns: 1fr;
+      }
+
+      .stats {
+        grid-template-columns: 1fr;
+      }
+    }
+  }
+}

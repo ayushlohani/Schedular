@@ -25,7 +25,7 @@ const LoginAdvisor = () => {
       );
       toast.success("Login Successful");
       //navigate("/");
-      window.location.href = "/";
+      window.location.href = "/Dashboard";
     } catch (err) {
       toast.error(err?.message || "Login failed", {
         position: "bottom-center",
