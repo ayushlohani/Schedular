@@ -5,6 +5,18 @@
   font-family: "Inter", sans-serif;
   font-size: 15px;
 }
+body {
+  height: 100vh;
+  overflow: scroll !important;
+  scrollbar-width: none; /* Firefox */
+}
+
+body::-webkit-scrollbar {
+  display: none; /* Chrome, Safari, Edge */
+}
+*::-webkit-scrollbar {
+  display: none; /* Chrome, Safari, Edge */
+}
 
 h1 {
   font-size: 35px;
@@ -31,4 +43,3 @@ h1 {
     color: black;
   }
 }
-
