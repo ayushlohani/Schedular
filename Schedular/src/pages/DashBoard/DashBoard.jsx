@@ -81,7 +81,7 @@ export default function DashBoard() {
     <div className="event-section">
       {loading && <Loader />}
       <h2>{title}</h2>
-      <hr className="divider" />
+      <hr className="divider" /> 
       <div className="event-card-list">
         {loading ? (
           <p>Loading...</p>

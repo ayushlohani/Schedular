@@ -27,7 +27,8 @@ import HabitSchedular from "./pages/HabitSchedular/HabitSchedular.jsx";
 import QuickAppointment from "./pages/QuickAppointment/QuickAppointment.jsx";
 import LearningMaterial from "./pages/LearningMaterial/LearningMaterial.jsx";
 import AdvisorQuick from "./pages/AdvisorQuick/AdvisorQuick.jsx";
-
+import AdvisorDashboard from "./pages/AdvisorDashboard/AdvisorDashboard.jsx";
+import LoginasUser from "./pages/Login/LoginasUser.jsx";
 const router = createBrowserRouter([
   {
     path: "/",
@@ -38,11 +39,15 @@ const router = createBrowserRouter([
         element: <Home />,
       },
       {
-        path: "/login",
+        path: "/loginCondition/login",
         element: <Login />,
       },
       {
-        path: "/advisor/login",
+        path: "/loginConditon",
+        element: <LoginasUser />,
+      },
+      {
+        path: "/loginCondition/loginAdvisor",
         element: <LoginAdvisor />,
       },
       {
@@ -99,7 +104,7 @@ const router = createBrowserRouter([
       },
       {
         path: "/Dashboard",
-        element: <DashBoard />,
+        element: <AdvisorDashboard />,
       },
       {
         path: "/user/signin",
