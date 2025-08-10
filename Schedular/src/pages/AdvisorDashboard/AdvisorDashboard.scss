@@ -6,7 +6,7 @@ $card-shadow: 0 8px 20px rgba(18, 33, 73, 0.04);
 
 * {
   box-sizing: border-box;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+  //font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial;
   overflow-y: auto;
 }
 
@@ -14,12 +14,13 @@ $card-shadow: 0 8px 20px rgba(18, 33, 73, 0.04);
   display: flex;
   min-height: 100vh;
   background: $light-gray;
-  margin-top: 80px;
+  //margin-top: 80px;
 
   .sidebar {
-    width: 260px;
+    width: 15vw;
     background: #fff;
     padding: 20px;
+    padding-top: 75px;
     box-shadow: $card-shadow;
     display: flex;
     flex-direction: column;
@@ -118,6 +119,7 @@ $card-shadow: 0 8px 20px rgba(18, 33, 73, 0.04);
       display: flex;
       justify-content: space-between;
       align-items: center;
+      height: 50px;
 
       h2 {
         margin: 0;
@@ -230,6 +232,17 @@ $card-shadow: 0 8px 20px rgba(18, 33, 73, 0.04);
           }
         }
       }
+      .no-appointments {
+        text-align: center;
+        color: #94a3b8;
+        font-size: 15px;
+        margin-top: 20px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 50vh;
+        width: 100%;
+      }
 
       .patients-table {
         width: 100%;
@@ -320,6 +333,7 @@ $card-shadow: 0 8px 20px rgba(18, 33, 73, 0.04);
 
     .calendar-card {
       background: #fff;
+
       padding: 14px;
       border-radius: 10px;
       box-shadow: $card-shadow;
@@ -336,8 +350,9 @@ $card-shadow: 0 8px 20px rgba(18, 33, 73, 0.04);
         .cal-nav button {
           border: none;
           background: #f1f5f9;
-          padding: 6px 8px;
+          padding: 3px 10px;
           border-radius: 6px;
+          margin: 0px 3px;
           cursor: pointer;
         }
       }
@@ -345,17 +360,19 @@ $card-shadow: 0 8px 20px rgba(18, 33, 73, 0.04);
       .weekdays {
         display: grid;
         grid-template-columns: repeat(7, 1fr);
-        margin-top: 12px;
+        margin-top: 20px;
         color: #94a3b8;
         font-weight: 600;
         font-size: 12px;
+        text-align: center;
       }
 
       .calendar-grid {
         display: grid;
         grid-template-columns: repeat(7, 1fr);
-        gap: 6px;
+        gap: 3px;
         margin-top: 8px;
+        font-size: 10px;
 
         .blank {
           min-height: 48px;
@@ -365,17 +382,18 @@ $card-shadow: 0 8px 20px rgba(18, 33, 73, 0.04);
           min-height: 56px;
           border-radius: 8px;
           background: #fff;
-          border: 1px solid #f1f5f9;
-          padding: 6px;
+          padding: 2px;
+          align-items: center;
           text-align: left;
           display: flex;
           flex-direction: column;
-          justify-content: flex-start;
+          justify-content: center;
           cursor: pointer;
 
           .day-num {
             font-weight: 700;
             color: $text;
+            font-size: small;
           }
 
           .dots {

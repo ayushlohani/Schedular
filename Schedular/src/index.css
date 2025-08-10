@@ -3,5 +3,7 @@
 @tailwind utilities;
 
 * {
-  font-family: "Comic Sans MS", "Comic Sans" !important;
+  font-family: "Poppins", sans-serif;
+  font-size: 0.9rem;
+  line-height: 1.6;
 }
