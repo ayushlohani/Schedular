@@ -18,15 +18,11 @@ export default function AdvisorDashboard() {
   const [Appointments, setAppointments] = useState([]);
   const [events, setEvents] = useState([]);
   const [domain, setdomain] = useState("");
-  const [tabeLimit, setTableLimit] = useState(5);
+  const [tabeLimit, setTableLimit] = useState(6);
   const today = useMemo(() => new Date(), []);
-  const [visibleMonth, setVisibleMonth] = useState(
-    new Date(today.getFullYear(), today.getMonth(), 1)
-  );
   const [selectedDate, setSelectedDate] = useState(formatDateToYYYYMMDD(today));
   const [searchText, setSearchText] = useState("");
   const [sortOrder, setSortOrder] = useState("A-Z");
-  const [selectedPatientId] = useState(null);
   const [page, setPage] = useState(1);
 
   useEffect(() => {
@@ -36,18 +32,6 @@ export default function AdvisorDashboard() {
       .catch((err) => console.log(err))
       .finally(() => setLoading(false));
   }, []);
-
-  function getMonthDays(date) {
-    const year = date.getFullYear();
-    const month = date.getMonth();
-    const firstDay = new Date(year, month, 1);
-    const startDay = firstDay.getDay();
-    const daysInMonth = new Date(year, month + 1, 0).getDate();
-    const arr = [];
-    for (let i = 0; i < startDay; i++) arr.push(null);
-    for (let d = 1; d <= daysInMonth; d++) arr.push(new Date(year, month, d));
-    return arr;
-  }
 
   useEffect(() => {
     if (!user) return;

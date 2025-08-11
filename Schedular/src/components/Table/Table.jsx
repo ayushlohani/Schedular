@@ -93,12 +93,17 @@ export default function Table({
 
       {TableContent.length > 0 && (
         <div className="pagination">
-          <button onClick={() => setPage(page - 1)} hidden={page === 1}>
+          <button
+            onClick={() => setPage(page - 1)}
+            hidden={page === 1}
+            className="pagenav"
+          >
             {"< Previous"}
           </button>
           <button
             onClick={() => setPage(page + 1)}
             hidden={TableContent.length < limit}
+            className="pagenav"
           >
             {"Next >"}
           </button>
