@@ -12,9 +12,8 @@ $card-shadow: 0 8px 20px rgba(18, 33, 73, 0.04);
 
 .dashboard {
   display: flex;
-  min-height: 100vh;
+  height: 100vh;
   background: $light-gray;
-  //margin-top: 80px;
 
   .dashboard-content {
     flex: 1;
@@ -28,7 +27,6 @@ $card-shadow: 0 8px 20px rgba(18, 33, 73, 0.04);
       justify-content: space-between;
       align-items: center;
       height: 50px;
-
       h2 {
         margin: 0;
         font-size: 20px;
@@ -55,39 +53,6 @@ $card-shadow: 0 8px 20px rgba(18, 33, 73, 0.04);
         }
       }
     }
-
-    .stats {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 16px;
-
-      .stat-card {
-        background: #fff;
-        padding: 12px;
-        border-radius: 10px;
-        box-shadow: $card-shadow;
-        display: flex;
-        gap: 12px;
-        align-items: center;
-
-        .icon {
-          font-size: 20px;
-          color: $primary;
-        }
-
-        .stat-body {
-          .stat-number {
-            font-size: 20px;
-            font-weight: 700;
-          }
-
-          .muted {
-            color: #64748b;
-          }
-        }
-      }
-    }
-
     .two-col {
       display: grid;
       grid-template-columns: 2fr 1fr;

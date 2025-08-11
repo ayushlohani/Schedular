@@ -3,6 +3,8 @@ import { FiSearch } from "react-icons/fi";
 import "./Sidebar.scss";
 
 export default function Sidebar({ searchText, setSearchText }) {
+  const curr_time = new Date();
+
   return (
     <aside className="sidebar">
       <div className="logo"></div>
@@ -16,12 +18,12 @@ export default function Sidebar({ searchText, setSearchText }) {
       </div>
       <nav>
         <ul>
-          <li className="active">Dashboard</li>
-          <li>Appointments</li>
+          <li className="active">Appointments</li>
           <li>Quick Sessions</li>
           <li>Batches</li>
           <li>My Tasks</li>
           <li>Past Events</li>
+          <li>Positivity Zone</li>
           <li>Help Center</li>
           <li>Settings</li>
         </ul>
@@ -31,8 +33,13 @@ export default function Sidebar({ searchText, setSearchText }) {
         <div className="track-card">
           <div className="dot" />
           <div>
-            <div>Wed, 8 June</div>
-            <div className="muted">06:23:53</div>
+            <div>
+              {curr_time.toLocaleDateString("en-US", {
+                weekday: "short",
+                day: "numeric",
+                month: "short",
+              })}
+            </div>
           </div>
         </div>
       </div>

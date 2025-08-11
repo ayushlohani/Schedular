@@ -3,22 +3,27 @@ import { FiSearch } from "react-icons/fi";
 import { FaBed, FaUserMd, FaAmbulance } from "react-icons/fa";
 import { fetchDataFromApi } from "../../utils/api";
 import "./advisorDashboard.scss";
-import { capitalizeWords } from "../../utils/usableFunctions";
+import {
+  capitalizeWords,
+  formatDateToYYYYMMDD,
+} from "../../utils/usableFunctions";
 import { formatDateToDDMMYYYY } from "../../utils/usableFunctions";
 import Sidebar from "../../components/Sidebar/Sidebar";
 import Table from "../../components/Table/Table";
 import CalendarCard from "../../components/Cards/CalendarCard";
+import Stats from "../../components/Stats/Stats";
 export default function AdvisorDashboard() {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(false);
   const [Appointments, setAppointments] = useState([]);
   const [events, setEvents] = useState([]);
   const [domain, setdomain] = useState("");
+  const [tabeLimit, setTableLimit] = useState(5);
   const today = useMemo(() => new Date(), []);
   const [visibleMonth, setVisibleMonth] = useState(
     new Date(today.getFullYear(), today.getMonth(), 1)
   );
-  const [selectedDate, setSelectedDate] = useState(formatDateToDDMMYYYY(today));
+  const [selectedDate, setSelectedDate] = useState(formatDateToYYYYMMDD(today));
   const [searchText, setSearchText] = useState("");
   const [sortOrder, setSortOrder] = useState("A-Z");
   const [selectedPatientId] = useState(null);
@@ -44,33 +49,13 @@ export default function AdvisorDashboard() {
     return arr;
   }
 
-  const eventsByDate = useMemo(() => {
-    const map = {};
-    for (const ev of events) {
-      map[ev.date] = map[ev.date] || [];
-      map[ev.date].push(ev);
-    }
-    return map;
-  }, [events]);
-
-  function prevMonth() {
-    setVisibleMonth((m) => new Date(m.getFullYear(), m.getMonth() - 1, 1));
-  }
-  function nextMonth() {
-    setVisibleMonth((m) => new Date(m.getFullYear(), m.getMonth() + 1, 1));
-  }
-  function onSelectDate(dObj) {
-    if (!dObj) return;
-    setSelectedDate(formatDateToDDMMYYYY(dObj));
-  }
-
   useEffect(() => {
     if (!user) return;
     setLoading(true);
     fetchDataFromApi("/appointment/filter", {
       advisorId: user?._id,
       domain,
-      limit: 8,
+      limit: tabeLimit,
       page,
       date: selectedDate,
     })
@@ -85,41 +70,43 @@ export default function AdvisorDashboard() {
 
       <main className="dashboard-content">
         <header className="header"></header>
-        <section className="stats">
-          <div className="stat-card">
-            <div className="stat-body">
-              <div className="stat-number">2</div>
-              <div className="muted">Total Today's Appointment</div>
-            </div>
-          </div>
-          <div className="stat-card">
-            <div className="stat-body">
-              <div className="stat-number">10</div>
-              <div className="muted">Total Upcoming Events</div>
-            </div>
-          </div>
-          <div className="stat-card">
-            <div className="icon"></div>
-            <div className="stat-body">
-              <div className="stat-number">12</div>
-              <div className="muted">Total Ongoing Batches</div>
-            </div>
-          </div>
-        </section>
+        <Stats
+          stats={[
+            { title: "Total Today's Appointment", value: 2 },
+            { title: "Total Upcoming Events", value: 10 },
+            { title: "Total Ongoing Batches", value: 12 },
+          ]}
+        />
 
         <section className="two-col">
           <Table
-            Appointments={Appointments}
+            TableContent={Appointments}
+            tableTitle="Appointments"
+            tableHeader={["Name", "Domain", "Status", "Topic", "Date"]}
+            SelectedFields={[
+              "userId fullname", // It mean nested object field mean p?.userId.fullname
+              "domain",
+              "status",
+              "topic",
+              "date",
+            ]}
             sortOrder={sortOrder}
             setSortOrder={setSortOrder}
             setSearchText={setSearchText}
             setSelectedDate={setSelectedDate}
             page={page}
             setPage={setPage}
+            isMeetLink={true}
+            limit={tabeLimit}
+            EmptyMessage="No Appointments found"
           />
           <CalendarCard
             events={events}
-            onDateSelect={(date) => setSelectedDate(date)}
+            onDateSelect={(date) => {
+              setSelectedDate(date);
+              setPage(1);
+            }}
+            selectedDate={selectedDate}
           />
         </section>
       </main>

@@ -1,0 +1,35 @@
+$primary: #2563eb;
+$light-gray: #f6f9fb;
+$text: #1f2937;
+$card-shadow: 0 8px 20px rgba(18, 33, 73, 0.04);
+.stats {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+
+      .stat-card {
+        background: #fff;
+        padding: 12px;
+        border-radius: 10px;
+        box-shadow: $card-shadow;
+        display: flex;
+        gap: 12px;
+        align-items: center;
+
+        .icon {
+          font-size: 20px;
+          color: $primary;
+        }
+
+        .stat-body {
+          .stat-number {
+            font-size: 20px;
+            font-weight: 700;
+          }
+
+          .muted {
+            color: #64748b;
+          }
+        }
+      }
+    }

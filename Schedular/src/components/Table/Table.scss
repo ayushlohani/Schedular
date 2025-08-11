@@ -4,9 +4,9 @@ $light-gray: #f6f9fb;
 $text: #1f2937;
 $card-shadow: 0 8px 20px rgba(18, 33, 73, 0.04);
 
-.patients-card {
+.main-card {
       background: #fff;
-      height: 75vh;
+      max-height: 75vh;
       padding: 14px;
       border-radius: 10px;
       box-shadow: $card-shadow;
@@ -50,7 +50,7 @@ $card-shadow: 0 8px 20px rgba(18, 33, 73, 0.04);
           }
         }
       }
-      .no-appointments {
+      .no-content {
         text-align: center;
         color: #94a3b8;
         font-size: 15px;
@@ -62,7 +62,7 @@ $card-shadow: 0 8px 20px rgba(18, 33, 73, 0.04);
         width: 100%;
       }
 
-      .patients-table {
+      .main-table {
         width: 100%;
         border-collapse: collapse;
         max-height: 55vh;

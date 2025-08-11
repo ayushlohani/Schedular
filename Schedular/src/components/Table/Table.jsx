@@ -3,21 +3,33 @@ import { capitalizeWords } from "../../utils/usableFunctions";
 import "./Table.scss";
 
 export default function Table({
-  Appointments,
+  tableHeader = [],
+  TableContent = [],
+  SelectedFields = [],
   sortOrder,
   setSortOrder,
   setSearchText,
   setSelectedDate,
   page,
   setPage,
+  limit = 8,
+  tableTitle = "Table",
+  EmptyMessage = "No Content found",
+  isMeetLink = false,
 }) {
+  const resetFilters = () => {
+    setSearchText("");
+    setSortOrder("A - Z");
+    setSelectedDate("");
+  };
+
   return (
-    <div className="patients-card">
+    <div className="main-card">
       <div>
         <div className="section-header">
-          <div>
-            <h3>Appointments({Appointments.length})</h3>
-          </div>
+          <h3>
+            {tableTitle} ({TableContent.length})
+          </h3>
           <div className="controls">
             <select
               value={sortOrder}
@@ -26,64 +38,72 @@ export default function Table({
               <option>A - Z</option>
               <option>Z - A</option>
             </select>
-            <button
-              className="link"
-              onClick={() => {
-                setSearchText("");
-                setSortOrder("A-Z");
-                setSelectedDate("");
-              }}
-            >
+            <button className="link" onClick={resetFilters}>
               See All
             </button>
           </div>
         </div>
-        {Appointments.length === 0 ? (
-          <div className="no-appointments">No appointments found</div>
+
+        {TableContent.length === 0 ? (
+          <div className="no-content">{EmptyMessage}</div>
         ) : (
-          <table className="patients-table">
+          <table className="main-table">
             <thead>
               <tr>
-                <th>Name</th>
-                <th>Domain</th>
-                <th>Status</th>
-                <th>Topic</th>
-                <th>Date</th>
-                <th>Link</th>
+                {tableHeader.map((header, index) => (
+                  <th key={index} className="center">
+                    {capitalizeWords(header)}
+                  </th>
+                ))}
+                {isMeetLink && <th className="center">Link</th>}
               </tr>
             </thead>
             <tbody>
-              {Appointments.map((p) => (
-                <tr key={p.id}>
-                  <td className="center">
-                    {capitalizeWords(p.userId?.fullname)}
-                  </td>
-                  <td className="center">{capitalizeWords(p.domain)}</td>
-                  <td className="center">{capitalizeWords(p.status)}</td>
-                  <td className="center">{capitalizeWords(p.topic)}</td>
-                  <td className="center">{p.date}</td>
-                  <td className="center">
-                    <a href={p.meetlink} target="_blank" className="join">
-                      Join
-                    </a>
-                  </td>
+              {TableContent.map((p, idx) => (
+                <tr key={p.id || idx}>
+                  {SelectedFields.map((field, index) => (
+                    <td key={index} className="center">
+                      {(() => {
+                        const path = field.split(" ");
+                        let value = p;
+                        for (const key of path) value = value?.[key];
+                        return capitalizeWords(value) ?? "-";
+                      })()}
+                    </td>
+                  ))}
+
+                  {isMeetLink && (
+                    <td className="center">
+                      <a
+                        href={p.meetlink}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="join"
+                      >
+                        Join
+                      </a>
+                    </td>
+                  )}
                 </tr>
               ))}
             </tbody>
           </table>
         )}
       </div>
-      <div className="pagination">
-        <button onClick={() => setPage(page - 1)} hidden={page === 1}>
-          {"< Previous"}
-        </button>
-        <button
-          onClick={() => setPage(page + 1)}
-          hidden={Appointments.length < 8}
-        >
-          {"Next >"}
-        </button>
-      </div>
+
+      {TableContent.length > 0 && (
+        <div className="pagination">
+          <button onClick={() => setPage(page - 1)} hidden={page === 1}>
+            {"< Previous"}
+          </button>
+          <button
+            onClick={() => setPage(page + 1)}
+            hidden={TableContent.length < limit}
+          >
+            {"Next >"}
+          </button>
+        </div>
+      )}
     </div>
   );
 }

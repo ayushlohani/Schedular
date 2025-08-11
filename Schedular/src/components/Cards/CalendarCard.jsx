@@ -1,16 +1,15 @@
 import "./CalenderCard.scss";
 import {
   capitalizeWords,
-  formatDateToDDMMYYYY,
+  formatDateToYYYYMMDD,
 } from "../../utils/usableFunctions";
 import React, { useState, useMemo } from "react";
 
-export default function CalendarCard({ events, onDateSelect }) {
+export default function CalendarCard({ events, onDateSelect, selectedDate }) {
   const today = new Date();
   const [visibleMonth, setVisibleMonth] = useState(
     new Date(today.getFullYear(), today.getMonth(), 1)
   );
-  const [selectedDate, setSelectedDate] = useState(formatDateToDDMMYYYY(today));
 
   const eventsByDate = useMemo(() => {
     const map = {};
@@ -42,9 +41,9 @@ export default function CalendarCard({ events, onDateSelect }) {
 
   function selectDate(dObj) {
     if (!dObj) return;
-    const ymd = formatDateToDDMMYYYY(dObj);
-    setSelectedDate(ymd);
+    const ymd = formatDateToYYYYMMDD(dObj);
     if (onDateSelect) onDateSelect(ymd);
+    console.log("Selected Date:", ymd);
   }
 
   return (
@@ -69,7 +68,7 @@ export default function CalendarCard({ events, onDateSelect }) {
       <div className="calendar-grid">
         {getMonthDays(visibleMonth).map((d, idx) => {
           if (!d) return <div key={idx} className="blank" />;
-          const ymd = formatDateToDDMMYYYY(d);
+          const ymd = formatDateToYYYYMMDD(d);
           const has = eventsByDate[ymd] && eventsByDate[ymd].length > 0;
           const active = ymd === selectedDate;
           return (
