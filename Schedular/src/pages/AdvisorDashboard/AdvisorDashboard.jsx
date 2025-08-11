@@ -12,18 +12,28 @@ import Sidebar from "../../components/Sidebar/Sidebar";
 import Table from "../../components/Table/Table";
 import CalendarCard from "../../components/Cards/CalendarCard";
 import Stats from "../../components/Stats/Stats";
+import { tableConfigs } from "../../components/Table/tableConfig";
 export default function AdvisorDashboard() {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(false);
-  const [Appointments, setAppointments] = useState([]);
+  const [tableData, setTableData] = useState([]);
   const [events, setEvents] = useState([]);
   const [domain, setdomain] = useState("");
-  const [tabeLimit, setTableLimit] = useState(6);
+  const [tab, settab] = useState("Appointments");
+  const [tableLimit, setTableLimit] = useState(6);
   const today = useMemo(() => new Date(), []);
   const [selectedDate, setSelectedDate] = useState(formatDateToYYYYMMDD(today));
   const [searchText, setSearchText] = useState("");
   const [sortOrder, setSortOrder] = useState("A-Z");
   const [page, setPage] = useState(1);
+
+  //tabelContents
+  const [tableHeader, setTableHeader] = useState([]);
+  const [tableContent, setTableContent] = useState([]);
+  const [tableTitle, setTableTitle] = useState("Appointments");
+  const [EmptyMessage, setEmptyMessage] = useState("No Appointments found");
+  const [isMeetLink, setIsMeetLink] = useState(true);
+  const [selectedFields, setSelectedFields] = useState([]);
 
   useEffect(() => {
     setLoading(true);
@@ -32,25 +42,61 @@ export default function AdvisorDashboard() {
       .catch((err) => console.log(err))
       .finally(() => setLoading(false));
   }, []);
+  const fetchQuickSessions = () => {
+    fetchDataFromApi(`/appointment/getQuickAppointments`)
+      .then((res) => {
+        setTableData(res?.data || []);
+        console.log("Quick Session:", res?.data);
+      })
+      .catch((err) => console.log(err))
+      .finally(() => setLoading(false));
+  };
 
   useEffect(() => {
     if (!user) return;
     setLoading(true);
-    fetchDataFromApi("/appointment/filter", {
-      advisorId: user?._id,
-      domain,
-      limit: tabeLimit,
-      page,
-      date: selectedDate,
-    })
-      .then((res) => setAppointments(res?.data || []))
-      .catch((err) => console.error("Failed to fetch appointments:", err))
-      .finally(() => setLoading(false));
-  }, [user, domain, page, selectedDate]);
+    let intervalId;
+    setTableData([]);
+
+    if (tab === "Appointments") {
+      fetchDataFromApi(
+        `/appointment/filter?advisorId=${user._id}&page=${page}&limit=${tableLimit}&sortOrder=${sortOrder}&date=${selectedDate}`
+      )
+        .then((res) => {
+          setTableData(res?.data || []);
+          console.log("Appointments Data:", res?.data);
+        })
+        .catch((err) => console.log(err))
+        .finally(() => setLoading(false));
+    } else if (tab === "Quick Sessions") {
+      fetchQuickSessions();
+      intervalId = setInterval(() => {
+        fetchQuickSessions();
+      }, 5000);
+    }
+
+    return () => {
+      if (intervalId) clearInterval(intervalId);
+    };
+  }, [user, domain, page, selectedDate, tab]);
+
+  useEffect(() => {
+    const config = tableConfigs[tab] || tableConfigs["Appointments"];
+    setTableHeader(config.header);
+    setSelectedFields(config.fields);
+    setTableTitle(config.title);
+    setEmptyMessage(config.empty);
+    setIsMeetLink(config.isMeetLink);
+  }, [tab]);
 
   return (
     <div className="dashboard">
-      <Sidebar searchText={searchText} setSearchText={setSearchText} />
+      <Sidebar
+        searchText={searchText}
+        setSearchText={setSearchText}
+        onSelectTab={settab}
+        activeTab={tab}
+      />
 
       <main className="dashboard-content">
         <header className="header"></header>
@@ -64,26 +110,22 @@ export default function AdvisorDashboard() {
 
         <section className="two-col">
           <Table
-            TableContent={Appointments}
-            tableTitle="Appointments"
-            tableHeader={["Name", "Domain", "Status", "Topic", "Date"]}
-            SelectedFields={[
-              "userId fullname", // It mean nested object field mean p?.userId.fullname
-              "domain",
-              "status",
-              "topic",
-              "date",
-            ]}
+            TableContent={tableData}
+            tableTitle={tableTitle}
+            tableHeader={tableHeader}
+            SelectedFields={selectedFields}
             sortOrder={sortOrder}
             setSortOrder={setSortOrder}
             setSearchText={setSearchText}
             setSelectedDate={setSelectedDate}
             page={page}
             setPage={setPage}
-            isMeetLink={true}
-            limit={tabeLimit}
-            EmptyMessage="No Appointments found"
+            isMeetLink={isMeetLink}
+            limit={tableLimit}
+            EmptyMessage={EmptyMessage}
+            advisorId={user?._id}
           />
+
           <CalendarCard
             events={events}
             onDateSelect={(date) => {

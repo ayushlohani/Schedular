@@ -1,6 +1,8 @@
 import React from "react";
 import { capitalizeWords } from "../../utils/usableFunctions";
 import "./Table.scss";
+import { toast } from "react-toastify";
+import { updateDatatoapi } from "../../utils/api";
 
 export default function Table({
   tableHeader = [],
@@ -16,11 +18,26 @@ export default function Table({
   tableTitle = "Table",
   EmptyMessage = "No Content found",
   isMeetLink = false,
+  advisorId = "",
 }) {
   const resetFilters = () => {
     setSearchText("");
     setSortOrder("A - Z");
     setSelectedDate("");
+  };
+  const handleQuickJoin = async (id) => {
+    try {
+      await updateDatatoapi(
+        `/appointment/joinQuickAppointment/${id}?advisorId=${advisorId}`,
+        "application/json"
+      ).then((res) => {
+        window.open(res?.data?.data?.meetlink, "_blank");
+        // reload to see updated list
+      });
+      toast.success("Joined appointment successfully!");
+    } catch (err) {
+      toast.error(err.response?.data?.message || "Failed to join appointment");
+    }
   };
 
   return (
@@ -74,14 +91,28 @@ export default function Table({
 
                   {isMeetLink && (
                     <td className="center">
-                      <a
-                        href={p.meetlink}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="join"
-                      >
-                        Join
-                      </a>
+                      {p.isQuick ? (
+                        <a
+                          href={p.status === "pending" ? p.meetlink : "#"}
+                          target={p.status === "pending" ? "_blank" : ""}
+                          rel="noopener noreferrer"
+                          className="join"
+                          onClick={() => {
+                            handleQuickJoin(p._id);
+                          }}
+                        >
+                          {p.status === "pending" ? "Join" : "-"}
+                        </a>
+                      ) : (
+                        <a
+                          href={p.meetlink}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="join"
+                        >
+                          Join
+                        </a>
+                      )}
                     </td>
                   )}
                 </tr>
