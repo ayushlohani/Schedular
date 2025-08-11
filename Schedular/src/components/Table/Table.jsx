@@ -98,7 +98,7 @@ export default function Table({
                           rel="noopener noreferrer"
                           className="join"
                           onClick={() => {
-                            handleQuickJoin(p._id);
+                            if (p.status == "pending") handleQuickJoin(p._id);
                           }}
                         >
                           {p.status === "pending" ? "Join" : "-"}
