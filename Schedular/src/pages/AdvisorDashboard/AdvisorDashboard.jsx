@@ -72,7 +72,7 @@ export default function AdvisorDashboard() {
       fetchQuickSessions();
       intervalId = setInterval(() => {
         fetchQuickSessions();
-      }, 5000);
+      }, 3000);
     }
 
     return () => {
