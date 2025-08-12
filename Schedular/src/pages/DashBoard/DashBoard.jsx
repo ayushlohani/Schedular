@@ -9,6 +9,7 @@ import LearningCard from "../../components/Cards/LearningCard";
 import PastCard from "../../components/Cards/PastCard";
 import AdvisorDashboard from "../AdvisorDashboard/AdvisorDashboard";
 import { useSelector } from "react-redux";
+import UserDashboard from "../UserDashboard/UserDashboard";
 
 export default function DashBoard() {
   const navigate = useNavigate();
@@ -199,100 +200,101 @@ export default function DashBoard() {
   return role === "advisor" ? (
     <AdvisorDashboard />
   ) : (
-    <div className="dashboard-wrapper">
-      <div className="dashboard-container">
-        <div className="top-bar">
-          <select
-            className="new-meeting domain"
-            value={domain}
-            onChange={(e) => {
-              setdomain(e?.target?.value);
-            }}
-          >
-            <option value={""}>All</option>
-            <option value={"mental"}>Mental</option>
-            <option value={"physical"}>Physical</option>
-            <option value={"financial"}>Financial</option>
-          </select>
-          <a className="new-meeting" onClick={goToCategory}>
-            + New Meeting
-          </a>
-          <div className="profile-toggle" onClick={toggleProfile}>
-            👤
-          </div>
-        </div>
+    <UserDashboard />
+    // <div className="dashboard-wrapper">
+    //   <div className="dashboard-container">
+    //     <div className="top-bar">
+    //       <select
+    //         className="new-meeting domain"
+    //         value={domain}
+    //         onChange={(e) => {
+    //           setdomain(e?.target?.value);
+    //         }}
+    //       >
+    //         <option value={""}>All</option>
+    //         <option value={"mental"}>Mental</option>
+    //         <option value={"physical"}>Physical</option>
+    //         <option value={"financial"}>Financial</option>
+    //       </select>
+    //       <a className="new-meeting" onClick={goToCategory}>
+    //         + New Meeting
+    //       </a>
+    //       <div className="profile-toggle" onClick={toggleProfile}>
+    //         👤
+    //       </div>
+    //     </div>
 
-        {renderAppointmentsSection("Upcoming Events", appointments)}
-        {renderLearningSection("Learning Materials", learningMaterials)}
-        {renderStaticSection("Past Events", 1)}
-      </div>
+    //     {renderAppointmentsSection("Upcoming Events", appointments)}
+    //     {renderLearningSection("Learning Materials", learningMaterials)}
+    //     {renderStaticSection("Past Events", 1)}
+    //   </div>
 
-      <div className={`profile-panel ${showProfile ? "show-on-mobile" : ""}`}>
-        <div className="top-profile-bar" onClick={toggleProfileFalse}>
-          <a>x</a>
-        </div>
-        <div className="profile-photo">
-          <div className="avatar-ring-wrapper">
-            <svg className="avatar-ring">
-              <circle className="bg" cx="95" cy="95" r="90" />
-              <circle className="fg" cx="95" cy="95" r="90" />
-            </svg>
-            <div className="avatar">
-              <img
-                src={
-                  user?.profilepic ||
-                  "https://upload.wikimedia.org/wikipedia/commons/9/9d/Unknown_Member.jpg"
-                }
-                alt="Profile"
-              />
-            </div>
-          </div>
-          <div className="name">
-            {capitalizeWords(user?.fullname) || "User"}
-          </div>
-          <div className="role">
-            {user?.dob
-              ? `${Math.floor(
-                  (new Date() - new Date(user.dob)) /
-                    (1000 * 60 * 60 * 24 * 365)
-                )} Years`
-              : ""}
-          </div>
-        </div>
-        <hr className="divider" />
-        <div className="profile-details">
-          <div>
-            <strong>Email:</strong> {user?.email}
-          </div>
-          <div>
-            <strong>Alt Email:</strong> {user?.contact?.email || "N/A"}
-          </div>
-          <div>
-            <strong>Phone:</strong> {user?.contact?.phone || "N/A"}
-          </div>
-          <div>
-            <strong>Gender:</strong> {capitalizeFirst(user?.gender)}
-          </div>
-          <div>
-            <strong>Blood Group:</strong> {user?.bloodGroup || "N/A"}
-          </div>
-          <div>
-            <strong>Languages:</strong> {user?.languagesSpoken?.join(", ")}
-          </div>
-          <div>
-            <strong>Address:</strong>{" "}
-            {user?.address
-              ? `${user.address.street}, ${user.address.city}, ${user.address.state}, ${user.address.zipCode}, ${user.address.country}`
-              : "N/A"}
-          </div>
-          <div>
-            <strong>Emergency Contact:</strong>{" "}
-            {user?.emergencyContact
-              ? `${user.emergencyContact.name} (${user.emergencyContact.relation}) - ${user.emergencyContact.phone}`
-              : "N/A"}
-          </div>
-        </div>
-      </div>
-    </div>
+    //   <div className={`profile-panel ${showProfile ? "show-on-mobile" : ""}`}>
+    //     <div className="top-profile-bar" onClick={toggleProfileFalse}>
+    //       <a>x</a>
+    //     </div>
+    //     <div className="profile-photo">
+    //       <div className="avatar-ring-wrapper">
+    //         <svg className="avatar-ring">
+    //           <circle className="bg" cx="95" cy="95" r="90" />
+    //           <circle className="fg" cx="95" cy="95" r="90" />
+    //         </svg>
+    //         <div className="avatar">
+    //           <img
+    //             src={
+    //               user?.profilepic ||
+    //               "https://upload.wikimedia.org/wikipedia/commons/9/9d/Unknown_Member.jpg"
+    //             }
+    //             alt="Profile"
+    //           />
+    //         </div>
+    //       </div>
+    //       <div className="name">
+    //         {capitalizeWords(user?.fullname) || "User"}
+    //       </div>
+    //       <div className="role">
+    //         {user?.dob
+    //           ? `${Math.floor(
+    //               (new Date() - new Date(user.dob)) /
+    //                 (1000 * 60 * 60 * 24 * 365)
+    //             )} Years`
+    //           : ""}
+    //       </div>
+    //     </div>
+    //     <hr className="divider" />
+    //     <div className="profile-details">
+    //       <div>
+    //         <strong>Email:</strong> {user?.email}
+    //       </div>
+    //       <div>
+    //         <strong>Alt Email:</strong> {user?.contact?.email || "N/A"}
+    //       </div>
+    //       <div>
+    //         <strong>Phone:</strong> {user?.contact?.phone || "N/A"}
+    //       </div>
+    //       <div>
+    //         <strong>Gender:</strong> {capitalizeFirst(user?.gender)}
+    //       </div>
+    //       <div>
+    //         <strong>Blood Group:</strong> {user?.bloodGroup || "N/A"}
+    //       </div>
+    //       <div>
+    //         <strong>Languages:</strong> {user?.languagesSpoken?.join(", ")}
+    //       </div>
+    //       <div>
+    //         <strong>Address:</strong>{" "}
+    //         {user?.address
+    //           ? `${user.address.street}, ${user.address.city}, ${user.address.state}, ${user.address.zipCode}, ${user.address.country}`
+    //           : "N/A"}
+    //       </div>
+    //       <div>
+    //         <strong>Emergency Contact:</strong>{" "}
+    //         {user?.emergencyContact
+    //           ? `${user.emergencyContact.name} (${user.emergencyContact.relation}) - ${user.emergencyContact.phone}`
+    //           : "N/A"}
+    //       </div>
+    //     </div>
+    //   </div>
+    // </div>
   );
 }
