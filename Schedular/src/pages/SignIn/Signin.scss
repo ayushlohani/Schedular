@@ -2,8 +2,7 @@ $blue: #004DFF;
 .home-scroll-container {
   display: flex;
   width: 100%;
-  height: calc(100vh); // Adjust '60px' to your navbar height
-  padding-top: 60px;
+    height: 70vh; 
   .left {
     flex: 1.2;
     display: flex;

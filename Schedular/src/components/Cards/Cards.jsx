@@ -52,7 +52,7 @@ const Cards = ({ advisor }) => {
         <div className="left-section">
           <div className="avatar">
             <img
-              src={advisor.profilepic || "/default-profile.png"}
+              src={advisor.profilepic || "/no-profile.jpg"}
               alt={advisor.fullname}
             />
           </div>

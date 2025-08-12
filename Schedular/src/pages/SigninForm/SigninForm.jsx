@@ -268,7 +268,7 @@ const RegisterForm = () => {
         </button>
         <div className="switch">
           <>
-            Already have account? <Link to="/login">Login</Link>
+            Already have account? <Link to="/user/login">Login</Link>
           </>
         </div>
       </form>
