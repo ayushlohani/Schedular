@@ -96,6 +96,16 @@ export default function AdvisorDashboard() {
         setSearchText={setSearchText}
         onSelectTab={settab}
         activeTab={tab}
+        tabs={[
+          "Appointments",
+          "Quick Sessions",
+          "Batches",
+          "My Tasks",
+          "Past Events",
+          "Positivity Zone",
+          "Help Center",
+          "Settings",
+        ]}
       />
 
       <main className="dashboard-content">

@@ -1,64 +1,63 @@
 import React, { useEffect, useState } from "react";
 import "./Navbar.scss";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { FaUserCircle } from "react-icons/fa";
 import { IoNotificationsOutline } from "react-icons/io5";
 import { fetchDataFromApi, sendDataToapi } from "../../utils/api";
 import { toast } from "react-toastify";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Useraction } from "../../store/userSlice";
+import ProfileCard from "../ProfileCard/ProfileCard";
 
 const Navbar = () => {
   const navigate = useNavigate();
-  const [user, setUser] = useState(null);
   const dispatch = useDispatch();
+  const [isLoggedin, setLoggedin] = useState(false);
+  const [profileShow, setProfileShow] = useState(false);
+
+  const user = useSelector((state) => state.user);
+  const role = useSelector((state) => state.role);
+
+  const [currentUrl, setCurrentUrl] = useState(window.location.pathname);
 
   useEffect(() => {
-    fetchDataFromApi("/advisors/getloggedinAdvisor")
-      .then((res) => {
-        setUser(res.data);
-        console.log("User data:", res.data);
-      })
-      .catch(() => setUser(null));
-  }, []);
-
-  const handleLogout = () => {
-    sendDataToapi("advisors/logout")
-      .then(() => {
-        toast.success("Logout Successfully!");
-        setUser(null);
-        dispatch(Useraction.logoutUser());
-        navigate("/");
-      })
-      .catch((err) => console.log(err));
-  };
+    if (user && user._id) {
+      setLoggedin(true);
+    } else {
+      setLoggedin(false);
+    }
+    setCurrentUrl(window.location.pathname);
+  });
 
   return (
     <div className="nav">
       {/* Logo */}
       <div className="left" onClick={() => navigate("/")}>
-        <img src="/logo3.png" alt="Logo" />
+        {currentUrl !== "/dashboard" && <img src="/logo3.png" alt="Logo" />}
       </div>
 
       {/* Links */}
       <div className="right">
-        <span
-          className="link"
-          onClick={() => navigate(user ? "/dashboard" : "/login")}
-        >
-          Dashboard
-        </span>
-
-        {!user && (
+        {isLoggedin ? (
           <span
-            className="login-btn"
-            onClick={() => navigate("/loginConditon")}
+            className="link"
+            onClick={() => navigate(isLoggedin ? "/dashboard" : "/login")}
           >
-            Login
+            Dashboard
+          </span>
+        ) : (
+          <span className="link" onClick={() => navigate("/advisor/login")}>
+            Login as Advisor{" "}
           </span>
         )}
 
-        {user && (
+        {!isLoggedin && (
+          <span className="login-btn" onClick={() => navigate("/user/login")}>
+            Login as User
+          </span>
+        )}
+
+        {isLoggedin && (
           <div className="user-actions">
             {/* Notification Icon */}
             <IoNotificationsOutline
@@ -70,8 +69,10 @@ const Navbar = () => {
             {/* Profile Picture */}
             <div
               className="profile-btn"
-              onClick={() => navigate("/profile")}
+              onClick={() => navigate("/dashboard")}
               title="My Profile"
+              onMouseOver={() => setProfileShow(true)}
+              onMouseLeave={() => setProfileShow(false)}
             >
               {user.profilepic ? (
                 <img
@@ -82,6 +83,8 @@ const Navbar = () => {
               ) : (
                 <FaUserCircle size={28} />
               )}
+
+              {profileShow && <ProfileCard />}
             </div>
           </div>
         )}

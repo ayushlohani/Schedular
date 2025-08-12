@@ -8,15 +8,17 @@ import { useDispatch } from "react-redux";
 import { Useraction } from "./store/userSlice";
 import { useEffect, useState } from "react";
 import Loader from "./components/Loader/Loader";
+import { RoleAction } from "./store/roleSlice";
 
 function App() {
   const [loading, setLoading] = useState(false);
   const dispatch = useDispatch();
   useEffect(() => {
     setLoading(true);
-    fetchDataFromApi("/advisors/getloggedinAdvisor")
+    fetchDataFromApi("/users/getloggedinUserAdvisor")
       .then((res) => {
-        dispatch(Useraction.loginUser(res?.data));
+        dispatch(Useraction.loginUser(res?.data?.user));
+        dispatch(RoleAction.loginRole(res?.data?.role));
         console.log(res);
       })
       .catch((err) => console.log(err))

@@ -7,6 +7,8 @@ import Loader from "../../components/Loader/Loader";
 import { learningMaterials } from "../../data/LearningMaterial";
 import LearningCard from "../../components/Cards/LearningCard";
 import PastCard from "../../components/Cards/PastCard";
+import AdvisorDashboard from "../AdvisorDashboard/AdvisorDashboard";
+import { useSelector } from "react-redux";
 
 export default function DashBoard() {
   const navigate = useNavigate();
@@ -17,11 +19,13 @@ export default function DashBoard() {
   const [user, setUser] = useState(null);
   const [domain, setdomain] = useState("");
 
+  const role = useSelector((state) => state.role);
+
   useEffect(() => {
     setLoading(true);
-    fetchDataFromApi("/users/getloggedinUser")
+    fetchDataFromApi("/users/getloggedinUserAdvisor")
       .then((res) => {
-        setUser(res?.data);
+        setUser(res?.data?.user);
         console.log(res);
       })
       .catch((err) => console.log(err))
@@ -81,7 +85,7 @@ export default function DashBoard() {
     <div className="event-section">
       {loading && <Loader />}
       <h2>{title}</h2>
-      <hr className="divider" /> 
+      <hr className="divider" />
       <div className="event-card-list">
         {loading ? (
           <p>Loading...</p>
@@ -192,7 +196,9 @@ export default function DashBoard() {
     </div>
   );
 
-  return (
+  return role === "advisor" ? (
+    <AdvisorDashboard />
+  ) : (
     <div className="dashboard-wrapper">
       <div className="dashboard-container">
         <div className="top-bar">

@@ -39,7 +39,7 @@ const router = createBrowserRouter([
         element: <Home />,
       },
       {
-        path: "/loginCondition/login",
+        path: "/user/login",
         element: <Login />,
       },
       {
@@ -47,7 +47,7 @@ const router = createBrowserRouter([
         element: <LoginasUser />,
       },
       {
-        path: "/loginCondition/loginAdvisor",
+        path: "/advisor/login",
         element: <LoginAdvisor />,
       },
       {
@@ -103,8 +103,8 @@ const router = createBrowserRouter([
         element: <Schedule />,
       },
       {
-        path: "/Dashboard",
-        element: <AdvisorDashboard />,
+        path: "/dashboard",
+        element: <DashBoard />,
       },
       {
         path: "/user/signin",

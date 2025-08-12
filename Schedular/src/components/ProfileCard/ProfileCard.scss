@@ -1,0 +1,15 @@
+.profile{
+    height: 70px;
+    width: 100px;
+    position: absolute;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 99;
+    overflow-y: auto;
+    transition: all 0.3s ease-in-out    ;
+    button{
+        background-color: rgb(17, 85, 231);
+        color: white;
+    }
+}

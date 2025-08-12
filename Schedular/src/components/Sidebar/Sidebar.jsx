@@ -7,6 +7,7 @@ export default function Sidebar({
   setSearchText,
   onSelectTab,
   activeTab,
+  tabs = [],
 }) {
   const [currTime, setCurrTime] = useState(new Date());
 
@@ -15,20 +16,11 @@ export default function Sidebar({
     return () => clearInterval(timer);
   }, []);
 
-  const tabs = [
-    "Appointments",
-    "Quick Sessions",
-    "Batches",
-    "My Tasks",
-    "Past Events",
-    "Positivity Zone",
-    "Help Center",
-    "Settings",
-  ];
-
   return (
     <aside className="sidebar">
-      <div className="logo"></div>
+      <div className="logo" onClick={() => navigate("/")}>
+        <img src="/logo3.png" alt="Logo" />
+      </div>
 
       <div className="search-box">
         <FiSearch />
