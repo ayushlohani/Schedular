@@ -25,6 +25,7 @@ export default function Table({
     setSearchText("");
     setSortOrder("A - Z");
     setSelectedDate("");
+    setPage(1);
   };
   const handleQuickJoin = async (id) => {
     try {
@@ -83,7 +84,7 @@ export default function Table({
                   {isProfilepic && (
                     <td className="prof-pic center">
                       <img
-                        src={p.advisorId.profilepic || "/no-profile.jpg"}
+                        src={p?.advisorId?.profilepic || "/no-profile.jpg"}
                       ></img>
                     </td>
                   )}
@@ -142,7 +143,7 @@ export default function Table({
           </button>
           <button
             onClick={() => setPage(page + 1)}
-            hidden={TableContent.length < limit}
+            hidden={TableContent.length <= limit}
             className="pagenav"
           >
             {"Next >"}

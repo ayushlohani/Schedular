@@ -43,7 +43,9 @@ export default function AdvisorDashboard() {
       .finally(() => setLoading(false));
   }, []);
   const fetchQuickSessions = () => {
-    fetchDataFromApi(`/appointment/getQuickAppointments`)
+    fetchDataFromApi(
+      `/appointment/getQuickAppointments?limit=${tableLimit}&domain=${user.domain}`
+    )
       .then((res) => {
         setTableData(res?.data || []);
         console.log("Quick Session:", res?.data);

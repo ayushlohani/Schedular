@@ -50,7 +50,7 @@ export default function UserDashboard() {
 
     if (tab === "Appointments") {
       fetchDataFromApi(
-        `/appointment/filter?userId=${user._id}&page=${page}&limit=${tableLimit}&sortOrder=${sortOrder}`
+        `/appointment/filter?userId=${user._id}&page=${page}&limit=${tableLimit}&sortOrder=${sortOrder}&domain=${domain}`
       )
         .then((res) => {
           setTableData(res?.data || []);
@@ -63,7 +63,7 @@ export default function UserDashboard() {
     return () => {
       if (intervalId) clearInterval(intervalId);
     };
-  }, [user, page, tab]);
+  }, [user, page, domain, tab]);
 
   useEffect(() => {
     const config = UsertableConfigs[tab] || UsertableConfigs["Appointments"];
@@ -139,10 +139,19 @@ export default function UserDashboard() {
             </div>
             <div className="sec">
               <label htmlFor="domain">Domain: </label>
-              <select name="domain" id="domain">
-                <option value={domain}>Mental</option>
-                <option value={domain}>Physical</option>
-                <option value={domain}>Financial</option>
+              <select
+                name="domain"
+                id="domain"
+                value={domain}
+                onChange={(e) => {
+                  console.log(e.target.value);
+                  setdomain(e.target.value);
+                }}
+              >
+                <option value="">All</option>
+                <option value="mental">Mental</option>
+                <option value="physical">Physical</option>
+                <option value="financial">Financial</option>
               </select>
             </div>
             <div className="sec-full">

@@ -11,14 +11,15 @@ import { toast } from "react-toastify";
 
 const QuickAppointment = () => {
   const { category, topic } = useParams();
-  const [quickAppointment, setQuick] = useState();
-  const [status, setStatus] = useState("pending");
+  const [quickAppointment, setQuick] = useState(null);
+  const [status, setStatus] = useState("idle"); // idle → pending → confirmed
   const [linkOpened, setLinkOpened] = useState(false);
-  const user = useSelector((state) => state.user);
   const [meetLink, setMeetLink] = useState("#");
+  const user = useSelector((state) => state.user);
   const navigate = useNavigate();
 
   const handleQuick = () => {
+    setStatus("pending");
     sendDataToapi(
       `/appointment/createQuickAppointment`,
       JSON.stringify({ userId: user?._id, domain: category, topic }),
@@ -26,9 +27,11 @@ const QuickAppointment = () => {
     )
       .then((res) => {
         setQuick(res?.data?.data);
-        console.warn(res);
       })
-      .catch((err) => console.log(err));
+      .catch(() => {
+        toast.error("Error creating appointment");
+        setStatus("idle");
+      });
   };
 
   const handleCancel = () => {
@@ -56,45 +59,63 @@ const QuickAppointment = () => {
           }
         }
       })
-      .catch((err) => console.log(err));
+      .catch(() => {});
   };
 
   useEffect(() => {
-    if (!quickAppointment?._id) return;
+    if (status !== "pending" || !quickAppointment?._id) return;
     const interval = setInterval(() => {
       getStatus();
     }, 3000);
     return () => clearInterval(interval);
-  }, [quickAppointment]);
+  }, [status, quickAppointment]);
 
-  return status === "pending" ? (
-    <div className="quick-appointment">
-      <h2>Finding the Right Advisor for You...</h2>
-      <p>Please wait while we search for a quick match based on your needs.</p>
+  return (
+    <div className="quick-appointment-container">
+      {status === "idle" && (
+        <div className="initial-view">
+          <h2>Quick Appointment</h2>
+          <p>Click below to find an advisor instantly.</p>
+          <button className="btn-generate" onClick={handleQuick}>
+            Generate Request
+          </button>
+        </div>
+      )}
 
-      <div className="loading-animation">
-        <div className="dot dot1" />
-        <div className="dot dot2" />
-        <div className="dot dot3" />
-      </div>
+      {status === "pending" && (
+        <div className="loading-view">
+          <h2>Finding the Right Advisor for You...</h2>
+          <p>Please wait while we search for a match based on your needs.</p>
 
-      <p className="tip">
-        Tip: Ensure your profile is complete for faster matches!
-      </p>
-      <button onClick={handleQuick}>Generate Request</button>
-      <button onClick={handleCancel}>Cancel Quick Appointment</button>
-    </div>
-  ) : (
-    <div className="quick-appointment">
-      <h2>You Have Got the Appointment. Your Meet Link is:</h2>
-      <a
-        href={meetLink}
-        target="_blank"
-        rel="noopener noreferrer"
-        className="meet-link"
-      >
-        Join Meeting
-      </a>
+          <div className="loading-animation">
+            <div className="dot dot1" />
+            <div className="dot dot2" />
+            <div className="dot dot3" />
+          </div>
+
+          <p className="tip">
+            💡 Tip: Ensure your profile is complete for faster matches!
+          </p>
+          <button className="btn-cancel" onClick={handleCancel}>
+            Cancel Quick Appointment
+          </button>
+        </div>
+      )}
+
+      {status === "confirmed" && (
+        <div className="confirmed-view">
+          <h2>🎉 Appointment Confirmed!</h2>
+          <p>Your meeting link is ready:</p>
+          <a
+            href={meetLink}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="meet-link"
+          >
+            Join Meeting
+          </a>
+        </div>
+      )}
     </div>
   );
 };
