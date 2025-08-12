@@ -18,7 +18,7 @@ export default function UserDashboard() {
   const [events, setEvents] = useState([]);
   const [domain, setdomain] = useState("");
   const [tab, settab] = useState("Appointments");
-  const [tableLimit, setTableLimit] = useState(5);
+  const [tableLimit, setTableLimit] = useState(8);
   const today = useMemo(() => new Date(), []);
   const [selectedDate, setSelectedDate] = useState(formatDateToYYYYMMDD(today));
   const [searchText, setSearchText] = useState("");
