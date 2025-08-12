@@ -24,6 +24,9 @@ $card-shadow: 0 8px 20px rgba(18, 33, 73, 0.04);
         width: 100%;
         height: 100%;
       }
+      &:hover{
+        cursor: pointer;
+      }
     }
 
     .search-box {

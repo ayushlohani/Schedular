@@ -17,11 +17,13 @@ const Home = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    fetchDataFromApi("/advisors/logout")
+    fetchDataFromApi("/users/getloggedinUserAdvisor")
       .then((res) => {
-        setUser(res.data);
+        setUser(res.data?.user);
+        const role = res?.data?.role;
         console.log(res);
-        navigate("/category");
+        if (role == "advisor") navigate("/dashboard");
+        else navigate("/category");
       })
       .catch((err) => {
         console.error("Error fetching user:", err);

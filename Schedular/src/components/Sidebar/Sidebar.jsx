@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { FiSearch } from "react-icons/fi";
 import "./Sidebar.scss";
+import { useNavigate } from "react-router-dom";
 
 export default function Sidebar({
   searchText,
@@ -16,6 +17,7 @@ export default function Sidebar({
     return () => clearInterval(timer);
   }, []);
 
+  const navigate = useNavigate();
   return (
     <aside className="sidebar">
       <div className="logo" onClick={() => navigate("/")}>
