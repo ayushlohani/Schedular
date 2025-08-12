@@ -115,6 +115,7 @@ export default function AdvisorDashboard() {
             { title: "Total Today's Appointment", value: 2 },
             { title: "Total Upcoming Events", value: 10 },
             { title: "Total Ongoing Batches", value: 12 },
+            { title: "Total Past Events", value: 8 },
           ]}
         />
 

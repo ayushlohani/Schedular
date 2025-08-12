@@ -18,7 +18,7 @@ export default function UserDashboard() {
   const [events, setEvents] = useState([]);
   const [domain, setdomain] = useState("");
   const [tab, settab] = useState("Appointments");
-  const [tableLimit, setTableLimit] = useState(6);
+  const [tableLimit, setTableLimit] = useState(5);
   const today = useMemo(() => new Date(), []);
   const [selectedDate, setSelectedDate] = useState(formatDateToYYYYMMDD(today));
   const [searchText, setSearchText] = useState("");
@@ -99,6 +99,7 @@ export default function UserDashboard() {
             { title: "Total Today's Appointment", value: 2 },
             { title: "Total Upcoming Events", value: 10 },
             { title: "Total Ongoing Batches", value: 12 },
+            { title: "Total Past Events", value: 15 },
           ]}
         />
 
@@ -118,6 +119,7 @@ export default function UserDashboard() {
             limit={tableLimit}
             EmptyMessage={EmptyMessage}
             advisorId={user?._id}
+            isProfilepic={tab === "Appointments"}
           />
 
           {/* <CalendarCard
@@ -143,7 +145,9 @@ export default function UserDashboard() {
                 <option value={domain}>Financial</option>
               </select>
             </div>
-            <div className="sec-full"></div>
+            <div className="sec-full">
+              <div className="title">Notifications</div>
+            </div>
           </div>
         </section>
       </main>

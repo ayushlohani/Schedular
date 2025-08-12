@@ -19,6 +19,7 @@ export default function Table({
   EmptyMessage = "No Content found",
   isMeetLink = false,
   advisorId = "",
+  isProfilepic = false,
 }) {
   const resetFilters = () => {
     setSearchText("");
@@ -67,6 +68,7 @@ export default function Table({
           <table className="main-table">
             <thead>
               <tr>
+                {isProfilepic && <th className="prof-pic">Profile</th>}
                 {tableHeader.map((header, index) => (
                   <th key={index} className="center">
                     {capitalizeWords(header)}
@@ -78,6 +80,13 @@ export default function Table({
             <tbody>
               {TableContent.map((p, idx) => (
                 <tr key={p.id || idx}>
+                  {isProfilepic && (
+                    <td className="prof-pic center">
+                      <img
+                        src={p.advisorId.profilepic || "/no-profile.jpg"}
+                      ></img>
+                    </td>
+                  )}
                   {SelectedFields.map((field, index) => (
                     <td key={index} className="center">
                       {(() => {

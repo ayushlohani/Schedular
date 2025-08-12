@@ -1,18 +1,19 @@
-import "./App.css";
-import { Outlet } from "react-router-dom";
-import Navbar from "./components/Navbar/Navbar";
-import { ToastContainer } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
-import { fetchDataFromApi } from "./utils/api";
-import { useDispatch } from "react-redux";
-import { Useraction } from "./store/userSlice";
 import { useEffect, useState } from "react";
-import Loader from "./components/Loader/Loader";
+import { useDispatch } from "react-redux";
+import { Outlet, useLocation } from "react-router-dom";
+import "./App.css";
+import { fetchDataFromApi } from "./utils/api";
+import { Useraction } from "./store/userSlice";
 import { RoleAction } from "./store/roleSlice";
+import { ToastContainer } from "react-toastify";
+import Navbar from "./components/Navbar/Navbar";
+import Loader from "./components/Loader/Loader";
 
 function App() {
+  const location = useLocation();
   const [loading, setLoading] = useState(false);
   const dispatch = useDispatch();
+
   useEffect(() => {
     setLoading(true);
     fetchDataFromApi("/users/getloggedinUserAdvisor")
@@ -25,13 +26,16 @@ function App() {
       .finally(() => {
         setLoading(false);
       });
-  }, []);
+  }, [dispatch]);
+
+  // update currentUrl when location changes
+  const currentUrl = location.pathname;
 
   return (
     <>
       {loading && <Loader />}
       <div>
-        <Navbar />
+        {currentUrl !== "/dashboard" && <Navbar />}
         <Outlet />
         <ToastContainer />
       </div>

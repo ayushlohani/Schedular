@@ -18,22 +18,19 @@ const Navbar = () => {
   const user = useSelector((state) => state.user);
   const role = useSelector((state) => state.role);
 
-  const [currentUrl, setCurrentUrl] = useState(window.location.pathname);
-
   useEffect(() => {
     if (user && user._id) {
       setLoggedin(true);
     } else {
       setLoggedin(false);
     }
-    setCurrentUrl(window.location.pathname);
   });
 
   return (
     <div className="nav">
       {/* Logo */}
       <div className="left" onClick={() => navigate("/")}>
-        {currentUrl !== "/dashboard" && <img src="/logo3.png" alt="Logo" />}
+        <img src="/logo3.png" alt="Logo" />
       </div>
 
       {/* Links */}
