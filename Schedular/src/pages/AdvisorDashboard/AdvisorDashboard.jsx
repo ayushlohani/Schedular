@@ -109,7 +109,6 @@ export default function AdvisorDashboard() {
       />
 
       <main className="dashboard-content">
-        <header className="header"></header>
         <Stats
           stats={[
             { title: "Total Today's Appointment", value: 2 },

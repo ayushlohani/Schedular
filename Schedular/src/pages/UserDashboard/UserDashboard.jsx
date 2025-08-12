@@ -146,7 +146,7 @@ export default function UserDashboard() {
               </select>
             </div>
             <div className="sec-full">
-              <div className="title">Notifications</div>
+              <div className="title">Notifications(0)</div>
             </div>
           </div>
         </section>
