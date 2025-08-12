@@ -14,12 +14,25 @@
     margin-bottom: 10px;
   }
 
+  a{
+    background-color: rgb(0, 102, 255);
+    color:white;
+    padding: 10px;
+    text-decoration: none;
+    border-radius: 4px;
+    &:hover{
+      background-color: #0754a7;
+    }
+  }
   p {
     font-size: 16px;
     color: #666;
     margin-bottom: 20px;
   }
 
+  button{
+    margin-bottom: 20px;
+  }
   .loading-animation {
     display: flex;
     gap: 8px;
