@@ -138,14 +138,17 @@ export default function AdvisorDashboard() {
             advisorId={user?._id}
           />
 
-          <CalendarCard
-            events={events}
-            onDateSelect={(date) => {
-              setSelectedDate(date);
-              setPage(1);
-            }}
-            selectedDate={selectedDate}
-          />
+          <div className="aside-sec">
+            <CalendarCard
+              events={events}
+              onDateSelect={(date) => {
+                setSelectedDate(date);
+                setPage(1);
+              }}
+              selectedDate={selectedDate}
+            />
+            <div className="notification">Notifications(0)</div>
+          </div>
         </section>
       </main>
     </div>
