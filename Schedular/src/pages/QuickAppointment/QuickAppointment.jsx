@@ -77,7 +77,7 @@ const QuickAppointment = () => {
           <h2>Quick Appointment</h2>
           <p>Click below to find an advisor instantly.</p>
           <button className="btn-generate" onClick={handleQuick}>
-            Generate Request
+            Generate Quick Session Request
           </button>
         </div>
       )}
