@@ -21,11 +21,18 @@ export const UsertableConfigs = {
       empty: "No Batches found",
       isMeetLink: true,
     },
-    "My Tasks": {
+    "Learning Resources": {
       header: ["Task", "Status", "Due Date"],
       fields: ["taskName", "status", "dueDate"],
-      title: "My Tasks",
-      empty: "No Tasks found",
+      title: "My Learning Material",
+      empty: "No Learning Material Found",
+      isMeetLink: false,
+    },
+    "Past Events": {
+      header: ["Name", "Domain", "Is Quick", "Topic", "Date"],
+      fields: ["userId fullname", "domain", "isQuick", "topic", "date"],
+      title: "My Past Events",
+      empty: "No Learning Material Found",
       isMeetLink: false,
     },
     // Add more tabs as needed...
