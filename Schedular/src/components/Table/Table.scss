@@ -76,6 +76,12 @@ $card-shadow: 0 8px 20px rgba(18, 33, 73, 0.04);
           font-weight: 600;
           font-size: 13px;
         }
+        .prof-pic{
+          padding: 10px;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+        }
 
         td {
           padding: 20px 6px;
@@ -90,7 +96,7 @@ $card-shadow: 0 8px 20px rgba(18, 33, 73, 0.04);
 
             height: 40px;
             width: 40px;
-            object-fit: contain;
+            object-fit: cover;
             border-radius: 100%;
           }
         }
