@@ -8,6 +8,7 @@ import {
 import { useNavigate, useParams } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { toast } from "react-toastify";
+import BackButton from "../../components/BackButton/BackButton";
 
 const QuickAppointment = () => {
   const { category, topic } = useParams();
@@ -41,7 +42,7 @@ const QuickAppointment = () => {
     )
       .then(() => {
         toast.success("Your Quick Appointment is Cancelled");
-        navigate("/category");
+        navigate(`/category/${category}`);
       })
       .catch(() => toast.error("Error Occured in Canceling"));
   };
@@ -72,6 +73,7 @@ const QuickAppointment = () => {
 
   return (
     <div className="quick-appointment-container">
+      <BackButton />
       {status === "idle" && (
         <div className="initial-view">
           <h2>Quick Appointment</h2>

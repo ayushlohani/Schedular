@@ -3,7 +3,7 @@ export const UsertableConfigs = {
     Appointments: {
       header: ["Advisor", "Domain", "Topic", "Date"],
       fields: ["advisorId fullname", "domain", "topic", "date"],
-      title: "Appointments",
+      title: "Upcoming Appointments",
       empty: "No Appointments found",
       isMeetLink: true,
     },

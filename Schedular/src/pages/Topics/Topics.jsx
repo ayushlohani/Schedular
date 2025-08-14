@@ -2,6 +2,7 @@ import React from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import "./Topics.scss";
 import { topicsData } from "../../data/topicsList";
+import BackButton from "../../components/BackButton/BackButton";
 
 const TopicsList = () => {
   const { category } = useParams();
@@ -25,6 +26,7 @@ const TopicsList = () => {
 
   return (
     <div className="topics-container">
+      <BackButton />
       <h2>
         {category?.charAt(0).toUpperCase() + category?.slice(1)} Health Topics
       </h2>

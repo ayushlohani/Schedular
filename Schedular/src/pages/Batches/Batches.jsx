@@ -8,6 +8,7 @@ import { weekdays } from "../../data/Usabledata";
 import { fetchDataFromApi } from "../../utils/api";
 import AdvisorSearch from "../../components/auto-complete-search/AdvisorSearch";
 import { capitalizeWords } from "../../utils/usableFunctions";
+import BackButton from "../../components/BackButton/BackButton";
 
 const Batches = () => {
   const { isGroup } = useParams();
@@ -43,6 +44,7 @@ const Batches = () => {
 
   return (
     <>
+      <BackButton />
       {isGroup !== "group" ? (
         <AdvisorList />
       ) : (

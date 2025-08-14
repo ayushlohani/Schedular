@@ -1,6 +1,7 @@
 import React from "react";
 import "./SessionType.scss";
 import { useNavigate } from "react-router-dom";
+import BackButton from "../../components/BackButton/BackButton";
 
 const SessionType = () => {
   const navigate = useNavigate();
@@ -10,6 +11,7 @@ const SessionType = () => {
   };
   return (
     <div className="Category">
+      <BackButton />
       <h1>How do you need help for?</h1>
       <div className="cat">
         <div onClick={() => onNav("quick-session")} className="cat-cont">

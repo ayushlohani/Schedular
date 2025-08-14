@@ -1,6 +1,7 @@
 import React from "react";
 import "./HabitSchedular.scss";
 import { useNavigate } from "react-router-dom";
+import BackButton from "../../components/BackButton/BackButton";
 
 const HabitSchedular = () => {
   const navigate = useNavigate();
@@ -10,6 +11,7 @@ const HabitSchedular = () => {
   };
   return (
     <div className="habit">
+      <BackButton />
       <h1>What Type of Scheduler Do You Need?</h1>
       <div className="cat">
         <div onClick={() => onNav("group")} className="cat-cont">

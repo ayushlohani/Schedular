@@ -6,6 +6,7 @@ import { useSelector } from "react-redux";
 import Loader from "../../components/Loader/Loader";
 import CalenderSlots from "../CalenderSlots/CalenderSlots";
 import { toast } from "react-toastify";
+import BackButton from "../../components/BackButton/BackButton";
 
 const Schedule = ({}) => {
   const [appointments, setappointments] = useState([]);
@@ -90,6 +91,7 @@ const Schedule = ({}) => {
   }
   return (
     <div className="appointment">
+      <BackButton />
       {loading && <Loader />}
       <div className="left">
         <CalenderSlots
