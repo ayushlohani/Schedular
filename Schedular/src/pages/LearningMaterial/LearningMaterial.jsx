@@ -1,5 +1,6 @@
 import React from "react";
 import "./LearningMaterial.scss";
+import BackButton from "../../components/BackButton/BackButton";
 
 const courseData = [
   {
@@ -31,6 +32,7 @@ const courseData = [
 const LearningMaterial = () => {
   return (
     <div className="learning-material">
+      <BackButton />
       <h2>Buy Courses</h2>
       <div className="course-grid">
         {courseData.map((course) => (
