@@ -3,7 +3,6 @@ import Cards from "../../components/Cards/Cards";
 import { fetchDataFromApi } from "../../utils/api";
 import "./AdvisorList.scss";
 import React, { useEffect, useState } from "react";
-import BackButton from "../../components/BackButton/BackButton";
 
 const AdvisorList = () => {
   const [advisor, setadvisor] = useState([]);
@@ -26,7 +25,6 @@ const AdvisorList = () => {
   }, []);
   return (
     <div className="list">
-      <BackButton />
       {advisor.map((advisor) => (
         <Cards advisor={advisor} />
       ))}

@@ -1,166 +1,158 @@
 .cards {
-  padding: 20px;
+  padding: 1rem;
+  min-width: 30vw;
 
   .card-container {
     display: flex;
+    align-items: flex-start;
+    gap: 1.5rem;
     background: #fff;
-    border-radius: 10px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-    overflow: hidden;
-    width: 30vw;
-    position: relative;
-    flex-direction: row;
-    height: 270px;
-  }
+    border-radius: 1rem;
+    padding: 1.5rem;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
 
-  .left-section {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background-color: #1882c126;
-  width: 40%;
-  height: 100%;
-  overflow-y: hidden;
-
-  .avatar {
-    width: 100%;
-    height: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    img {
-      width: 100%;
-      height: 100%;
-      object-fit: fill; // ⬅️ this makes image cover the container
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-  }
-}
-
-
-  .right-section {
-    flex: 1;
-    padding: 20px;
-    display: flex;
-    flex-direction: column;
-    padding: 10px
-
-    h2 {
-      color: #033e6b;
-    }
-
-    .speciality {
-      font-size: 14px;
-      color: #2b93d1;
-
-      span {
-        color: #666;
-      }
-    }
-
-    .divider {
-      border: none;
-      border-top: 1px solid #ccc;
-      margin: 10px 0;
-    }
-
-    .details {
-      height: 100px;
-      margin: 10px 0;
-      overflow: hidden;
-      .qualification{
-        color: #083877;
-        font-weight: 600;
-      }
-
-      p {
-        margin: 5px 0;
-        color: #777777;
-      }
-    }
-
-    .timing {
-      margin: 10px 0;
-
-      .days {
-        font-weight: bold;
-        color: #d19f00;
-      }
-
-      .hours {
-        color: #004DFF;
-        margin-left: 5px;
-      }
-    }
-
-    .book-btn {
-      align-self: flex-end;
-      padding: 10px 20px;
-      background: #026cdd;
-      color: white;
-      border: none;
-      border-radius: 6px;
-      cursor: pointer;
-      font-size: 15px;
-      width: 100%;
-    }
-  }
-
-  // 👇 Responsive styles
-  @media (max-width: 768px) {
-    .card-container {
-      flex-direction: column;
-      padding: 10px;
-      width: 100%;
+    &:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 6px 16px rgba(0, 0, 0, 0.12);
     }
 
     .left-section {
-      padding: 20px 0;
-      background-color: transparent;
+      flex-shrink: 0;
+      .avatar {
+        width: 120px;
+        height: 120px;
+        border-radius: 50%;
+        overflow: hidden;
+        border: 3px solid #eee;
+        background: #f7f7f7;
 
-      .avatar img {
-        margin-left: 0;
-        width: 70px;
-        height: 70px;
+        img {
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+        }
       }
     }
 
     .right-section {
-      padding: 15px;
-      align-items: center;
-      text-align: center;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+
+      h2 {
+        font-size: 1.4rem;
+        margin-bottom: 0.25rem;
+        font-weight: 600;
+        color: #222;
+      }
+
+      .speciality {
+        font-size: 0.95rem;
+        color: #555;
+
+        span {
+          color: #0077ff;
+          font-weight: 500;
+        }
+      }
+
+      .divider {
+        margin: 0.75rem 0;
+        border: none;
+        height: 1px;
+        background: #ddd;
+      }
+
+      .details {
+        font-size: 0.9rem;
+        color: #444;
+        margin-bottom: 0.75rem;
+
+        .qualification {
+          font-weight: 500;
+          margin-bottom: 0.25rem;
+        }
+      }
+
+      .timing {
+        font-size: 0.9rem;
+        margin-bottom: 1rem;
+
+        .days {
+          background: #eef6ff;
+          color: #0077ff;
+          padding: 0.25rem 0.5rem;
+          border-radius: 0.5rem;
+          font-weight: 500;
+        }
+      }
 
       .book-btn {
-        align-self: center;
-        width: 100%;
-        margin-top: 15px;
+        padding: 0.6rem 1.2rem;
+        border: none;
+        border-radius: 0.5rem;
+        background: #0077ff;
+        color: white;
+        font-size: 0.95rem;
+        font-weight: 500;
+        cursor: pointer;
+        align-self: flex-start;
+        transition: background 0.2s ease;
+
+        &:hover {
+          background: #005fcc;
+        }
       }
     }
   }
 
-  @media (max-width: 480px) {
-    .right-section {
-      padding: 12px;
+  // Tablet
+  @media (max-width: 992px) {
+    min-width: 40vw;
+    .card-container {
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
 
-      h2 {
-        font-size: 18px;
+      .left-section {
+        .avatar {
+          width: 100px;
+          height: 100px;
+        }
       }
 
-      .speciality {
-        font-size: 13px;
-      }
+      .right-section {
+        align-items: center;
 
-      .details p,
-      .timing {
-        font-size: 13px;
+        .book-btn {
+          align-self: center;
+        }
       }
+    }
+  }
 
-      .book-btn {
-        font-size: 14px;
-        padding: 10px;
+  // Mobile
+  @media (max-width: 576px) {
+    padding: 0.5rem;
+    min-width: 80vw;
+
+    .card-container {
+      padding: 1rem;
+      gap: 1rem;
+
+      .right-section {
+        h2 {
+          font-size: 1.2rem;
+        }
+
+        .speciality {
+          font-size: 0.85rem;
+        }
+
+        .details {
+          font-size: 0.85rem;
+        }
       }
     }
   }

@@ -48,7 +48,7 @@ export default function Sidebar({
       </nav>
 
       <div className="working-track">
-        <small>Working Track</small>
+        {/* <small>Working Track</small> */}
         <div className="track-card">
           <div className="dot" />
           <div>

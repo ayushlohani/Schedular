@@ -65,8 +65,8 @@ const Cards = ({ advisor }) => {
           <hr className="divider" />
           <div className="details">
             <p className="qualification">{qualification}</p>
-            {/* <p>{languages}</p> */}
-            <p>{advisor.description}</p>
+            <p>{languages}</p>
+            {/* <p>{advisor.description}</p> */}
           </div>
           <div className="timing">
             <span className="days">{capitalizeWords(advisor.domain)}</span>

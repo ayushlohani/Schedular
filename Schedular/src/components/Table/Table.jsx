@@ -1,5 +1,5 @@
 import React from "react";
-import { capitalizeWords } from "../../utils/usableFunctions";
+import { capitalizeWords, formatIfDate } from "../../utils/usableFunctions";
 import "./Table.scss";
 import { toast } from "react-toastify";
 import { updateDatatoapi } from "../../utils/api";
@@ -94,7 +94,7 @@ export default function Table({
                         const path = field.split(" ");
                         let value = p;
                         for (const key of path) value = value?.[key];
-                        return capitalizeWords(value) ?? "-";
+                        return capitalizeWords(formatIfDate(value)) ?? "-";
                       })()}
                     </td>
                   ))}

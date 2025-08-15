@@ -63,6 +63,10 @@ const router = createBrowserRouter([
         element: <Signin />,
       },
       {
+        path: "/category/:category/habbit-learning/personal/:topic",
+        element: <AdvisorList />,
+      },
+      {
         path: "/calender/:id",
         element: <Calender />,
       },
