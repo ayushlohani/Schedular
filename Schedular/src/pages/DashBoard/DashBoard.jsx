@@ -61,7 +61,7 @@ export default function DashBoard() {
     setLoading(true);
     fetchDataFromApi("/appointment/filter", { userId: user?._id, domain })
       .then((res) => {
-        const list = res?.data || [];
+        const list = res?.data?.appointments || [];
         setAppointments(list);
         console.log(list);
         console.warn(user);

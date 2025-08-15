@@ -26,6 +26,7 @@ export default function AdvisorDashboard() {
   const [searchText, setSearchText] = useState("");
   const [sortOrder, setSortOrder] = useState("A-Z");
   const [page, setPage] = useState(1);
+  const [totalData, setTotalData] = useState(0);
 
   //tabelContents
   const [tableHeader, setTableHeader] = useState([]);
@@ -65,7 +66,8 @@ export default function AdvisorDashboard() {
         `/appointment/filter?advisorId=${user._id}&page=${page}&limit=${tableLimit}&sortOrder=${sortOrder}&date=${selectedDate}`
       )
         .then((res) => {
-          setTableData(res?.data || []);
+          setTableData(res?.data?.appointments || []);
+          setTotalData(res?.data?.total);
           console.log("Appointments Data:", res?.data);
         })
         .catch((err) => console.log(err))
@@ -75,6 +77,17 @@ export default function AdvisorDashboard() {
       intervalId = setInterval(() => {
         fetchQuickSessions();
       }, 3000);
+    } else if (tab === "Batches") {
+      fetchDataFromApi(
+        `/batch/filter?advisorId=${user._id}&page=${page}&limit=${tableLimit}&sortOrder=${sortOrder}&domain=${domain}`
+      )
+        .then((res) => {
+          setTableData(res?.data?.batches || []);
+          setTotalData(res?.data?.total);
+          console.log("Batches Data:", res?.data);
+        })
+        .catch((err) => console.log(err))
+        .finally(() => setLoading(false));
     }
 
     return () => {
@@ -102,8 +115,8 @@ export default function AdvisorDashboard() {
           "Appointments",
           "Quick Sessions",
           "Batches",
-          "My Tasks",
           "Past Events",
+          "My Tasks",
           "Positivity Zone",
           "Help Center",
           "Settings",
@@ -136,6 +149,7 @@ export default function AdvisorDashboard() {
             limit={tableLimit}
             EmptyMessage={EmptyMessage}
             advisorId={user?._id}
+            total={totalData}
           />
 
           <div className="aside-sec">

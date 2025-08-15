@@ -1,4 +1,5 @@
 export const capitalizeWords = (str)=>{
+  if(typeof str !== 'string') return str;
   if (!str) return "";
   return str
     .split(/[- ]+/)

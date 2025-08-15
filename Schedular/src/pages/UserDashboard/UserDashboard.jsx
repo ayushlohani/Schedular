@@ -31,6 +31,7 @@ export default function UserDashboard() {
   const [EmptyMessage, setEmptyMessage] = useState("No Appointments found");
   const [isMeetLink, setIsMeetLink] = useState(true);
   const [selectedFields, setSelectedFields] = useState([]);
+  const [totalData, setTotalData] = useState(0);
 
   const navigate = useNavigate();
 
@@ -53,8 +54,19 @@ export default function UserDashboard() {
         `/appointment/filter?userId=${user._id}&page=${page}&limit=${tableLimit}&sortOrder=${sortOrder}&domain=${domain}`
       )
         .then((res) => {
-          setTableData(res?.data || []);
-          console.log("Appointments Data:", res?.data);
+          setTableData(res?.data?.appointments || []);
+          setTotalData(res?.data?.total);
+        })
+        .catch((err) => console.log(err))
+        .finally(() => setLoading(false));
+    } else if (tab === "Batches") {
+      fetchDataFromApi(
+        `/batch/filter?userId=${user._id}&page=${page}&limit=${tableLimit}&sortOrder=${sortOrder}&domain=${domain}`
+      )
+        .then((res) => {
+          setTableData(res?.data?.batches || []);
+          setTotalData(res?.data?.total);
+          console.log("Batches Data:", res?.data);
         })
         .catch((err) => console.log(err))
         .finally(() => setLoading(false));
@@ -120,6 +132,7 @@ export default function UserDashboard() {
             EmptyMessage={EmptyMessage}
             advisorId={user?._id}
             isProfilepic={tab === "Appointments"}
+            total={totalData}
           />
 
           {/* <CalendarCard

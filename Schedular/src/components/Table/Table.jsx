@@ -20,6 +20,7 @@ export default function Table({
   isMeetLink = false,
   advisorId = "",
   isProfilepic = false,
+  total = 0,
 }) {
   const resetFilters = () => {
     setSearchText("");
@@ -47,7 +48,7 @@ export default function Table({
       <div>
         <div className="section-header">
           <h3>
-            {tableTitle} ({TableContent.length})
+            {tableTitle} ({total})
           </h3>
           <div className="controls">
             <select

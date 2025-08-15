@@ -73,11 +73,10 @@ const BatchCard = ({ batch }) => {
           <strong>Starting From:</strong> {formatDateToDDMMYYYY(startDate)}
         </p>
         <p>
-          <strong>Day:</strong> {dayNames[weekDay]}
+          <strong>Day:</strong> {weekDay}
         </p>
         <p>
-          <strong>Slot Time:</strong>{" "}
-          {`${formatTime(slotTime)}-${formatTime(slotTime + 100)}`}
+          <strong>Slot Time:</strong> {`${slotTime.start}-${slotTime.end}`}
         </p>
         <p>
           <strong>Slot Available:</strong> {attendees.length}/{maxAttendee}
