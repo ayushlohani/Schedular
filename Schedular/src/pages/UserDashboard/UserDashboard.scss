@@ -24,7 +24,7 @@ $card-shadow: 0 8px 20px rgba(18, 33, 73, 0.04);
       display: flex;
       justify-content: space-between;
       align-items: center;
-      height: 50px;
+      //height: 50px;
       h2 {
         margin: 0;
         font-size: 20px;
@@ -226,13 +226,9 @@ $card-shadow: 0 8px 20px rgba(18, 33, 73, 0.04);
 /* Responsive */
 @media (max-width: 1000px) {
   .user-dashboard {
-    .sidebar {
-      display: none;
-    }
-
+    flex-direction: column;
     .dashboard-content {
       padding: 16px;
-
       .two-col {
         grid-template-columns: 1fr;
       }

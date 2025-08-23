@@ -198,9 +198,7 @@ $card-shadow: 0 8px 20px rgba(18, 33, 73, 0.04);
 /* Responsive */
 @media (max-width: 1000px) {
   .dashboard {
-    .sidebar {
-      display: none;
-    }
+    flex-direction: column;
 
     .dashboard-content {
       padding: 16px;
