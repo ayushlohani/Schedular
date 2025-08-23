@@ -13,6 +13,7 @@ import Table from "../../components/Table/Table";
 import CalendarCard from "../../components/Cards/CalendarCard";
 import Stats from "../../components/Stats/Stats";
 import { tableConfigs } from "../../components/Table/tableConfig";
+import { useNavigate } from "react-router-dom";
 export default function AdvisorDashboard() {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(false);
@@ -35,6 +36,8 @@ export default function AdvisorDashboard() {
   const [EmptyMessage, setEmptyMessage] = useState("No Appointments found");
   const [isMeetLink, setIsMeetLink] = useState(true);
   const [selectedFields, setSelectedFields] = useState([]);
+
+  const navigate = useNavigate();
 
   useEffect(() => {
     setLoading(true);
@@ -153,6 +156,22 @@ export default function AdvisorDashboard() {
           />
 
           <div className="aside-sec">
+            {tab == "Batches" && (
+              <div
+                className="newBatch"
+                onClick={() => navigate(`/advisor/${user._id}/createBatch`)}
+              >
+                + Create Batch
+              </div>
+            )}
+            {tab == "Batches" && (
+              <div
+                className="newBatch"
+                onClick={() => navigate(`/advisor/${user._id}/updateBatch`)}
+              >
+                Update Your Old Batches
+              </div>
+            )}
             <CalendarCard
               events={events}
               onDateSelect={(date) => {
@@ -161,7 +180,9 @@ export default function AdvisorDashboard() {
               }}
               selectedDate={selectedDate}
             />
-            <div className="notification">Notifications(0)</div>
+            {tab != "Batches" && (
+              <div className="notification">Notifications(0)</div>
+            )}
           </div>
         </section>
       </main>

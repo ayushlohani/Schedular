@@ -32,7 +32,7 @@ export const UsertableConfigs = {
       header: ["Name", "Domain", "Is Quick", "Topic", "Date"],
       fields: ["userId fullname", "domain", "isQuick", "topic", "date"],
       title: "My Past Events",
-      empty: "No Learning Material Found",
+      empty: "No Past Event Found",
       isMeetLink: false,
     },
     // Add more tabs as needed...
@@ -59,6 +59,13 @@ export const tableConfigs = {
       title: "Batches",
       empty: "No Batches found",
       isMeetLink: true,
+    },
+    "Past Events": {
+      header: ["Name", "Domain", "Is Quick", "Topic", "Date"],
+      fields: ["userId fullname", "domain", "isQuick", "topic", "date"],
+      title: "My Past Events",
+      empty: "No Past Event Found",
+      isMeetLink: false,
     },
     "My Tasks": {
       header: ["Task", "Status", "Due Date"],

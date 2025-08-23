@@ -5,6 +5,7 @@ import { toast } from "react-toastify";
 import { useNavigate, useParams } from "react-router-dom";
 import { topicsData } from "../../data/topicsList";
 import { weekdays } from "../../data/Usabledata";
+import BackButton from "../../components/BackButton/BackButton";
 
 const CreateBatch = () => {
   const { advisorId } = useParams();
@@ -55,75 +56,93 @@ const CreateBatch = () => {
 
   return (
     <div className="create">
-      <h2>Create Batch</h2>
       <form onSubmit={handleSubmit}>
-        {/* Domain Selection */}
-        <select
-          name="domain"
-          onChange={handleDomainChange}
-          defaultValue=""
-          required
-        >
-          <option value="" disabled>
-            Select Your Domain
-          </option>
-          <option value="mental">Mental</option>
-          <option value="physical">Physical</option>
-          <option value="financial">Financial</option>
-        </select>
+        <h2>Create Batch</h2>
 
-        {/* Topic Dropdown (conditional) */}
-        {domain && (
-          <select name="topic" onChange={handleChange} defaultValue="" required>
+        <div className="form-row">
+          <select
+            name="domain"
+            onChange={handleDomainChange}
+            defaultValue=""
+            required
+          >
             <option value="" disabled>
-              Select Your Topic
+              Select Your Domain
             </option>
-            {topicsData[domain].map((topic, i) => (
-              <option key={i} value={formatTopicForUrl(topic)}>
-                {topic}
+            <option value="mental">Mental</option>
+            <option value="physical">Physical</option>
+            <option value="financial">Financial</option>
+          </select>
+
+          {
+            <select
+              name="topic"
+              onChange={handleChange}
+              defaultValue=""
+              required
+              disabled={!domain}
+            >
+              <option value="" disabled>
+                Select Your Topic
+              </option>
+              {domain &&
+                topicsData[domain].map((topic, i) => (
+                  <option key={i} value={formatTopicForUrl(topic)}>
+                    {topic}
+                  </option>
+                ))}
+            </select>
+          }
+        </div>
+
+        <div className="form-row">
+          <select name="weekDay" onChange={handleChange} defaultValue="">
+            <option value="" disabled>
+              Select Your WeekDay
+            </option>
+            {weekdays.map((day, i) => (
+              <option key={i} value={i}>
+                {day}
               </option>
             ))}
           </select>
-        )}
 
-        {/* WeekDay Dropdown */}
-        <select name="weekDay" onChange={handleChange} defaultValue="">
-          <option value="" disabled>
-            Select Your WeekDay
-          </option>
-          {weekdays.map((day, i) => (
-            <option key={i} value={i}>
-              {day}
-            </option>
-          ))}
-        </select>
+          <input
+            type="number"
+            name="maxAttendee"
+            placeholder="Max Attendees"
+            onChange={handleChange}
+          />
+        </div>
 
-        {/* Other Fields */}
+        <div className="form-row">
+          <input
+            type="number"
+            name="slotTime"
+            placeholder="Slot Time (e.g. 930, 1430)"
+            onChange={handleChange}
+            required
+          />
+          <input
+            type="date"
+            name="startDate"
+            onChange={handleChange}
+            required
+          />
+        </div>
+
         <textarea
           name="description"
           placeholder="Description"
           onChange={handleChange}
         />
         <input
-          type="number"
-          name="maxAttendee"
-          placeholder="Max Attendees"
-          onChange={handleChange}
-        />
-        <input
-          type="number"
-          name="slotTime"
-          placeholder="Slot Time (e.g. 930, 1430)"
-          onChange={handleChange}
-          required
-        />
-        <input type="date" name="startDate" onChange={handleChange} required />
-        <input
           type="text"
           name="learningMaterial"
           placeholder="Learning Material Link"
           onChange={handleChange}
         />
+
         <button type="submit">Create Batch</button>
       </form>
     </div>
