@@ -2,13 +2,10 @@ $blue: #004DFF;
 
 .main {
   overflow-y: auto;
-  // scroll-behavior: smooth;   // disable initially, enable via JS after load
+  scroll-behavior: smooth;
   display: flex;
   align-items: center;
   flex-direction: column;
-
-  /* GPU acceleration hint */
-  will-change: transform;
 }
 
 .landingPage {
@@ -19,6 +16,7 @@ $blue: #004DFF;
   min-height: 72vh;
   padding: 50px 0;
   background-color: transparent;
+   
 
   .left {
     width: 40%;
@@ -31,7 +29,6 @@ $blue: #004DFF;
       font-size: 2.5rem;
       text-align: center;
       margin-bottom: 20px;
-      font-family: "Open Sans", Arial, sans-serif; // fallback font
     }
 
     button {
@@ -98,10 +95,6 @@ $blue: #004DFF;
       height: 60%;
       width: 60%;
       border-radius: 20px;
-
-      /* Prevent reflow on load */
-      display: block;
-      object-fit: cover;
     }
   }
 }
@@ -124,9 +117,6 @@ $blue: #004DFF;
   overflow: hidden;
   transition: transform 0.3s ease;
 
-  /* GPU acceleration */
-  will-change: transform;
-
   &:hover {
     transform: translateY(-5px);
   }
@@ -136,9 +126,6 @@ $blue: #004DFF;
   width: 100%;
   height: 180px;
   object-fit: cover;
-
-  /* Prevent layout shift */
-  display: block;
 }
 
 .blog-content {
@@ -160,7 +147,6 @@ $blue: #004DFF;
   font-weight: 700;
   color: #333;
   margin: 0;
-  font-family: "Open Sans", Arial, sans-serif;
 }
 
 .blog-description {
@@ -181,9 +167,6 @@ $blue: #004DFF;
   height: 35px;
   border-radius: 50%;
   object-fit: cover;
-
-  /* Prevent reflow */
-  display: block;
 }
 
 .author-info {
@@ -223,11 +206,9 @@ $blue: #004DFF;
 
     .right {
       display: none;
-
       img {
         width: 90%;
         height: auto;
-        display: block;
       }
     }
   }
@@ -287,7 +268,6 @@ $blue: #004DFF;
     }
   }
 }
-
 .positivity {
   position: relative;
   padding-bottom: 60px;
@@ -301,13 +281,13 @@ $blue: #004DFF;
     width: 780px;
 
     .main-title {
-      font-family: "Pacifico", cursive, Arial, sans-serif;
+      font-family: "Pacifico", cursive;
       color: #333;
       margin-bottom: 10px;
     }
 
     .sub-title {
-      font-family: "Open Sans", Arial, sans-serif;
+      font-family: "Open Sans", sans-serif;
       font-size: 1.2rem;
       color: #444;
       max-width: 700px;
@@ -342,7 +322,3 @@ $blue: #004DFF;
   }
 }
 
-/* ---------- ENABLE SMOOTH SCROLL CLASS ---------- */
-.smooth-enabled {
-  scroll-behavior: smooth;
-}
