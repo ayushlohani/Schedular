@@ -46,7 +46,7 @@ const CreateBatch = () => {
       .then((res) => {
         toast.success("Batch Created Successfully!");
         console.log(res);
-        navigate("/advisor/dashboard");
+        navigate("/dashboard");
       })
       .catch((err) => {
         toast.error("Error in creating batch!");
