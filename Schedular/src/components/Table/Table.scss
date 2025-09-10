@@ -68,6 +68,8 @@ $card-shadow: 0 8px 20px rgba(18, 33, 73, 0.04);
         max-height: 55vh;
         tr{
           height: 50px;
+        }:hover{
+          cursor: pointer;
         }
         th {
           text-align: center;

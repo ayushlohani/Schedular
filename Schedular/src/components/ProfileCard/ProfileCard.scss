@@ -13,3 +13,34 @@
         color: white;
     }
 }
+.profile-card {
+  text-align: center;
+  color: black;
+}
+.profile-body{
+    color: black;
+}
+.profile-header {
+  margin-bottom: 15px;
+}
+
+.profile-pic-lg {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-bottom: 10px;
+}
+
+.muted {
+  color: #666;
+  font-size: 14px;
+}
+
+.logOut{
+    margin-top: 10px;
+}
+.logOut:hover{
+    background-color: blue;
+    color: white;
+}

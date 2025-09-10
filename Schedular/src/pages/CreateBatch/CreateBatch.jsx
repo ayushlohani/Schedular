@@ -56,6 +56,7 @@ const CreateBatch = () => {
 
   return (
     <div className="create">
+      <BackButton />
       <form onSubmit={handleSubmit}>
         <h2>Create Batch</h2>
 

@@ -1,8 +1,9 @@
-import React from "react";
+import React, { useState } from "react";
 import { capitalizeWords, formatIfDate } from "../../utils/usableFunctions";
 import "./Table.scss";
 import { toast } from "react-toastify";
 import { updateDatatoapi } from "../../utils/api";
+import TableCard from "../TableCard/TableCard";
 
 export default function Table({
   tableHeader = [],
@@ -28,6 +29,8 @@ export default function Table({
     setSelectedDate("");
     setPage(1);
   };
+  const [cardShow,setCardShow] = useState(false);
+  const [id,setId] = useState(null);
   const handleQuickJoin = async (id) => {
     try {
       await updateDatatoapi(
@@ -81,7 +84,7 @@ export default function Table({
             </thead>
             <tbody>
               {TableContent.map((p, idx) => (
-                <tr key={p.id || idx}>
+                <tr key={p.id || idx} onClick={()=>{setCardShow(true);setId(p)}}>
                   {isProfilepic && (
                     <td className="prof-pic center">
                       <img
@@ -132,6 +135,19 @@ export default function Table({
           </table>
         )}
       </div>
+      {cardShow && (
+        <div className="modal-overlay" onClick={() => setCardShow(false)}>
+          <div
+            className="modal-content"
+            onClick={(e) => e.stopPropagation()} // prevent closing when clicking inside
+          >
+            <TableCard user={id} />
+            <button className="close-btn" onClick={() => setCardShow(false)}>
+              ✕
+            </button>
+          </div>
+        </div>
+      )}
 
       {TableContent.length > 0 && (
         <div className="pagination">

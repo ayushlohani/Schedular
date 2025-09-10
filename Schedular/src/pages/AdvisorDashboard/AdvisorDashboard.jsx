@@ -14,6 +14,7 @@ import CalendarCard from "../../components/Cards/CalendarCard";
 import Stats from "../../components/Stats/Stats";
 import { tableConfigs } from "../../components/Table/tableConfig";
 import { useNavigate } from "react-router-dom";
+import { Positivity } from "../PositivityZone/Positivity";
 export default function AdvisorDashboard() {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(false);
@@ -36,6 +37,7 @@ export default function AdvisorDashboard() {
   const [EmptyMessage, setEmptyMessage] = useState("No Appointments found");
   const [isMeetLink, setIsMeetLink] = useState(true);
   const [selectedFields, setSelectedFields] = useState([]);
+  const [positivity, setPositivity] = useState(false);
 
   const navigate = useNavigate();
 
@@ -91,7 +93,22 @@ export default function AdvisorDashboard() {
         })
         .catch((err) => console.log(err))
         .finally(() => setLoading(false));
-    }
+      } else if (tab === "Past Events") {
+            fetchDataFromApi(
+              `/appointment//getallPastAppointment?userId=${user._id}&page=${page}&limit=${tableLimit}&sortOrder=${sortOrder}&domain=${domain}`
+            )
+              .then((res) => {
+                setTableData(res?.data?.appointments || []);
+                setTotalData(res?.data?.total);
+              })
+              .catch((err) => console.log(err))
+              .finally(() => setLoading(false));
+              setPositivity(false);
+      } else if(tab === "Positivity Zone") {
+        setPositivity(true);
+      } else{
+        setPositivity(false);
+      }
 
     return () => {
       if (intervalId) clearInterval(intervalId);
@@ -137,6 +154,10 @@ export default function AdvisorDashboard() {
         />
 
         <section className="two-col">
+          {positivity?
+            <div className="positivity-wrapper">
+              <Positivity />
+            </div>:
           <Table
             TableContent={tableData}
             tableTitle={tableTitle}
@@ -153,7 +174,7 @@ export default function AdvisorDashboard() {
             EmptyMessage={EmptyMessage}
             advisorId={user?._id}
             total={totalData}
-          />
+          />}
 
           <div className="aside-sec">
             {tab == "Batches" && (
