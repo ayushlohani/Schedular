@@ -1,14 +1,14 @@
 import React, { useState } from "react";
 import "./Stats.scss";
-import { IoNotificationsOutline } from "react-icons/io5";
-import ProfileCard from "../ProfileCard/ProfileCard";
 import { FaUserCircle } from "react-icons/fa";
 import { useSelector } from "react-redux";
 import { capitalizeWords } from "../../utils/usableFunctions";
+import ProfileCard from "../ProfileCard/ProfileCard";
 
 const Stats = ({ stats }) => {
   const user = useSelector((state) => state.user);
   const [profileShow, setProfileShow] = useState(false);
+
   return (
     <section className="stats">
       {stats.map((stat, index) => (
@@ -19,22 +19,14 @@ const Stats = ({ stats }) => {
           </div>
         </div>
       ))}
+
       <div className="stat-card center">
         <div className="user-actions">
-          {/* Notification Icon */}
-          {/* <IoNotificationsOutline
-            size={24}
-            className="notification-icon"
-            onClick={() => navigate("/notifications")}
-          /> */}
-
-          {/* Profile Picture */}
+          {/* Profile button */}
           <div
             className="profile-btn"
-            onClick={() => navigate("/dashboard")}
+            onClick={() => setProfileShow(true)}
             title="My Profile"
-            onMouseOver={() => setProfileShow(true)}
-            onMouseLeave={() => setProfileShow(false)}
           >
             {user.profilepic ? (
               <img
@@ -45,8 +37,6 @@ const Stats = ({ stats }) => {
             ) : (
               <FaUserCircle size={28} />
             )}
-
-            {profileShow && <ProfileCard />}
           </div>
         </div>
         <div className="title">
@@ -54,6 +44,21 @@ const Stats = ({ stats }) => {
           <div className="muted">{user.email}</div>
         </div>
       </div>
+
+      {/* Modal for Profile */}
+      {profileShow && (
+        <div className="modal-overlay" onClick={() => setProfileShow(false)}>
+          <div
+            className="modal-content"
+            onClick={(e) => e.stopPropagation()} // stop closing when clicking inside
+          >
+            <ProfileCard user={user} />
+            <button className="close-btn" onClick={() => setProfileShow(false)}>
+              ✕
+            </button>
+          </div>
+        </div>
+      )}
     </section>
   );
 };

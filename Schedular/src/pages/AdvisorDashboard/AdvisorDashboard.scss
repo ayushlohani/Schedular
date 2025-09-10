@@ -55,6 +55,17 @@ $card-shadow: 0 8px 20px rgba(18, 33, 73, 0.04);
       display: grid;
       grid-template-columns: 2fr 1fr;
       gap: 16px;
+      .positivity-wrapper {
+    background: #fff;
+    padding: 15px;
+    border-radius: 10px;
+    box-shadow: $card-shadow;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    height: 80vh;
+    overflow: scroll;
+  }
       .aside-sec{
         gap: 16px;
         height: 100%;
