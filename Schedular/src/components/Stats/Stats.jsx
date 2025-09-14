@@ -49,7 +49,6 @@ const Stats = ({ stats }) => {
       {profileShow && (
         <div className="modal-overlay" onClick={() => setProfileShow(false)}>
           <div
-            className="modal-content"
             onClick={(e) => e.stopPropagation()} // stop closing when clicking inside
           >
             <ProfileCard user={user} />
