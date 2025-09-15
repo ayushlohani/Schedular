@@ -138,7 +138,6 @@ export default function Table({
       {cardShow && (
         <div className="modal-overlay" onClick={() => setCardShow(false)}>
           <div
-            className="modal-content"
             onClick={(e) => e.stopPropagation()} // prevent closing when clicking inside
           >
             <TableCard user={id} />
