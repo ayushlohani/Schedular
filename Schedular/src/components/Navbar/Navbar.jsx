@@ -89,7 +89,7 @@ const Navbar = () => {
 
       {/* Profile Modal */}
       {profileShow && (
-  <div className="modal-overlay" onClick={() => setProfileShow(false)}>
+  <div className="modal-overlay" onClick={() => {setProfileShow(false);setEdit(true);}}>
     <AnimatePresence>
       <motion.div
         initial={{ opacity: 0, scale: 0.8, y: -20 }}
