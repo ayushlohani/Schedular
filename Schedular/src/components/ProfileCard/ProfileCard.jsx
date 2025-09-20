@@ -5,44 +5,33 @@ import { sendDataToapi } from "../../utils/api";
 import { toast } from "react-toastify";
 import { Useraction } from "../../store/userSlice";
 import { RoleAction } from "../../store/roleSlice";
-import { FaUserCircle, FaPen } from "react-icons/fa";  // <-- added FaPen
+import { FaUserCircle, FaPen } from "react-icons/fa";
 import { capitalizeWords } from "../../utils/usableFunctions";
 
-const ProfileCard = ({ user, onEdit}) => {
+const ProfileCard = ({ user, onEdit }) => {
   const role = useSelector((state) => state.role);
   const [loading, setLoading] = useState(false);
   const dispatch = useDispatch();
 
   const handleLogout = () => {
     setLoading(true);
-    if (role === "advisor") {
-      sendDataToapi("/advisors/logout")
-        .then(() => {
-          toast.success("Logout Successfully!");
-          dispatch(Useraction.logoutUser());
-          dispatch(RoleAction.logoutRole());
-          window.location.href = "/";
-        })
-        .catch((err) => console.log(err))
-        .finally(() => setLoading(false));
-    }
-    if (role === "user") {
-      sendDataToapi("/users/logout")
-        .then(() => {
-          toast.success("Logout Successfully!");
-          dispatch(Useraction.logoutUser());
-          dispatch(RoleAction.logoutRole());
-          window.location.href = "/";
-        })
-        .catch((err) => console.log(err))
-        .finally(() => setLoading(false));
-    }
+    const apiPath = role === "advisor" ? "/advisors/logout" : "/users/logout";
+
+    sendDataToapi(apiPath)
+      .then(() => {
+        toast.success("Logout Successfully!");
+        dispatch(Useraction.logoutUser());
+        dispatch(RoleAction.logoutRole());
+        window.location.href = "/";
+      })
+      .catch((err) => console.log(err))
+      .finally(() => setLoading(false));
   };
 
   const formatDOB = (dob) => {
     if (!dob || dob.length !== 10) return dob;
-    const day = dob.slice(9, 10);
-    const month = dob.slice(6, 7);
+    const day = dob.slice(8, 10);
+    const month = dob.slice(5, 7);
     const year = dob.slice(0, 4);
     const monthNames = [
       "Jan", "Feb", "Mar", "Apr", "May", "Jun",
@@ -51,20 +40,20 @@ const ProfileCard = ({ user, onEdit}) => {
     return `${day} ${monthNames[parseInt(month, 10) - 1]} ${year}`;
   };
 
-  const formatArray = (arr) => {
-    if (!arr || arr.length === 0) return "N/A";
-    return arr.join(", ");
+  const formatArrayOrString = (val) => {
+    if (!val) return "N/A";
+    return Array.isArray(val) ? val.join(", ") : val;
   };
 
   return (
     <div className="profile-card">
       <div className="editButton">
-        <button className="edit-btn" onClick={()=>onEdit(false)}>
-          <FaPen size={16} />  {/* Pen Icon */}
+        <button className="edit-btn" onClick={() => onEdit(false)}>
+          <FaPen size={16} />
         </button>
       </div>
 
-      {/* Profile Header Section */}
+      {/* Header */}
       <div className="profile-header">
         <div className="profile-image">
           {user?.profilepic ? (
@@ -79,7 +68,7 @@ const ProfileCard = ({ user, onEdit}) => {
         </div>
       </div>
 
-      {/* Profile Body */}
+      {/* Body */}
       <div className="session-details">
         {user?.dob && (
           <div className="detail-item">
@@ -101,19 +90,44 @@ const ProfileCard = ({ user, onEdit}) => {
 
         {user?.languagesSpoken && (
           <div className="detail-item">
-            <strong>Languages:</strong> {formatArray(user.languagesSpoken)}
+            <strong>Languages:</strong> {formatArrayOrString(user.languagesSpoken)}
+          </div>
+        )}
+
+        {/* Advisor Specific Fields */}
+        {user?.specialization && (
+          <div className="detail-item">
+            <strong>Specialization:</strong> {user.specialization}
+          </div>
+        )}
+
+        {user?.qualification && (
+          <div className="detail-item">
+            <strong>Qualification:</strong> {user.qualification}
+          </div>
+        )}
+
+        {user?.experienceYears && (
+          <div className="detail-item">
+            <strong>Experience:</strong> {user.experienceYears} years
+          </div>
+        )}
+
+        {user?.description && (
+          <div className="detail-item">
+            <strong>About:</strong> {user.description}
           </div>
         )}
 
         {user?.learningMaterial && (
           <div className="detail-item">
-            <strong>Learning Material:</strong> {formatArray(user.learningMaterial)}
+            <strong>Learning Material:</strong> {formatArrayOrString(user.learningMaterial)}
           </div>
         )}
 
         {user?.domain && (
           <div className="detail-item">
-            <strong>Domain:</strong> {formatArray(user.domain)}
+            <strong>Domain:</strong> {formatArrayOrString(user.domain)}
           </div>
         )}
 
@@ -124,7 +138,7 @@ const ProfileCard = ({ user, onEdit}) => {
         )}
       </div>
 
-      {/* Action Button */}
+      {/* Action */}
       <button className="logOut" onClick={handleLogout} disabled={loading}>
         {loading ? "Logging out..." : "LogOut"}
       </button>
